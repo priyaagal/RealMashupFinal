@@ -130,7 +130,7 @@
 					<td>Lot Sq.Ft Area</td>
 					<td>Estimated Price</td>
 				</tr>
-				<tr>
+				<%--<tr>
 					<!--Body content-->
 					<td>
 						${flash.address}
@@ -157,7 +157,7 @@
 						${flash.zestAmt}
 					</td>
 				</tr>
-			</table>
+			--%></table>
 			<button type="button" class="btn btn-primary" onclick="codeAddress()"
 				data-loading-text="LOading...">View Map!</button>
 			<div id="map-canvas" style="width: 300px; height: 300px"></div>
