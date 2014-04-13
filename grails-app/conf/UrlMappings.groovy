@@ -11,7 +11,7 @@ class UrlMappings {
         "500"(view:'/error')
 		
 		
-		name logout: "/logout"(view:"/home.register")
-		name listings: "/listings"(view:"/home.listings")
+		name logout: "/logout"(view:"/home/register")
+		name listings: "/listings"(view:"/home/listings")
 	}
 }
