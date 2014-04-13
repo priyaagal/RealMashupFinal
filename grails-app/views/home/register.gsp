@@ -83,7 +83,7 @@
 		 <div id = "loginMsgSuccess" class = "alert alert-success" hidden = "true">
 		 </div>
             <legend>Please Sign In</legend>
-           <form method="post" action="AuthController" accept-charset="UTF-8" id = "loginForm">
+           <g:form method="post" controller="user" action="authenticateUser" accept-charset="UTF-8" id = "loginForm">
              <div class="input-prepend">
 	                <span class="add-on"><i class="icon-user"></i></span>
 	                  <input type="email" id="email" class="span3" name="email" placeholder="Email" required="true"/>
@@ -100,7 +100,7 @@
             <button type="submit" name="submit" class="btn btn-success btn-block" id = "loginBtn">Sign in</button>
             <button type="submit" name="submit" class="btn btn-block" id = "loginClearBtn">Clear</button>
           
-            </form>
+            </g:form>
         </div>
     </div>
 </div>
@@ -119,33 +119,31 @@
 	 <div id = "successMsg" class = "alert alert-success" hidden = "true">
 	 </div>
 	 <div id = "failureMsg" class = "alert alert-danger" hidden = "true"></div>
-	<form id = "registerForm" action="AuthController" method = "post">
-      <div class="controls controls-row">
-      
-          <input id="fname" name="fname" type="text" class="span2" placeholder="First Name" required="true"/>
-          <input id="lname" name="lname" type="text" class="span2" placeholder="Last Name" />
-      </div>
-       <div class="controls controls-row">
-       <input id="email" name="email" type="email" class="span4" placeholder="Email address" required="true"/>
-       </div>
-       <div class="controls controls-row">
-  
-       <input type="password" id="regpassword" class="span4" name="password" placeholder="Password" required="true"/>
-      </div>
-       <div class="controls controls-row">
-  
-       <input type="password" id="regpasswordrep" class="span4" name="passwordrep" placeholder="Re-enter Password" required="true"/>
-       <input type = "hidden" value = "register" name = "operation"/>
-      </div>
-      
-     
+	<g:form id = "registerForm" controller="user" action="registerUser" >
+	      <div class="controls controls-row">
+	      
+	          <input id="fname" name="fname" type="text" class="span2" placeholder="First Name" required="true"/>
+	          <input id="lname" name="lname" type="text" class="span2" placeholder="Last Name" />
+	      </div>
+	       <div class="controls controls-row">
+	       <input id="email" name="email" class="span4" placeholder="Email address" required="true"/>
+	       </div>
+	       <div class="controls controls-row">
+	  
+	       <input type="password" id="regpassword" class="span4" name="password" placeholder="Password" required="true"/>
+	      </div>
+	       <div class="controls controls-row">
+	  
+	       <input type="password" id="regpasswordrep" class="span4" name="passwordrep" placeholder="Re-enter Password" required="true"/>
+	       <input type = "hidden" value = "register" name = "operation"/>
+	      </div>
+	      <div class="modal-footer">
+			<button type="submit" id = "registerBtn" class="btn btn-primary">Submit</button>
+			<a href="#" class="btn" data-dismiss="modal">Close</a>
+			</div>
+	</g:form>
+</div>
 
-</form>
-</div>
-<div class="modal-footer">
-<button type="submit" id = "registerBtn" class="btn btn-primary">Submit</button>
-<a href="#" class="btn" data-dismiss="modal">Close</a>
-</div>
 </div>
  
 <!-- JavaScript -->
