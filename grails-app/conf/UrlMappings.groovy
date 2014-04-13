@@ -12,6 +12,5 @@ class UrlMappings {
 		
 		
 		name logout: "/logout"(view:"/home/register")
-		name listings: "/listings"(view:"/home/listings")
 	}
 }

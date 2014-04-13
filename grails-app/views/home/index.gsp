@@ -172,15 +172,15 @@ body { padding-top: 60px; padding-bottom: 40px; }
 			<div class="col-lg-12 text-center v-center">
 				<h1>Welcome to Real Realty!</h1>
 				<p class="lead">Find the Best Places to Live</p>
-				<form class="col-lg-12" method="get" action="/search">
+				<g:form class="col-lg-12"  controller="home"  action="listings">
 					<div class="input-group input-group-lg col-sm-offset-4 col-sm-4">
 						<input type="text" class="center-block form-control input-lg"
-							title="Search" placeholder="e.g. San Jose"> <span
+							title="Search" placeholder="e.g. San Jose" name="query"> <span
 							class="input-group-btn">
-							<button class="btn btn-lg btn-primary" type="button">Go!</button>
+							<button class="btn btn-lg btn-primary" type="submit">Go!</button>
 						</span>
 					</div>
-				</form>
+				</g:form>
 			</div>
 		</div>
 		<!-- /row -->

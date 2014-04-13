@@ -1,0 +1,13 @@
+package sjsu.cmpe295.models
+
+class User {
+
+	String firstname
+	String lastname
+	String password
+	String email
+	
+	static constraints = {
+		email(unique: true)
+	}
+}
