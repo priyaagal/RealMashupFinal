@@ -53,6 +53,7 @@ body { padding-top: 60px; padding-bottom: 40px; }
 <!-- Bootstrap -->
 <link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'bootstrap.min.css')}">
 <link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'bootstrap-responsive.min.css')}">
+<link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'bootstrap-responsive.css')}">
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <link rel="stylesheet" href="${resource(dir: 'fancybox', file: 'jquery.fancybox-v=2.1.5.css')}" type="text/css" media="screen">
