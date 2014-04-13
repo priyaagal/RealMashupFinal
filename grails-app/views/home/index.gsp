@@ -49,7 +49,7 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 <link rel="stylesheet" href="css/font-awesome.css">
 <script src="//www.google-analytics.com/ga.js" style=""></script>
 <script src="js/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
-body { padding-top: 60px; padding-bottom: 40px; }
+<!-- body { padding-top: 60px; padding-bottom: 40px; } -->
 <!-- Bootstrap -->
 <link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'bootstrap.min.css')}">
 <link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'bootstrap-responsive.min.css')}">
@@ -112,10 +112,20 @@ body { padding-top: 60px; padding-bottom: 40px; }
 								userName = userDto.getUsername();
 							}
 						%>
-						--%><ul class="nav">
+						--%>
+						<ul class="nav">
+						
+							<% if(session.username != null){ %>
 							<li style="color: white; padding-top: 10px;"><i
-								class="icon-user icon-white"></i> <%=userName%></li>
-							<li><g:link mapping="logout"> Logout</g:link></li>
+								class="icon-user icon-white"></i> ${session.username}</li>
+							<li><g:link controller="user" action="logout" > Logout</g:link></li>
+							<% }
+							else
+							{ %>
+								<li style="color: white; padding-top: 10px;"><i
+								class="icon-user icon-white"></i>  </li>
+								<li><g:link mapping="register"> Sign In</g:link></li>
+							<%}%> 
 						</ul>
 					</div>
 				</div>
