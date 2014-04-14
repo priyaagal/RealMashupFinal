@@ -17,6 +17,7 @@ class DataNormalizerController {
 		//construct home page
 		println("In class DataPopulaterController.groovy/home()")
 		dataCollectorService.generateNormalizedDataFromResultCsv();
+		render(view:'/index')
 	}
 	
 	def details(){

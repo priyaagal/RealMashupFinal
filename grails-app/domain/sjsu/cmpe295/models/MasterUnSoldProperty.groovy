@@ -38,7 +38,7 @@ class MasterUnSoldProperty {
 		Double zest_valueChange
 		Double zest_low
 		Double zest_high
-		
+		Double zpID
 		
 		static mapping = {
 		}
