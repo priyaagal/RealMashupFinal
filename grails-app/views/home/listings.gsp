@@ -178,10 +178,12 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 									</dl>
 									<div class="col-md-2">
 									<p>
+										<% if(session.username != null){ %>
 										<g:form class="col-lg-12" controller="home" action="AddToUserWatchList" params="${ [address: flash.address]}">
 										<button class="btn btn-lg btn-primary" type="submit">
 											Watchlist!</button>
 										</g:form>
+										<% } %>
 									</p>
 									</div>
 								</div>

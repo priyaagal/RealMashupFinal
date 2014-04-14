@@ -1,5 +1,6 @@
 package sjsu.cmpe295.controllers
 
+import sjsu.cmpe295.models.MasterUnSoldProperty
 import sjsu.cmpe295.models.Property
 import sjsu.cmpe295.models.User
 
@@ -18,7 +19,7 @@ class HomeController {
 		println("In class DataQueryController/listings()")
 		def address = params.query
 		printf(address)
-		Property property = dataQueryService.findAddress(address)
+		MasterUnSoldProperty property = dataQueryService.findAddress(address)
 		//AddToUserWatchList(property)
 		
 		flash.address = address
