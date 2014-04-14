@@ -19,22 +19,7 @@ class HomeController {
 		def address = params.query
 		printf(address)
 		Property property = dataQueryService.findAddress(address)
-		
-		// Below code adds user to watchlist
-		// Put it in a different function later
-		
-		User user = User.findByEmail(session.email) // find user by email from session
-		
-		
-		// set association
-		Set properties = new HashSet()
-		properties.add(property)
-		user.props =  properties
-		
-		// save objects
-		user.save(flush:true)
-		printf(user.getErrors().toString())
-		
+		//AddToUserWatchList(property)
 		
 		flash.address = address
 		flash.city = property.getCity()
@@ -50,6 +35,7 @@ class HomeController {
 		render(view: "listings")
 	}
 	
+	/*
 	def getUserWatchlist()
 	{	
 		def user = User.findByEmail(session.email)
@@ -57,9 +43,30 @@ class HomeController {
 		{ 	println (prop.Address.toString())
 			println (prop.city.toString())
 			println (prop.state.toString())
-			println (prop.zip.toString())
 		}
 		 
 	}
+	
+	def AddToUserWatchList(Property property)
+	{
+		// Below code adds user to watchlist
+		// Put it in a different function later
+		
+		User user = User.findByEmail(session.email) // find user by email from session
+		
+		
+		// set association
+		Set properties = new HashSet()
+		properties.add(property)
+		user.props =  properties
+		
+		// save objects
+		user.save(flush:true)
+		printf(user.getErrors().toString())
+		
+	}
+	*/
+	
+	
 }
 
