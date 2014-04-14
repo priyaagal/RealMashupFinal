@@ -111,9 +111,17 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 						%>
 						--%>
 						<ul class="nav">
+						<% if(session.username != null){ %>
 							<li style="color: white; padding-top: 10px;"><i
-								class="icon-user icon-white"></i> <%=userName%></li>
-							<li><a href="register.gsp"> Logout</a></li>
+								class="icon-user icon-white"></i> ${session.username}</li>
+							<li><g:link controller="user" action="logout" > Logout</g:link></li>
+							<% }
+							else
+							{ %>
+								<li style="color: white; padding-top: 10px;"><i
+								class="icon-user icon-white"></i>  </li>
+								<li><g:link mapping="register"> Sign In</g:link></li>
+							<%}%> 
 						</ul>
 					</div>
 				</div>
@@ -170,8 +178,10 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 									</dl>
 									<div class="col-md-2">
 									<p>
+										<g:form class="col-lg-12" controller="home" action="AddToUserWatchList" params="${ [address: flash.address]}">
 										<button class="btn btn-lg btn-primary" type="submit">
 											Watchlist!</button>
+										</g:form>
 									</p>
 									</div>
 								</div>

@@ -46,11 +46,13 @@ class HomeController {
 		}
 		 
 	}
-	
-	def AddToUserWatchList(Property property)
+	*/
+	def AddToUserWatchList()
 	{
-		// Below code adds user to watchlist
-		// Put it in a different function later
+		println("In class DataQueryController/AddToUserWatchList()")
+		def address = params.address
+		printf(address)
+		Property property = dataQueryService.findAddress(address)
 		
 		User user = User.findByEmail(session.email) // find user by email from session
 		
@@ -64,8 +66,15 @@ class HomeController {
 		user.save(flush:true)
 		printf(user.getErrors().toString())
 		
+		for (prop in user.props)
+		{ 	println (prop.Address.toString())
+			println (prop.city.toString())
+			println (prop.state.toString())
+		}
+		
+		render(view: "index")
 	}
-	*/
+	
 	
 	
 }
