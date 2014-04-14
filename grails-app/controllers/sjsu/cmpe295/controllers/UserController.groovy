@@ -43,6 +43,8 @@ class UserController {
 		if(user != null)
 		{	printf("User authenticated")
 			session.username = user.getFirstname()
+			session.lastname = user.getLastname()
+			session.email = user.getEmail()
 			render(view:'/home/index')
 		}
 		else
@@ -57,6 +59,8 @@ class UserController {
 		
 		//session.invalidate()
 		session.username = null
+		session.lastname = null
+		session.email = null
 		render(view:'/home/index')
 	}
 }

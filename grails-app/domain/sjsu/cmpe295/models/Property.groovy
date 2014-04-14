@@ -35,6 +35,7 @@ class Property {
     static mapping = {
     }
     
+	//static hasMany = [users:User]
 	
     static constraints = {
         zpID(unique: true)
