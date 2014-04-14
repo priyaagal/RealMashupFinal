@@ -1,43 +1,72 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<title>Real Estate Prediction Engine</title>
 <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Real Estate Analytics</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="" name="description">
+<meta content="" name="author">
 
+<!-- Le styles -->
+<style type="text/css">
+<
+style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc div
+	{
+	font-weight: 400
+}
+</style>
+<style type="text/css">
+.gm-style .gm-style-cc span,.gm-style .gm-style-cc a,.gm-style .gm-style-mtc div
+	{
+	font-size: 10px
+}
+</style>
+<link type="text/css" rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+<style type="text/css">
+@media print {
+	.gm-style .gmnoprint,.gmnoprint {
+		display: none
+	}
+}
+
+@media screen {
+	.gm-style .gmnoscreen,.gmnoscreen {
+		display: none
+	}
+}
+</style>
+<style type="text/css">
+.gm-style {
+	font-family: Roboto, Arial, sans-serif;
+	font-size: 11px;
+	font-weight: 400;
+	text-decoration: none
+}
+</style>
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/bootstrap-responsive.min.css">
+<link rel="stylesheet" href="css/font-awesome.css">
+<script src="//www.google-analytics.com/ga.js" style=""></script>
+<script src="js/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
+<!-- body { padding-top: 60px; padding-bottom: 40px; } -->
 <!-- Bootstrap -->
-<link rel="stylesheet" type="text/css"
-	href="${resource(dir: 'css', file: 'bootstrap.min.css')}">
+<link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'bootstrap.min.css')}">
+<link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'bootstrap-responsive.min.css')}">
+<link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'bootstrap-responsive.css')}">
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<link rel="stylesheet"
-	href="${resource(dir: 'fancybox', file: 'jquery.fancybox-v=2.1.5.css')}"
-	type="text/css" media="screen">
+<link rel="stylesheet" href="${resource(dir: 'fancybox', file: 'jquery.fancybox-v=2.1.5.css')}" type="text/css" media="screen">
 
 
 <!-- CSS (necessary for Bootstrap's CSS ) -->
-
-<link rel="stylesheet"
-	href="${resource(dir: 'css', file: 'font-awesome.min.css')}"
-	rel="stylesheet">
-<link rel="stylesheet" type="text/css"
-	href="${resource(dir: 'css', file: 'style.css')}">
-
-<link
-	href='http://fonts.googleapis.com/css?family=Titillium+Web:400,600,300,200&subset=latin,latin-ext'
-	rel='stylesheet' type='text/css'>
-
-<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+	
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'font-awesome.min.css')}" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'style.css')}">	
+	
+	<link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,600,300,200&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 </head>
 <body>
-
-
 	<header>
 		<div class="navbar navbar-inverse navbar-fixed-top">
 			<div class="navbar-inner">
@@ -94,54 +123,82 @@
 
 	<!-- === MAIN Background === -->
 	<g:javascript src="mapUtil.js"></g:javascript>
-
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-md-3 col-sm-4">
-				<div class="right-sec">
-					<ul class="media-list">
-						<li class="media"><a class="pull-left" href="#">
-								<img class="media-object" alt="64x64" style="" src="">
-						</a>
-							<div class="media-body">
-								<h4>
-									${flash.address}
-									<span class="label label-success pull-right">$123,456</span>
-								</h4>
-								<dl class="dl-horizontal">
-									<dt>City</dt>
-									<dd>
-										${flash.city}
-									</dd>
-									<dt>Zip</dt>
-									<dd>
-										${flash.zip }
-									</dd>
-									<dt>Bathrooms</dt>
-									<dd>
-										${flash.bathroom }
-									</dd>
-									<dt>Bedrooms</dt>
-									<dd>
-										${flash.bedroom}
-									</dd>
-									<dt>Finished Sq.Ft Area</dt>
-									<dd>
-										${flash.fArea}
-									</dd>
-									<dt>Lot Sq.Ft Area</dt>
-									<dd>
-										${flash.lArea}
-									</dd>
-									<dt>Estimated Price</dt>
-									<dd>
-										${flash.zestAmt}
-									</dd>
-								</dl>
-							</div></li>
-
-					</ul>
+	<div class="container">
+		<hr>
+		<div class="row-fluid">
+				<div class="panel panel-default">
+					<div class="right-sec">
+						<ul class="media-list">
+							<li class="media span7">
+								<a class="pull-left" href="#"> 
+								<img class="media-object" src="http://photos.foter.com/68/new-money-movement_300x300.jpg" style="" alt="64x64" data-src="holder.js/64x64">
+								</a>
+								<div class="media-body">
+									<h4>
+										${flash.address}
+										<span class="label label-success pull-right">$123,456</span>
+									</h4>
+									<dl class="dl-horizontal">
+										<dt>City</dt>
+										<dd>
+											${flash.city}
+										</dd>
+										<dt>Zip</dt>
+										<dd>
+											${flash.zip}
+										</dd>
+										<dt>Bathrooms</dt>
+										<dd>
+											${flash.bathroom}
+										</dd>
+										<dt>Bedrooms</dt>
+										<dd>
+											${flash.bedroom}
+										</dd>
+										<dt>Finished Sq.Ft Area</dt>
+										<dd>
+											${flash.fArea}
+										</dd>
+										<dt>Lot Sq.Ft Area</dt>
+										<dd>
+											${flash.lArea}
+										</dd>
+										<dt>Estimated Price</dt>
+										<dd>
+											${flash.zestAmt}
+										</dd>
+									</dl>
+									<div class="col-md-2">
+									<p>
+										<button class="btn btn-lg btn-primary" type="submit">
+											Watchlist!</button>
+									</p>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
 				</div>
+			</div>
+		</div>
+	<div class="container">
+		<div class="row-fluid">
+			<div class="col-sm-6 col-md-3">
+				<ul class="thumbnails">
+					<li class="span3">
+						<div class="thumbnail">
+							<img src="/bootstrap/images/kittens.jpg"
+								alt="Generic placeholder thumbnail">
+							<div class="caption">
+								<h3>Thumbnail label</h3>
+								<p>Some sample text. Some sample text.</p>
+								<p>
+									<a href="#" class="btn btn-primary" role="button"> Button </a>
+								</p>
+							</div>
+						</div>
+					</li>
+				</ul>
 			</div>
 		</div>
 	</div>
@@ -200,116 +257,7 @@
 --%>
 		</div>
 -->
-	<!-- /container -->
-	<%--</div>--%>
-
-	<div class="container-fluid">
-		<div id="custom_carousel" class="carousel slide" data-ride="carousel"
-			data-interval="2500">
-			<!-- Wrapper for slides -->
-			<div class="carousel-inner">
-				<div class="item active">
-					<div class="container-fluid">
-						<div class="row">
-							<div class="col-md-3">
-								<img src="http://placehold.it/350x250" class="img-responsive">
-							</div>
-							<div class="col-md-9">
-								<h2>Slide 1</h2>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-									Animi, labore, magni illum nemo ipsum quod voluptates ab natus
-									nulla possimus incidunt aut neque quaerat mollitia perspiciatis
-									assumenda asperiores consequatur soluta.</p>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-									Animi, labore, magni illum nemo ipsum quod voluptates ab natus
-									nulla possimus incidunt aut neque quaerat mollitia perspiciatis
-									assumenda asperiores consequatur soluta.</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="item">
-					<div class="container-fluid">
-						<div class="row">
-							<div class="col-md-3">
-								<img src="http://placehold.it/350x250" class="img-responsive">
-							</div>
-							<div class="col-md-9">
-								<h2>Slide 2</h2>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-									Animi, labore, magni illum nemo ipsum quod voluptates ab natus
-									nulla possimus incidunt aut neque quaerat mollitia perspiciatis
-									assumenda asperiores consequatur soluta.</p>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-									Animi, labore, magni illum nemo ipsum quod voluptates ab natus
-									nulla possimus incidunt aut neque quaerat mollitia perspiciatis
-									assumenda asperiores consequatur soluta.</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="item">
-					<div class="container-fluid">
-						<div class="row">
-							<div class="col-md-3">
-								<img src="http://placehold.it/350x250" class="img-responsive">
-							</div>
-							<div class="col-md-9">
-								<h2>Slide 3</h2>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-									Animi, labore, magni illum nemo ipsum quod voluptates ab natus
-									nulla possimus incidunt aut neque quaerat mollitia perspiciatis
-									assumenda asperiores consequatur soluta.</p>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-									Animi, labore, magni illum nemo ipsum quod voluptates ab natus
-									nulla possimus incidunt aut neque quaerat mollitia perspiciatis
-									assumenda asperiores consequatur soluta.</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="item">
-					<div class="container-fluid">
-						<div class="row">
-							<div class="col-md-3">
-								<img src="http://placehold.it/350x250" class="img-responsive">
-							</div>
-							<div class="col-md-9">
-								<h2>Slide 4</h2>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-									Animi, labore, magni illum nemo ipsum quod voluptates ab natus
-									nulla possimus incidunt aut neque quaerat mollitia perspiciatis
-									assumenda asperiores consequatur soluta.</p>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-									Animi, labore, magni illum nemo ipsum quod voluptates ab natus
-									nulla possimus incidunt aut neque quaerat mollitia perspiciatis
-									assumenda asperiores consequatur soluta.</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- End Item -->
-			</div>
-			<!-- End Carousel Inner -->
-			<div class="controls">
-				<ul class="nav">
-					<li data-target="#custom_carousel" data-slide-to="1" class="active"><a
-						href="#"><img src="http://placehold.it/50x50"><small>Slide
-								One</small></a></li>
-					<li data-target="#custom_carousel" data-slide-to="2"><a
-						href="#"><img src="http://placehold.it/50x50"><small>Slide
-								Two</small></a></li>
-					<li data-target="#custom_carousel" data-slide-to="3"><a
-						href="#"><img src="http://placehold.it/50x50"><small>Slide
-								Three</small></a></li>
-					<li data-target="#custom_carousel" data-slide-to="4"><a
-						href="#"><img src="http://placehold.it/50x50"><small>Slide
-								Four</small></a></li>
-				</ul>
-			</div>
-		</div>
-		<!-- End Carousel -->
-	</div>
+		<!-- /container -->
 </body>
 
 
