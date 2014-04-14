@@ -95,22 +95,58 @@
 	<!-- === MAIN Background === -->
 	<g:javascript src="mapUtil.js"></g:javascript>
 
-	<div class="row-fluid">
-		<ul class="thumbnails">
-			<li class="span3">
-				<div class="thumbnail">
-					<img data-src="" alt="">
-					<div class="caption">
-						<h3>Your property search</h3>
-						
-							<a href="#" class="btn btn-primary" id="dellBtn">Start Here</a>
-						</p>
-					</div>
-				</div>
-			</li>
-		</ul>
-	</div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-3 col-sm-4">
+				<div class="right-sec">
+					<ul class="media-list">
+						<li class="media"><a class="pull-left" href="#">
+								<img class="media-object" alt="64x64" style="" src="">
+						</a>
+							<div class="media-body">
+								<h4>
+									${flash.address}
+									<span class="label label-success pull-right">$123,456</span>
+								</h4>
+								<dl class="dl-horizontal">
+									<dt>City</dt>
+									<dd>
+										${flash.city}
+									</dd>
+									<dt>Zip</dt>
+									<dd>
+										${flash.zip }
+									</dd>
+									<dt>Bathrooms</dt>
+									<dd>
+										${flash.bathroom }
+									</dd>
+									<dt>Bedrooms</dt>
+									<dd>
+										${flash.bedroom}
+									</dd>
+									<dt>Finished Sq.Ft Area</dt>
+									<dd>
+										${flash.fArea}
+									</dd>
+									<dt>Lot Sq.Ft Area</dt>
+									<dd>
+										${flash.lArea}
+									</dd>
+									<dt>Estimated Price</dt>
+									<dd>
+										${flash.zestAmt}
+									</dd>
+								</dl>
+							</div></li>
 
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--
+<%--  
 	<div class="slide story" id="slide-1" data-slide="1">
 		<div>
 			<h1 id="address" hidden="true">
@@ -161,73 +197,119 @@
 			<button type="button" class="btn btn-primary" onclick="codeAddress()"
 				data-loading-text="LOading...">View Map!</button>
 			<div id="map-canvas" style="width: 300px; height: 300px"></div>
-
+--%>
 		</div>
-		<!-- /container -->
-	</div>
-	
+-->
+	<!-- /container -->
+	<%--</div>--%>
+
 	<div class="container-fluid">
-    <div id="custom_carousel" class="carousel slide" data-ride="carousel" data-interval="2500">
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner">
-            <div class="item active">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-3"><img src="http://placehold.it/350x250" class="img-responsive"></div>
-                        <div class="col-md-9">
-                            <h2>Slide 1</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi, labore, magni illum nemo ipsum quod voluptates ab natus nulla possimus incidunt aut neque quaerat mollitia perspiciatis assumenda asperiores consequatur soluta.</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi, labore, magni illum nemo ipsum quod voluptates ab natus nulla possimus incidunt aut neque quaerat mollitia perspiciatis assumenda asperiores consequatur soluta.</p>
-                        </div>
-                    </div>
-                </div>            
-            </div> 
-            <div class="item">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-3"><img src="http://placehold.it/350x250" class="img-responsive"></div>
-                        <div class="col-md-9">
-                            <h2>Slide 2</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi, labore, magni illum nemo ipsum quod voluptates ab natus nulla possimus incidunt aut neque quaerat mollitia perspiciatis assumenda asperiores consequatur soluta.</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi, labore, magni illum nemo ipsum quod voluptates ab natus nulla possimus incidunt aut neque quaerat mollitia perspiciatis assumenda asperiores consequatur soluta.</p>
-                        </div>
-                    </div>
-                </div>            
-            </div> 
-            <div class="item">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-3"><img src="http://placehold.it/350x250" class="img-responsive"></div>
-                        <div class="col-md-9">
-                            <h2>Slide 3</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi, labore, magni illum nemo ipsum quod voluptates ab natus nulla possimus incidunt aut neque quaerat mollitia perspiciatis assumenda asperiores consequatur soluta.</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi, labore, magni illum nemo ipsum quod voluptates ab natus nulla possimus incidunt aut neque quaerat mollitia perspiciatis assumenda asperiores consequatur soluta.</p>
-                        </div>
-                    </div>
-                </div>           
-            </div> 
-            <div class="item">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-3"><img src="http://placehold.it/350x250" class="img-responsive"></div>
-                        <div class="col-md-9">
-                            <h2>Slide 4</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi, labore, magni illum nemo ipsum quod voluptates ab natus nulla possimus incidunt aut neque quaerat mollitia perspiciatis assumenda asperiores consequatur soluta.</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi, labore, magni illum nemo ipsum quod voluptates ab natus nulla possimus incidunt aut neque quaerat mollitia perspiciatis assumenda asperiores consequatur soluta.</p>
-                        </div>
-                    </div>
-                </div>           
-            </div> 
-        <!-- End Item -->
-        </div>
-        <!-- End Carousel Inner -->
-        <div class="controls">
-            <ul class="nav">
-                <li data-target="#custom_carousel" data-slide-to="1" class="active"><a href="#"><img src="http://placehold.it/50x50"><small>Slide One</small></a></li>
-                <li data-target="#custom_carousel" data-slide-to="2"><a href="#"><img src="http://placehold.it/50x50"><small>Slide Two</small></a></li>
-                <li data-target="#custom_carousel" data-slide-to="3"><a href="#"><img src="http://placehold.it/50x50"><small>Slide Three</small></a></li>
-                <li data-target="#custom_carousel" data-slide-to="4"><a href="#"><img src="http://placehold.it/50x50"><small>Slide Four</small></a></li>
-            </ul>
-        </div>
-    </div>
-    <!-- End Carousel -->
-</div>
+		<div id="custom_carousel" class="carousel slide" data-ride="carousel"
+			data-interval="2500">
+			<!-- Wrapper for slides -->
+			<div class="carousel-inner">
+				<div class="item active">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-md-3">
+								<img src="http://placehold.it/350x250" class="img-responsive">
+							</div>
+							<div class="col-md-9">
+								<h2>Slide 1</h2>
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+									Animi, labore, magni illum nemo ipsum quod voluptates ab natus
+									nulla possimus incidunt aut neque quaerat mollitia perspiciatis
+									assumenda asperiores consequatur soluta.</p>
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+									Animi, labore, magni illum nemo ipsum quod voluptates ab natus
+									nulla possimus incidunt aut neque quaerat mollitia perspiciatis
+									assumenda asperiores consequatur soluta.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="item">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-md-3">
+								<img src="http://placehold.it/350x250" class="img-responsive">
+							</div>
+							<div class="col-md-9">
+								<h2>Slide 2</h2>
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+									Animi, labore, magni illum nemo ipsum quod voluptates ab natus
+									nulla possimus incidunt aut neque quaerat mollitia perspiciatis
+									assumenda asperiores consequatur soluta.</p>
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+									Animi, labore, magni illum nemo ipsum quod voluptates ab natus
+									nulla possimus incidunt aut neque quaerat mollitia perspiciatis
+									assumenda asperiores consequatur soluta.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="item">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-md-3">
+								<img src="http://placehold.it/350x250" class="img-responsive">
+							</div>
+							<div class="col-md-9">
+								<h2>Slide 3</h2>
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+									Animi, labore, magni illum nemo ipsum quod voluptates ab natus
+									nulla possimus incidunt aut neque quaerat mollitia perspiciatis
+									assumenda asperiores consequatur soluta.</p>
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+									Animi, labore, magni illum nemo ipsum quod voluptates ab natus
+									nulla possimus incidunt aut neque quaerat mollitia perspiciatis
+									assumenda asperiores consequatur soluta.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="item">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-md-3">
+								<img src="http://placehold.it/350x250" class="img-responsive">
+							</div>
+							<div class="col-md-9">
+								<h2>Slide 4</h2>
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+									Animi, labore, magni illum nemo ipsum quod voluptates ab natus
+									nulla possimus incidunt aut neque quaerat mollitia perspiciatis
+									assumenda asperiores consequatur soluta.</p>
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+									Animi, labore, magni illum nemo ipsum quod voluptates ab natus
+									nulla possimus incidunt aut neque quaerat mollitia perspiciatis
+									assumenda asperiores consequatur soluta.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- End Item -->
+			</div>
+			<!-- End Carousel Inner -->
+			<div class="controls">
+				<ul class="nav">
+					<li data-target="#custom_carousel" data-slide-to="1" class="active"><a
+						href="#"><img src="http://placehold.it/50x50"><small>Slide
+								One</small></a></li>
+					<li data-target="#custom_carousel" data-slide-to="2"><a
+						href="#"><img src="http://placehold.it/50x50"><small>Slide
+								Two</small></a></li>
+					<li data-target="#custom_carousel" data-slide-to="3"><a
+						href="#"><img src="http://placehold.it/50x50"><small>Slide
+								Three</small></a></li>
+					<li data-target="#custom_carousel" data-slide-to="4"><a
+						href="#"><img src="http://placehold.it/50x50"><small>Slide
+								Four</small></a></li>
+				</ul>
+			</div>
+		</div>
+		<!-- End Carousel -->
+	</div>
 </body>
 
 
@@ -259,13 +341,19 @@
 	});
 </script>
 <script>
-$(document).ready(function(ev){
-    $('#custom_carousel').on('slide.bs.carousel', function (evt) {
-      $('#custom_carousel .controls li.active').removeClass('active');
-      $('#custom_carousel .controls li:eq('+$(evt.relatedTarget).index()+')').addClass('active');
-    })
-});
-
+	$(document).ready(
+			function(ev) {
+				$('#custom_carousel').on(
+						'slide.bs.carousel',
+						function(evt) {
+							$('#custom_carousel .controls li.active')
+									.removeClass('active');
+							$(
+									'#custom_carousel .controls li:eq('
+											+ $(evt.relatedTarget).index()
+											+ ')').addClass('active');
+						})
+			});
 </script>
 
 </html>
