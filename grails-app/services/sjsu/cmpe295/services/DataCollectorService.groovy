@@ -32,14 +32,14 @@ class DataCollectorService {
 		def noOfRecordsScanned = 0
 		def noOfRowsInserted = 0
 		def csvIterator
-		def csvFileObject = new File( "/Users/priyanka/Documents/SJSU/MasterProject/ProjectData/soldProperty.csv" ).withReader {
+		def csvFileObject = new File( "E:\\CMPE295B\\results\\soldResult.csv" ).withReader {
 			csvIterator = CsvParser.parseCsv( it )
 			csvIterator.each {
-				String res = dataNormalizerService.normalizeData(it[3].toString().toDouble(),
+				String res = dataNormalizerService.normalizeData(it[2].toString(),it[3].toString().toDouble(),
 																it[4].toString().toDouble(),it[5].toString(),it[6].toString().toDouble(),it[7].toString(),it[8].toString().toDouble(),
-																it[11].toString().toDouble(),it[13].toString().toDouble(),it[16].toString(),it[17].toString().toDouble(),
+																it[9].toString().toDouble(),it[10].toString().toDouble(),it[11].toString().toDouble(),it[11].toString(),it[13].toString().toDouble(),it[16].toString(),it[17].toString().toDouble(),
 																it[18].toString().toDouble(),it[19].toString().toDouble(),it[20].toString().toDouble(),it[21].toString().toDouble(),
-																it[23].toString().toDouble());
+																it[22].toString(),it[23].toString().toDouble());
 				noOfRecordsScanned++;
 				if(res.equalsIgnoreCase("success"))
 					{
