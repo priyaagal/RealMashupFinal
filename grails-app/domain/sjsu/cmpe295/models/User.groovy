@@ -7,6 +7,9 @@ class User {
 	String password
 	String email
 	
+	//static belongsTo = Property
+	static hasMany = [props:Property]
+	
 	static constraints = {
 		email(unique: true)
 	}
