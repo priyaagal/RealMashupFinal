@@ -51,20 +51,30 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 <script src="js/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
 <!-- body { padding-top: 60px; padding-bottom: 40px; } -->
 <!-- Bootstrap -->
-<link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'bootstrap.min.css')}">
-<link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'bootstrap-responsive.min.css')}">
-<link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'bootstrap-responsive.css')}">
+<link rel="stylesheet" type="text/css"
+	href="${resource(dir: 'css', file: 'bootstrap.min.css')}">
+<link rel="stylesheet" type="text/css"
+	href="${resource(dir: 'css', file: 'bootstrap-responsive.min.css')}">
+<link rel="stylesheet" type="text/css"
+	href="${resource(dir: 'css', file: 'bootstrap-responsive.css')}">
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<link rel="stylesheet" href="${resource(dir: 'fancybox', file: 'jquery.fancybox-v=2.1.5.css')}" type="text/css" media="screen">
+<link rel="stylesheet"
+	href="${resource(dir: 'fancybox', file: 'jquery.fancybox-v=2.1.5.css')}"
+	type="text/css" media="screen">
 
 
 <!-- CSS (necessary for Bootstrap's CSS ) -->
-	
-    <link rel="stylesheet" href="${resource(dir: 'css', file: 'font-awesome.min.css')}" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'style.css')}">	
-	
-	<link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,600,300,200&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+<link rel="stylesheet"
+	href="${resource(dir: 'css', file: 'font-awesome.min.css')}"
+	rel="stylesheet">
+<link rel="stylesheet" type="text/css"
+	href="${resource(dir: 'css', file: 'style.css')}">
+
+<link
+	href='http://fonts.googleapis.com/css?family=Titillium+Web:400,600,300,200&subset=latin,latin-ext'
+	rel='stylesheet' type='text/css'>
 </head>
 <body>
 	<header>
@@ -111,7 +121,7 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 						%>
 						--%>
 						<ul class="nav">
-						<% if(session.username != null){ %>
+							<% if(session.username != null){ %>
 							<li style="color: white; padding-top: 10px;"><i
 								class="icon-user icon-white"></i> ${session.username}</li>
 							<li><g:link controller="user" action="logout" > Logout</g:link></li>
@@ -121,7 +131,7 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 								<li style="color: white; padding-top: 10px;"><i
 								class="icon-user icon-white"></i>  </li>
 								<li><g:link mapping="register"> Sign In</g:link></li>
-							<%}%> 
+							<%}%>
 						</ul>
 					</div>
 				</div>
@@ -134,86 +144,132 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 	<div class="container">
 		<hr>
 		<div class="row-fluid">
-				<div class="panel panel-default">
-					<div class="right-sec">
-						<ul class="media-list">
-							<li class="media span7">
-								<a class="pull-left" href="#"> 
-								<img class="media-object" src="http://photos.foter.com/68/new-money-movement_300x300.jpg" style="" alt="64x64" data-src="holder.js/64x64">
-								</a>
-								<div class="media-body">
-									<h4>
-										${flash.address}
-										<span class="label label-success pull-right">$123,456</span>
-									</h4>
-									<dl class="dl-horizontal">
-										<dt>City</dt>
-										<dd>
-											${flash.city}
-										</dd>
-										<dt>Zip</dt>
-										<dd>
-											${flash.zip}
-										</dd>
-										<dt>Bathrooms</dt>
-										<dd>
-											${flash.bathroom}
-										</dd>
-										<dt>Bedrooms</dt>
-										<dd>
-											${flash.bedroom}
-										</dd>
-										<dt>Finished Sq.Ft Area</dt>
-										<dd>
-											${flash.fArea}
-										</dd>
-										<dt>Lot Sq.Ft Area</dt>
-										<dd>
-											${flash.lArea}
-										</dd>
-										<dt>Estimated Price</dt>
-										<dd>
-											${flash.zestAmt}
-										</dd>
-									</dl>
-									<div class="col-md-2">
+			<div class="panel panel-default">
+				<div class="right-sec">
+					<ul class="media-list">
+						<li class="media span7"><a class="pull-left" href="#"> <img
+								class="media-object"
+								src="http://photos.foter.com/68/new-money-movement_300x300.jpg"
+								style="" alt="64x64" data-src="holder.js/64x64">
+						</a>
+							<div class="media-body">
+								<h4>
+									${flash.address}
+									<span class="label label-success pull-right">$123,456</span>
+								</h4>
+								<dl class="dl-horizontal">
+									<dt>City</dt>
+									<dd>
+										${flash.city}
+									</dd>
+									<dt>Zip</dt>
+									<dd>
+										${flash.zip}
+									</dd>
+									<dt>Bathrooms</dt>
+									<dd>
+										${flash.bathroom}
+									</dd>
+									<dt>Bedrooms</dt>
+									<dd>
+										${flash.bedroom}
+									</dd>
+									<dt>Finished Sq.Ft Area</dt>
+									<dd>
+										${flash.fArea}
+									</dd>
+									<dt>Lot Sq.Ft Area</dt>
+									<dd>
+										${flash.lArea}
+									</dd>
+									<dt>Estimated Price</dt>
+									<dd>
+										${flash.zestAmt}
+									</dd>
+								</dl>
+								<div class="col-md-2">
 									<p>
 										<% if(session.username != null){ %>
-										<g:form class="col-lg-12" controller="home" action="AddToUserWatchList" params="${ [address: flash.address]}">
-										<button class="btn btn-lg btn-primary" type="submit">
-											Watchlist!</button>
+										<g:form class="col-lg-12" controller="home"
+											action="AddToUserWatchList"
+											params="${ [address: flash.address]}">
+											<button class="btn btn-lg btn-primary" type="submit">
+												Watchlist!</button>
 										</g:form>
 										<% } %>
 									</p>
-									</div>
 								</div>
-							</li>
-						</ul>
+							</div></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--  Tab bar for widgets -->
+	<div class="container">
+		<ul id="widgets" class="nav nav-tabs">
+			<li class="active"><a href="#amenities" data-toggle="tab">Amenities</a>
+			</li>
+			<li><a href="#crimerate" data-toggle="tab">Crime Rate</a></li>
+			<li><a href="#education" data-toggle="tab">Education</a></li>
+			<li><a href="#employment" data-toggle="tab">Employment</a></li>
+			<li><a href="#weather" data-toggle="tab">Weather</a></li>
+		</ul>
+		<div id="tabscontent" class="tab-content">
+			<div class="tab-pane fade in active" id="amenities">
+				<div class="thumbnail">
+					<img src="/RealMashupFinal/static/images/weather.jpg" alt="">
+					<div class="caption">
+						<h3>Thumbnail label</h3>
+						<p>Some sample text. Some sample text.</p>
+					</div>
+				</div>
+			</div>
+			<div class="tab-pane fade" id="crimerate">
+				<div class="thumbnail">
+					<img src="/RealMashupFinal/static/images/weather.jpg"
+						alt="Generic placeholder thumbnail">
+					<div class="caption">
+						<h3>Thumbnail label</h3>
+						<p>Some sample text. Some sample text.</p>
+					</div>
+				</div>
+			</div>
+			<div class="tab-pane fade" id="education">
+				<div class="thumbnail">
+					<img src="/RealMashupFinal/static/images/weather.jpg"
+						alt="Generic placeholder thumbnail">
+					<div class="caption">
+						<h3>Thumbnail label</h3>
+						<p>Some sample text. Some sample text.</p>
+
+					</div>
+				</div>
+			</div>
+			<div class="tab-pane fade" id="employment">
+				<div class="thumbnail">
+					<img src="/RealMashupFinal/static/images/weather.jpg"
+						alt="Generic placeholder thumbnail">
+					<div class="caption">
+						<h3>Thumbnail label</h3>
+						<p>Some sample text. Some sample text.</p>
+					</div>
+				</div>
+			</div>
+			<div class="tab-pane fade" id="weather">
+				<div class="thumbnail">
+					<img src="/RealMashupFinal/static/images/weather.jpg"
+						alt="Generic placeholder thumbnail">
+					<div class="caption">
+						<h3>Thumbnail label</h3>
+						<p>Some sample text. Some sample text.</p>
 					</div>
 				</div>
 			</div>
 		</div>
-	<div class="container">
-		<div class="row-fluid">
-			<div class="col-sm-6 col-md-3">
-				<ul class="thumbnails">
-					<li class="span3">
-						<div class="thumbnail">
-							<img src="/bootstrap/images/kittens.jpg"
-								alt="Generic placeholder thumbnail">
-							<div class="caption">
-								<h3>Thumbnail label</h3>
-								<p>Some sample text. Some sample text.</p>
-								<p>
-									<a href="#" class="btn btn-primary" role="button"> Button </a>
-								</p>
-							</div>
-						</div>
-					</li>
-				</ul>
-			</div>
-		</div>
 	</div>
+	<!-- Tab bar for widgets ends -->
 	<!--
 <%--  
 	<div class="slide story" id="slide-1" data-slide="1">
@@ -269,7 +325,7 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 --%>
 		</div>
 -->
-		<!-- /container -->
+	<!-- /container -->
 </body>
 
 
@@ -315,5 +371,9 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 						})
 			});
 </script>
-
+<script>
+   $(function () {
+      $('#widgets li:eq(1) a').tab('show');
+   });
+</script>
 </html>
