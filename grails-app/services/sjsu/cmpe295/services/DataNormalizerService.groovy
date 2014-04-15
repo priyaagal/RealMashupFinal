@@ -35,7 +35,7 @@ class DataNormalizerService extends DateGroovyMethods {
 	final def D = -1.5
 	final def F = -2
 	
-	
+	/*
 	def populateProperty(result)
 	{
 		try
@@ -80,7 +80,7 @@ class DataNormalizerService extends DateGroovyMethods {
 		}
 		
 	}
-	
+	*/
 	
 	def public normalizeData(String address, Double bathroom, Double bedroom,String city, Double fArea, String lastSoldDate, Double lastSoldPrice,Double lat, Double lon, Double lArea, String state, Double tax, String useCode,Double yearBuilt, Double zestAmt,Double zestHigh, Double zestLow, Double zestVal,String zipcode, Double zpid )
 	{	def property
@@ -137,7 +137,19 @@ class DataNormalizerService extends DateGroovyMethods {
 			}
 			
 			//populateInternal factors
-			property = populateInternalFactors(property, bathroom, bedroom, fArea, lArea,lastSoldPrice,  tax,  useCode,  zestAmt, zestHigh,  zestLow,  zestVal,  zpid)
+			//property = populateInternalFactors(property, bathroom, bedroom, fArea, lArea,lastSoldPrice,  tax,  useCode,  zestAmt, zestHigh,  zestLow,  zestVal,  zpid)
+			property.setBathroom(bathroom)
+			property.setBedroom(bedroom)
+			property.setFinishedSqFt(fArea)
+			property.setLotSizeSqFt(lArea)
+			property.setLastSoldPrice(lastSoldPrice)
+			property.setTaxAssesment(tax)
+			property.setZest_amt(zestAmt)
+			property.setZest_high(zestHigh)
+			property.setZest_low(zestLow)
+			property.setZest_valueChange(zestVal)
+			property.setZpID(zpid)
+			
 			
 			property.setCity(city.replace(" ", "").toLowerCase())
 			property.setUseCode(useCode)

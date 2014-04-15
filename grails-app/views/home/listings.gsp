@@ -189,12 +189,14 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 								</dl>
 								<div class="col-md-2">
 									<p>
+										<% if(session.username != null){ %>
 										<g:form class="col-lg-12" controller="home"
 											action="AddToUserWatchList"
 											params="${ [address: flash.address]}">
 											<button class="btn btn-lg btn-primary" type="submit">
 												Watchlist!</button>
 										</g:form>
+										<% } %>
 									</p>
 								</div>
 							</div></li>
@@ -267,8 +269,8 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 			</div>
 		</div>
 	</div>
-		<!-- Tab bar for widgets ends -->
-		<!--
+	<!-- Tab bar for widgets ends -->
+	<!--
 <%--  
 	<div class="slide story" id="slide-1" data-slide="1">
 		<div>
@@ -323,7 +325,7 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 --%>
 		</div>
 -->
-		<!-- /container -->
+	<!-- /container -->
 </body>
 
 
@@ -369,11 +371,9 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 						})
 			});
 </script>
-
 <script>
    $(function () {
       $('#widgets li:eq(1) a').tab('show');
    });
 </script>
-
 </html>
