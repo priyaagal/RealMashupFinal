@@ -616,3 +616,12 @@ a.skip {
 	position: absolute;
 	left: -9999px;
 }
+
+#map {
+    display: block;
+    width: 10%;
+    height: 10%;
+}
+
+#map {
+    background: #58B;

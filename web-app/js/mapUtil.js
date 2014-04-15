@@ -1,3 +1,4 @@
+<script src="http://maps.googleapis.com/maps/api/js?v=3&sensor=true"></script>
 function loadMap2(address) {
 
 	alert(address)

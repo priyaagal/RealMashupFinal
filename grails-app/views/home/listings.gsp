@@ -8,9 +8,9 @@
 <meta content="" name="author">
 
 <!-- Le styles -->
+
 <style type="text/css">
-<
-style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc div
+<style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc div
 	{
 	font-weight: 400
 }
@@ -51,30 +51,31 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 <script src="js/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
 <!-- body { padding-top: 60px; padding-bottom: 40px; } -->
 <!-- Bootstrap -->
-<link rel="stylesheet" type="text/css"
-	href="${resource(dir: 'css', file: 'bootstrap.min.css')}">
-<link rel="stylesheet" type="text/css"
-	href="${resource(dir: 'css', file: 'bootstrap-responsive.min.css')}">
-<link rel="stylesheet" type="text/css"
-	href="${resource(dir: 'css', file: 'bootstrap-responsive.css')}">
+<link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'bootstrap.min.css')}">
+<link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'bootstrap-responsive.min.css')}">
+<link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'bootstrap-responsive.css')}">
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<link rel="stylesheet"
-	href="${resource(dir: 'fancybox', file: 'jquery.fancybox-v=2.1.5.css')}"
-	type="text/css" media="screen">
-
+<link rel="stylesheet" href="${resource(dir: 'fancybox', file: 'jquery.fancybox-v=2.1.5.css')}" type="text/css" media="screen">
 
 <!-- CSS (necessary for Bootstrap's CSS ) -->
 
-<link rel="stylesheet"
-	href="${resource(dir: 'css', file: 'font-awesome.min.css')}"
-	rel="stylesheet">
-<link rel="stylesheet" type="text/css"
-	href="${resource(dir: 'css', file: 'style.css')}">
+<link rel="stylesheet" href="${resource(dir: 'css', file: 'font-awesome.min.css')}" rel="stylesheet">
+<link rel="stylesheet" type="text/css"href="${resource(dir: 'css', file: 'style.css')}">
 
-<link
-	href='http://fonts.googleapis.com/css?family=Titillium+Web:400,600,300,200&subset=latin,latin-ext'
-	rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,600,300,200&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+<g:javascript src="html5shiv.js"></g:javascript>
+<g:javascript src="jquery-1.10.2.min.js"></g:javascript>
+<g:javascript src="jquery-migrate-1.2.1.min.js"></g:javascript>
+<g:javascript src="bootstrap.min.js"></g:javascript>
+<g:javascript src="jquery.easing.1.3.js"></g:javascript>
+<g:javascript src="jquery.raty.js"></g:javascript>
+<g:javascript src="application.js"></g:javascript>
+<g:javascript src="script.js"></g:javascript>
+<g:javascript src="gmaps.js"></g:javascript>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+
 </head>
 <body>
 	<header>
@@ -140,66 +141,68 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 	</header>
 
 	<!-- === MAIN Background === -->
-	<g:javascript src="mapUtil.js"></g:javascript>
 	<div class="container">
 		<hr>
 		<div class="row-fluid">
 			<div class="panel panel-default">
 				<div class="right-sec">
 					<ul class="media-list">
-						<li class="media span7"><a class="pull-left" href="#"> <img
-								class="media-object"
-								src="http://photos.foter.com/68/new-money-movement_300x300.jpg"
-								style="" alt="64x64" data-src="holder.js/64x64">
+						<li class="media span7">
+						<a class="pull-left" href="#"> 
+							<img class="media-object" src="http://photos.foter.com/68/new-money-movement_300x300.jpg" style="" alt="64x64" data-src="holder.js/64x64">
 						</a>
-							<div class="media-body">
-								<h4>
-									${flash.address}
-									<span class="label label-success pull-right">$123,456</span>
-								</h4>
-								<dl class="dl-horizontal">
-									<dt>City</dt>
-									<dd>
-										${flash.city}
-									</dd>
-									<dt>Zip</dt>
-									<dd>
-										${flash.zip}
-									</dd>
-									<dt>Bathrooms</dt>
-									<dd>
-										${flash.bathroom}
-									</dd>
-									<dt>Bedrooms</dt>
-									<dd>
-										${flash.bedroom}
-									</dd>
-									<dt>Finished Sq.Ft Area</dt>
-									<dd>
-										${flash.fArea}
-									</dd>
-									<dt>Lot Sq.Ft Area</dt>
-									<dd>
-										${flash.lArea}
-									</dd>
-									<dt>Estimated Price</dt>
-									<dd>
-										${flash.zestAmt}
-									</dd>
-								</dl>
-								<div class="col-md-2">
-									<p>
-										<% if(session.username != null){ %>
-										<g:form class="col-lg-12" controller="home"
-											action="AddToUserWatchList"
-											params="${ [address: flash.address]}">
-											<button class="btn btn-lg btn-primary" type="submit">
-												Watchlist!</button>
-										</g:form>
-										<% } %>
-									</p>
-								</div>
-							</div></li>
+						<div class="media-body">
+							<h4>
+								${flash.address}
+								<span class="label label-success pull-right">$123,456</span>
+							</h4>
+							<dl class="dl-horizontal">
+								<dt>City</dt>
+								<dd>
+									${flash.city}
+								</dd>
+								<dt>Zip</dt>
+								<dd>
+									${flash.zip}
+								</dd>
+								<dt>Bathrooms</dt>
+								<dd>
+									${flash.bathroom}
+								</dd>
+								<dt>Bedrooms</dt>
+								<dd>
+									${flash.bedroom}
+								</dd>
+								<dt>Finished Sq.Ft Area</dt>
+								<dd>
+									${flash.fArea}
+								</dd>
+								<dt>Lot Sq.Ft Area</dt>
+								<dd>
+									${flash.lArea}
+								</dd>
+								<dt>Estimated Price</dt>
+								<dd>
+									${flash.zestAmt}
+								</dd>
+							</dl>
+							<div class="col-md-2">
+								<p>
+									<% if(session.username != null){  %>
+									<g:form class="col-lg-12" controller="home"
+										action="AddToUserWatchList"
+										params="${ [address: flash.address]}">
+										<button class="btn btn-lg btn-primary" type="submit">
+											Watchlist!</button>
+									</g:form>
+									<% } %>
+								</p>
+							</div>
+							<div class="col-md-6">
+								<div id="map"></div>
+							</div>
+						</div>
+						</li>
 					</ul>
 				</div>
 			</div>
@@ -209,7 +212,8 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 	<!--  Tab bar for widgets -->
 	<div class="container">
 		<ul id="widgets" class="nav nav-tabs">
-			<li class="active"><a href="#amenities" data-toggle="tab">Amenities</a>
+			<li class="active">
+				<a href="#amenities" data-toggle="tab">Amenities</a>
 			</li>
 			<li><a href="#crimerate" data-toggle="tab">Crime Rate</a></li>
 			<li><a href="#education" data-toggle="tab">Education</a></li>
@@ -218,127 +222,64 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 		</ul>
 		<div id="tabscontent" class="tab-content">
 			<div class="tab-pane fade in active" id="amenities">
-				<div class="thumbnail">
+				<div class="thumbnail pull-left">
 					<img src="/RealMashupFinal/static/images/weather.jpg" alt="">
 					<div class="caption">
-						<h3>Thumbnail label</h3>
-						<p>Some sample text. Some sample text.</p>
+						<h3>Amenities</h3>
+						<div id="amenitiesStar"></div>
 					</div>
 				</div>
 			</div>
 			<div class="tab-pane fade" id="crimerate">
-				<div class="thumbnail">
-					<img src="/RealMashupFinal/static/images/weather.jpg"
-						alt="Generic placeholder thumbnail">
+				<div class="thumbnail pull-left">
+					<img src="/RealMashupFinal/static/images/weather.jpg" alt="">
 					<div class="caption">
-						<h3>Thumbnail label</h3>
-						<p>Some sample text. Some sample text.</p>
+						<h3>Crime Rate</h3>
+						<div id="crimeRateStar"></div>
 					</div>
 				</div>
 			</div>
 			<div class="tab-pane fade" id="education">
-				<div class="thumbnail">
-					<img src="/RealMashupFinal/static/images/weather.jpg"
-						alt="Generic placeholder thumbnail">
+				<div class="thumbnail pull-left">
+					<img src="/RealMashupFinal/static/images/weather.jpg" alt="">
 					<div class="caption">
-						<h3>Thumbnail label</h3>
-						<p>Some sample text. Some sample text.</p>
-
+						<h3>Education</h3>
+						<div id="educationStar"></div>
 					</div>
 				</div>
 			</div>
 			<div class="tab-pane fade" id="employment">
-				<div class="thumbnail">
-					<img src="/RealMashupFinal/static/images/weather.jpg"
-						alt="Generic placeholder thumbnail">
+				<div class="thumbnail pull-left">
+					<img src="/RealMashupFinal/static/images/weather.jpg" alt="">
 					<div class="caption">
-						<h3>Thumbnail label</h3>
-						<p>Some sample text. Some sample text.</p>
+						<h3>Employment</h3>
+						<div id="employmentStar"></div>
 					</div>
 				</div>
 			</div>
 			<div class="tab-pane fade" id="weather">
-				<div class="thumbnail">
-					<img src="/RealMashupFinal/static/images/weather.jpg"
-						alt="Generic placeholder thumbnail">
+				<div class="thumbnail pull-left">
+					<img src="/RealMashupFinal/static/images/weather.jpg" alt="">
 					<div class="caption">
-						<h3>Thumbnail label</h3>
-						<p>Some sample text. Some sample text.</p>
+						<h3>Weather</h3>
+						<div id="weatherStar"></div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<!-- Tab bar for widgets ends -->
-	<!--
-<%--  
-	<div class="slide story" id="slide-1" data-slide="1">
-		<div>
-			<h1 id="address" hidden="true">
-				${flash.address}
-			</h1>
-		</div>
-		<div class="container">
-			<table class="table table-bordered">
-				<tr>
-					<!--Body content-->
-					<td>Address</td>
-					<td>City</td>
-					<td>Zip</td>
-					<td>Bathrooms</td>
-					<td>Bedrooms</td>
-					<td>Finished Sq.Ft Area</td>
-					<td>Lot Sq.Ft Area</td>
-					<td>Estimated Price</td>
-				</tr>
-				<%--<tr>
-					<!--Body content-->
-					<td>
-						${flash.address}
-					</td>
-					<td>
-						${flash.city}
-					</td>
-					<td>
-						${flash.zip }
-					</td>
-					<td>
-						${flash.bathroom}
-					</td>
-					<td>
-						${flash.bedroom}
-					</td>
-					<td>
-						${flash.fArea}
-					</td>
-					<td>
-						${flash.lArea}
-					</td>
-					<td>
-						${flash.zestAmt}
-					</td>
-				</tr>
-			--%></table>
+
+<%-- 
 			<button type="button" class="btn btn-primary" onclick="codeAddress()"
 				data-loading-text="LOading...">View Map!</button>
 			<div id="map-canvas" style="width: 300px; height: 300px"></div>
 --%>
-		</div>
--->
+
 	<!-- /container -->
 </body>
 
 
-<script src="js/html5shiv.js"></script>
-<script src="js/jquery-1.10.2.min.js"></script>
-<script src="js/jquery-migrate-1.2.1.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.easing.1.3.js"></script>
-<script type="text/javascript"
-	src="fancybox/jquery.fancybox.pack-v=2.1.5.js"></script>
-<script src="js/script.js"></script>
-<script
-	src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 <!-- fancybox init -->
 <script>
 	$(document).ready(function(e) {
@@ -354,6 +295,37 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 			}
 		});
 
+	});
+</script>
+<script type="text/javascript">
+	var amenitiesScore =${flash.amenities}+3
+	$('#amenitiesStar').raty({
+		readOnly : true,
+		score : amenitiesScore
+	});
+	
+	var crimeRateScore = ${flash.crimeRate}+3
+	$('#crimeRateStar').raty({
+		readOnly : true,
+		score : crimeRateScore
+	});
+
+	var educationScore = ${flash.education}+3
+	$('#educationStar').raty({
+		readOnly : true,
+		score : educationScore
+	});
+
+	var employmentScore = ${flash.employment}+3
+	$('#employmentStar').raty({
+		readOnly : true,
+		score : employmentScore
+	});
+
+	var weatherScore =${flash.weather}+3
+	$('#weatherStar').raty({
+		readOnly : true,
+		score : weatherScore
 	});
 </script>
 <script>
@@ -372,8 +344,21 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 			});
 </script>
 <script>
-   $(function () {
-      $('#widgets li:eq(1) a').tab('show');
-   });
+	$(function() {
+		$('#widgets li:eq(1) a').tab('show');
+	});
 </script>
-</html>
+
+
+<%--<script>
+var map;
+$(document).ready(function(){
+  map = new GMaps({
+	div: '#map',
+    lat: ${flash.lat},
+    lng: ${flash.lon},
+    title:'${flash.address}'
+  });
+});
+</script>
+--%></html>
