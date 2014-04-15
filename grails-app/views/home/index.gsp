@@ -11,7 +11,7 @@
 <style type="text/css">
 <
 style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc div
-	{
+{
 	font-weight: 400
 }
 </style>
@@ -21,8 +21,7 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 	font-size: 10px
 }
 </style>
-<link type="text/css" rel="stylesheet"
-	href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
 <style type="text/css">
 @media print {
 	.gm-style .gmnoprint,.gmnoprint {
@@ -60,12 +59,12 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 
 
 <!-- CSS (necessary for Bootstrap's CSS ) -->
-	
-    <link rel="stylesheet" href="${resource(dir: 'css', file: 'font-awesome.min.css')}" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'style.css')}">	
-	
-	<link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,600,300,200&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 
+<link rel="stylesheet" href="${resource(dir: 'css', file: 'font-awesome.min.css')}" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'style.css')}">
+
+<link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,600,300,200&subset=latin,latin-ext'
+	rel='stylesheet' type='text/css'>
 
 </head>
 
@@ -105,16 +104,8 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 					<!--/.nav-collapse -->
 
 					<div class="nav-collapse collapse pull-right">
-						<%--<%
-							String userName = "";
-							if (session.getAttribute("user") != null) {
-								User userDto = (User) session.getAttribute("user");
-								userName = userDto.getUsername();
-							}
-						%>
-						--%>
 						<ul class="nav">
-						
+
 							<% if(session.username != null){ %>
 							<li style="color: white; padding-top: 10px;"><i
 								class="icon-user icon-white"></i> ${session.username}</li>
@@ -125,7 +116,7 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 								<li style="color: white; padding-top: 10px;"><i
 								class="icon-user icon-white"></i>  </li>
 								<li><g:link mapping="register"> Sign In</g:link></li>
-							<%}%> 
+							<%}%>
 						</ul>
 					</div>
 				</div>
@@ -140,7 +131,8 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 		<div id="myCarousel" class="carousel slide">
 			<div class="carousel-inner">
 				<div class="item active">
-					<img src="/RealMashupFinal/static/images/property-main-1.jpg" alt="">
+					<img src="/RealMashupFinal/static/images/property-main-1.jpg"
+						alt="">
 					<!--    <div class="container">
             <div class="carousel-caption">
               <h1>Example headline.</h1>
@@ -150,24 +142,12 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
           </div> -->
 				</div>
 				<div class="item">
-					<img src="/RealMashupFinal/static/images/property-main-2.jpg" alt="">
-					<!--   <div class="container">
-            <div class="carousel-caption">
-              <h1>Another example headline.</h1>
-              <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-              <a class="btn btn-large btn-primary" href="#">Learn more</a>
-            </div>
-          </div> -->
+					<img src="/RealMashupFinal/static/images/property-main-2.jpg"
+						alt="">
 				</div>
 				<div class="item">
-					<img src="/RealMashupFinal/static/images/property-main-3.jpg" alt="">
-					<!--   <div class="container">
-            <div class="carousel-caption">
-              <h1>One more for good measure.</h1>
-              <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-              <a class="btn btn-large btn-primary" href="#">Browse gallery</a>
-            </div>
-          </div> -->
+					<img src="/RealMashupFinal/static/images/property-main-3.jpg"
+						alt="">
 				</div>
 			</div>
 			<a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
@@ -185,8 +165,8 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 					<g:form class="col-lg-12" controller="home" action="listAddressesFromCity">
 					<div class="input-group input-group-lg col-sm-offset-4 col-sm-4">
 						<input type="text" class="center-block form-control input-lg"
-							title="Search" placeholder="e.g. San Jose" name="query"> <span
-							class="input-group-btn">
+							title="Search" placeholder="e.g. San Jose" name="query">
+						<span class="input-group-btn">
 							<button class="btn btn-lg btn-primary" type="submit">Go!</button>
 						</span>
 					</div>
@@ -195,7 +175,7 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 		</div>
 		<!-- /row -->
 		<!-- Example row of columns -->
-		
+
 		<hr>
 
 		<footer>
@@ -207,9 +187,10 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 
 	<!-- 
     ================================================== -->
-	<script src="js/jquery.js"></script>
-	<script src="js/bootstrap.js"></script>
-	<script src="js/operations.js"></script>
+	<g:javascript src="jquery-1.10.2.min.js"></g:javascript>
+	<g:javascript src="bootstrap.js"></g:javascript>
+	<g:javascript src="operations.js"></g:javascript>
+	<g:javascript src="script.js"></g:javascript>
 	<script>
 		!function($) {
 			(function() {

@@ -1,5 +1,6 @@
 package sjsu.cmpe295.controllers
 
+import java.text.DecimalFormat
 import sjsu.cmpe295.models.MasterUnSoldProperty
 import sjsu.cmpe295.models.Property
 import sjsu.cmpe295.models.User
@@ -21,16 +22,36 @@ class HomeController {
 		MasterUnSoldProperty property = dataQueryService.findSingleAddress(address)
 		
 		flash.address = address
-		flash.city = property.getCity()
-		flash.zestAmt = property.getZest_amt()
+		String city = property.getCity()
+//		char[] a = city.toLowerCase().toCharArray();
+//		for (int i = 0; i < a.length; i++ ) {
+//			a[i] = i == 0 || a[i-1] == ' ' ? a[i].toString().toUpperCase().toCharacter() : a[i];
+//		}
+//		String convertedCity = new String(a);
+		flash.city = city;
+		
+		DecimalFormat dFormat = new DecimalFormat("####,###,###.00");
+		String zestAmount = '$' + (dFormat.format(property.getZest_amt()));
+		println(zestAmount)
+		flash.zestAmt = zestAmount;
+		
 		flash.address = property.getAddress()
-		flash.bathroom = property.getBathroom()
-		flash.bedroom = property.getBedroom()
+		flash.bathroom = String.valueOf(property.getBathroom());
+		
+		flash.bedroom = String.valueOf(property.getBedroom());
 		flash.fArea = property.getFinishedSqFt()
 		flash.lArea = property.getLotSizeSqFt()
 		flash.lat = property.getLatitude()
 		flash.lon = property.getLongitude()
 		flash.zip = property.getZipcode()
+		
+		flash.amenities = property.getAmenities()
+		println(property.getAmenities())
+		flash.crimeRate = property.getCrimerate()
+		flash.education = property.getEducation()
+		flash.employment = property.getEmployment()
+		flash.weather = property.getWeather()
+		
 		render(view: "listings")
 	}
 	
