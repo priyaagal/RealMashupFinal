@@ -10,18 +10,16 @@ class HomeController {
 	
 	def index() {
 		println("In class HomeController/index()")
-		//redirect(action : 'home')
 		render(view: "index")	
 	}
 
 	
-	def listings()
+	def listingSingleAddress()
 	{
 		println("In class DataQueryController/listings()")
 		def address = params.query
 		printf(address)
-		MasterUnSoldProperty property = dataQueryService.findAddress(address)
-		//AddToUserWatchList(property)
+		MasterUnSoldProperty property = dataQueryService.findSingleAddress(address)
 		
 		flash.address = address
 		String city = property.getCity()
@@ -57,6 +55,56 @@ class HomeController {
 		render(view: "listings")
 	}
 	
+	def listAddressesFromCity()
+	{
+		println("In class DataQueryController/listAddressesFromCity()")
+		def city = params.query.replace(" ", "")
+		printf(city)
+		//List properties = dataQueryService.findAddressFromCtiy(city,[params])
+		List properties = MasterUnSoldProperty.findAllByCity(city,[params])
+		def total = properties.size()
+		printf(properties.size().toString())
+		flash.properties = properties
+		
+		/*
+		for (it in properties)
+		{ 	println (it.address.toString())
+			println (it.city.toString())
+			println (it.state.toString())
+		}
+		*/
+		
+		def maxPageCount = 0
+		render(view: "result", model:['properties':properties, 'total': total])
+		
+	}
+	
+	def paginateAddresses()
+	{
+		println("In class DataQueryController/paginateAddresses()")
+		def city = params.query 
+		def total = params.total
+		printf(total.toString())
+		printf(city.toString())
+		printf(params.toString())
+		List properties = MasterUnSoldProperty.findAllByCity(city,[ max : params.max, offset : params.offset ])
+		printf(properties.toString())
+		printf(properties.size().toString())
+		
+		render(view: "result", model:['properties':properties, 'total': total])
+		
+		/*
+		def properties = flash.properties as List
+		def maxPageCount = params.offset.toInteger() + 20
+		//['properties':properties, 'offset':maxPageCount]
+		printf(maxPageCount.toString())
+		printf(properties.toString())
+		
+		render(view: "result", model:['properties':properties, 'offset':maxPageCount])
+		*/
+	}
+	
+	
 	/*
 	def getUserWatchlist()
 	{	
@@ -74,7 +122,7 @@ class HomeController {
 		println("In class DataQueryController/AddToUserWatchList()")
 		def address = params.address
 		printf(address)
-		Property property = dataQueryService.findAddress(address)
+		Property property = dataQueryService.findSingleAddress(address)
 		
 		User user = User.findByEmail(session.email) // find user by email from session
 		
