@@ -8,7 +8,7 @@ class User {
 	String email
 	
 	//static belongsTo = Property
-	static hasMany = [props:Property]
+	static hasMany = [properties : MasterUnSoldProperty]
 	
 	static constraints = {
 		email(unique: true)
