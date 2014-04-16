@@ -162,7 +162,7 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 			<div class="col-lg-12 text-center v-center">
 				<h1>Welcome to Real Realty!</h1>
 				<p class="lead">Find the Best Places to Live</p>
-					<g:form class="col-lg-12" controller="home" action="listAddressesFromCity">
+					<g:form class="col-lg-12" controller="home" action="parseRequest">
 					<div class="input-group input-group-lg col-sm-offset-4 col-sm-4">
 						<input type="text" class="center-block form-control input-lg"
 							title="Search" placeholder="e.g. San Jose" name="query">
