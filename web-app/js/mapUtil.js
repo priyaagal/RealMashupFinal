@@ -22,8 +22,11 @@ function loadMap2(address) {
 // Reference
 // https://developers.google.com/maps/documentation/javascript/geocoding
 
+//global variables
 var geocoder;
 var map;
+var propertiesData;
+
 function initialize() {
   geocoder = new google.maps.Geocoder();
   // var latlng = new google.maps.LatLng(-34.397, 150.644);
@@ -32,24 +35,25 @@ function initialize() {
     // center: latlng,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   }
+  
   map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+  var query = getParameterByName('query');
+  var offset = getParameterByName('offset');
+  var max = getParameterByName('max');
+  if(!offset) {
+	  offset = 0;
+  }
+  if(!max) {
+	  max = 20;
+  }
+  
+  //get surrounding properties
+  getProperties(query, offset, max);
+ 
 }
 
-function codeAddress() {
-	if(!geocoder || !map) initialize();
-	
-	  var query = getParameterByName('query');
-	  var offset = getParameterByName('offset');
-	  var max = getParameterByName('max');
-	  if(!offset) {
-		  offset = 0;
-	  }
-	  if(!max) {
-		  max = 20;
-	  }
-	  
-	  //get surrounding properties
-	  getProperties(query, offset, max);
+function codeAddress(query) {
 	  
 	  geocoder.geocode( { 'address': query}, function(results, status) {
 	    if (status == google.maps.GeocoderStatus.OK) {
@@ -59,15 +63,17 @@ function codeAddress() {
 	          position: results[0].geometry.location
 	      });
 	      
+	      //mark other properties
+	      propertyMarkers();
 	    } else {
 	      alert('Geocode was not successful for the following reason: ' + status);
 	    }
 	  });
 }
 
-function propertyMarkers(xmlDoc){
-	if(geocoder && map) {
-		var properties = xmlDoc.documentElement.getElementsByTagName('masterUnSoldProperty');
+function propertyMarkers(){
+	if(geocoder && map && propertiesData) {
+		var properties = propertiesData.documentElement.getElementsByTagName('masterUnSoldProperty');
 	    var pinImage = new google.maps.MarkerImage("http://localhost:8080/RealEstate/static/images/marker_blue.png");
 	    // "${resource(dir : 'images', file : 'marker_blue.png')}");
 	    for(var i=0; i< properties.length; i++){
@@ -85,20 +91,24 @@ function propertyMarkers(xmlDoc){
 	}
 }
 
-function getProperties(city, offset, max) {
+function getProperties(address, offset, max) {
 	var xmlhttp;
 	if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
 		xmlhttp=new XMLHttpRequest();
 	}else{// code for IE6, IE5
 		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 	}
+	//listner 
 	xmlhttp.onreadystatechange=function() {
 		if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-			propertyMarkers(xmlhttp.responseXML);
+			propertiesData = xmlhttp.responseXML;
+			
+			//display map
+			if(geocoder && map) codeAddress(address);
 		}
 	}
 
-	xmlhttp.open("GET","http://localhost:8080/RealMashupFinal/rest?city=" + city + "&dtype=xml&offset=" + offset + "&max=" + max,true);
+	xmlhttp.open("GET","http://localhost:8080/RealMashupFinal/rest?city=" + address + "&dtype=xml&offset=" + offset + "&max=" + max,true);
 	xmlhttp.send();
 }
 
@@ -121,4 +131,6 @@ function getParameterByName(name) {
     return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
-google.maps.event.addDomListener(window, 'load', codeAddress);
+//entry point
+google.maps.event.addDomListener(window, 'load', initialize);
+
