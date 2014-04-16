@@ -39,7 +39,7 @@
 
 <body>
 	<header>
-		<div class="navbar navbar-inverse" id="navbarInversePreview">
+		<div class="navbar navbar-inverse navbar-fixed-top">
 			<div class="navbar-inner">
 				<div class="container">
 					<a data-target=".navbar-responsive-collapse" data-toggle="collapse" class="btn btn-navbar">
