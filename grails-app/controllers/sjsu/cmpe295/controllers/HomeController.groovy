@@ -150,11 +150,14 @@ class HomeController {
 
 	
 	 def getUserWatchlist() {
+		 println("In class DataQueryController/getUserWatchlist()")
 		 def user = User.findByEmail(session.email)
-		 List properties
-		 for (prop in user.properties)
+		 def properties = []
+		 for (prop in user.props)
 		  {
-			  println (prop.Address.toString())
+			  println (prop.address.toString())
+			  println (prop.city.toString())
+			  println (prop.state.toString())
 			  properties.add(prop)
 		  }
 		  
@@ -169,23 +172,28 @@ class HomeController {
 		MasterUnSoldProperty property = dataQueryService.findSingleAddress(address)
 
 		User user = User.findByEmail(session.email) // find user by email from session
-
+		
+		def properties
 
 		// set association
-		Set properties = new HashSet()
+		if(user.props != null)
+			properties =  user.props
+		else
+			properties = new HashSet()
+			
 		properties.add(property)
 		printf(properties.toString())
-		user.properties =  properties
+		user.props =  properties
 
 		// save objects
 		user.save(flush:true)
 		printf(user.getErrors().toString())
-		printf(user.properties.toString())
+		printf(user.props.toString())
 
-		for (it in user.properties)
-		{ //	println (it.address.toString())
-			println (it.city.toString())
-			println (it.state.toString())
+		for (props in user.props)
+		{ 	println (props.address.toString())
+			println (props.city.toString())
+			println (props.state.toString())
 		}
 
 		render(view: "index")

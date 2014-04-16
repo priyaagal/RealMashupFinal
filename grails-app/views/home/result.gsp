@@ -231,7 +231,7 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 										<% if(session.username != null){ %>
 										<g:form class="col-lg-12" controller="home"
 											action="AddToUserWatchList"
-											params="${ [address: flash.address]}">
+											params="[address: properties[i].address]">
 											<button class="btn btn-lg btn-primary" type="submit">
 												Watchlist!</button>
 										</g:form>
