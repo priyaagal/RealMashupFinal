@@ -6,24 +6,28 @@ import sjsu.cmpe295.models.Property;
 class DataPopulaterController {
 
 	def dataCollectorService
-	
-	
-    def index() {
+
+
+	def index() {
 		println("In class DataPopulaterController/index()")
 		//redirect(action : 'home')
 		render(view: "home")
 		println("In class DataPopulaterController/last index()")
-		
+
 	}
 
-	
+
 	def home() {
 		//construct home page
+		def errorMessage
 		println("In class DataPopulaterController/home()")
-		println("In class DataPopulaterController/last home()")
-		dataCollectorService.getAddressesFromCsv();
+		try{
+			dataCollectorService.getAddressesFromCsv();
+		} catch(Exception e) {
+			errorMessage = e.getMessage()
+		}
 	}
-	
+
 	def details(){
 		//@TODO: fetch property details and pass to the view
 	}
