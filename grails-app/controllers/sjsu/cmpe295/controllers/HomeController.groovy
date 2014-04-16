@@ -1,5 +1,6 @@
 package sjsu.cmpe295.controllers
 
+import java.text.DecimalFormat
 import sjsu.cmpe295.models.MasterUnSoldProperty
 import sjsu.cmpe295.models.Property
 import sjsu.cmpe295.models.User
@@ -9,12 +10,11 @@ class HomeController {
 
 	def index() {
 		println("In class HomeController/index()")
-		//redirect(action : 'home')
 		render(view: "index")
 	}
 
 
-	def listings() {
+	def listingSingleAddress() {
 		println("In class DataQueryController/listings()")
 		def errorMessage
 
@@ -22,20 +22,39 @@ class HomeController {
 			def address = params.query
 			printf(address)
 			if(address) {
-				MasterUnSoldProperty property = dataQueryService.findAddress(address)
-				//AddToUserWatchList(property)
+				MasterUnSoldProperty property = dataQueryService.findSingleAddress(address)
 
 				flash.address = address
-				flash.city = property.getCity()
-				flash.zestAmt = property.getZest_amt()
+				String city = property.getCity()
+				//		char[] a = city.toLowerCase().toCharArray();
+				//		for (int i = 0; i < a.length; i++ ) {
+				//			a[i] = i == 0 || a[i-1] == ' ' ? a[i].toString().toUpperCase().toCharacter() : a[i];
+				//		}
+				//		String convertedCity = new String(a);
+				flash.city = city;
+
+				DecimalFormat dFormat = new DecimalFormat("####,###,###.00");
+				String zestAmount = '$' + (dFormat.format(property.getZest_amt()));
+				println(zestAmount)
+				flash.zestAmt = zestAmount;
+
 				flash.address = property.getAddress()
-				flash.bathroom = property.getBathroom()
-				flash.bedroom = property.getBedroom()
+				flash.bathroom = String.valueOf(property.getBathroom());
+
+				flash.bedroom = String.valueOf(property.getBedroom());
 				flash.fArea = property.getFinishedSqFt()
 				flash.lArea = property.getLotSizeSqFt()
 				flash.lat = property.getLatitude()
 				flash.lon = property.getLongitude()
 				flash.zip = property.getZipcode()
+
+				flash.amenities = property.getAmenities()
+				println(property.getAmenities())
+				flash.crimeRate = property.getCrimerate()
+				flash.education = property.getEducation()
+				flash.employment = property.getEmployment()
+				flash.weather = property.getWeather()
+
 				render(view: "listings")
 			}
 			else {
@@ -46,6 +65,52 @@ class HomeController {
 			errorMessage = e.getMessage()
 			render(view: "error")
 		}
+	}
+
+	def listAddressesFromCity() {
+		println("In class DataQueryController/listAddressesFromCity()")
+		def city = params.query.replace(" ", "")
+		printf(city)
+		//List properties = dataQueryService.findAddressFromCtiy(city,[params])
+		List properties = MasterUnSoldProperty.findAllByCity(city,[params])
+		def total = properties.size()
+		printf(properties.size().toString())
+		flash.properties = properties
+
+		/*
+		 for (it in properties)
+		 { 	println (it.address.toString())
+		 println (it.city.toString())
+		 println (it.state.toString())
+		 }
+		 */
+
+		def maxPageCount = 0
+		render(view: "result", model:['properties':properties, 'total': total])
+
+	}
+
+	def paginateAddresses() {
+		println("In class DataQueryController/paginateAddresses()")
+		def city = params.query
+		def total = params.total
+		printf(total.toString())
+		printf(city.toString())
+		printf(params.toString())
+		List properties = MasterUnSoldProperty.findAllByCity(city,[ max : params.max, offset : params.offset ])
+		printf(properties.toString())
+		printf(properties.size().toString())
+
+		render(view: "result", model:['properties':properties, 'total': total])
+
+		/*
+		 def properties = flash.properties as List
+		 def maxPageCount = params.offset.toInteger() + 20
+		 //['properties':properties, 'offset':maxPageCount]
+		 printf(maxPageCount.toString())
+		 printf(properties.toString())
+		 render(view: "result", model:['properties':properties, 'offset':maxPageCount])
+		 */
 	}
 
 	/*
@@ -60,49 +125,31 @@ class HomeController {
 	 }
 	 */
 	def AddToUserWatchList() {
-		def errorMessage
 		println("In class DataQueryController/AddToUserWatchList()")
-		try{
-			def address = params.address
-			printf(address)
-			if(address)
-				Property property = dataQueryService.findAddress(address)
-			else
-				errorMessage = "Address not provided"
+		def address = params.address
+		printf(address)
+		Property property = dataQueryService.findSingleAddress(address)
 
-			if(session.email)
-				User user = User.findByEmail(session.email) // find user by email from session
-			else
-				errorMessage = "User not logged in. Please log in"
+		User user = User.findByEmail(session.email) // find user by email from session
 
-			// set association
-			if(property && user) {
-				Set properties = new HashSet()
-				properties.add(property)
-				user.props =  properties
 
-				// save objects
-				user.save(flush:true)
-				printf(user.getErrors().toString())
+		// set association
+		Set properties = new HashSet()
+		properties.add(property)
+		user.props =  properties
 
-				for (prop in user.props)
-				{ 	println (prop.Address.toString())
-					println (prop.city.toString())
-					println (prop.state.toString())
-				}
+		// save objects
+		user.save(flush:true)
+		printf(user.getErrors().toString())
 
-				render(view: "index")
-			}
-			else {
-				errorMessage = "Property or User is null"
-				render(view: "error")
-			}
-		} catch(Exception e) {
-			errorMessage = e.getMessage()
-			render(view: "error")
+		for (prop in user.props)
+		{ 	println (prop.Address.toString())
+			println (prop.city.toString())
+			println (prop.state.toString())
 		}
-	}
 
+		render(view: "index")
+	}
 
 
 }
