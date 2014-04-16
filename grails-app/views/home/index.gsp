@@ -94,13 +94,15 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 								<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown">WatchList<b class="caret"></b></a>
 								  <ul class="dropdown-menu">
-									<li><a href=“#watchlist”>My Watclist</a></li>
+									<li><g:link controller="home" action="getUserWatchlist" >My Watclist</g:link></li>
 									   <li class="divider"></li>
 								  </ul>
 								</li>
 							<li style="color: white; padding-top: 10px;">
-								<i class="icon-user icon-white"></i>${session.username}</li>
-							<li><g:link controller="user" action="logout" > Logout</g:link></li>
+							<i class="icon-user icon-white"></i> ${session.username}</li>
+							<li>
+								<g:link controller="user" action="logout"> Logout</g:link>
+							</li>
 							<% }
 							else
 							{ %>

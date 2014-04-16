@@ -1,7 +1,5 @@
 package sjsu.cmpe295.services
 import sjsu.cmpe295.models.MasterUnSoldProperty
-import sjsu.cmpe295.models.Property;
-import sjsu.cmpe295.models.SoldProperty
 
 class DataQueryService {
 

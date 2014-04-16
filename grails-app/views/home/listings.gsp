@@ -57,7 +57,7 @@
 						</ul>
 					<!--/.nav-collapse -->
 						<div class="navbar-search pull-left">
-							<g:form class="navbar-form navbar-left" controller="home" action="listingSingleAddress">
+							<g:form class="navbar-form navbar-left" controller="home" action="parseRequest">
 								<div class="form-group fieldcontain text-center">
 									<input type="text" title="Search" value="" placeholder="Search ..." class="form-control nav-search" name="query"> 
 									<span class="input-group-btn">
@@ -68,13 +68,13 @@
 						</div>
 						<ul class="nav pull-right">
 							<% if(session.username != null){ %>
-							<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">WatchList<b class="caret"></b></a>
-								<ul class="dropdown-menu">
-									<li>
-										<a href=“#watchlist”>My Watclist</a>
-									</li>
-								</ul>
-							</li>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">WatchList<b class="caret"></b></a>
+								  <ul class="dropdown-menu">
+									<li><g:link controller="home" action="getUserWatchlist" >My Watclist</g:link></li>
+									   <li class="divider"></li>
+								  </ul>
+								</li>
 							<li style="color: white; padding-top: 10px;">
 								<i class="icon-user icon-white"></i> ${session.username}</li>
 							<li>

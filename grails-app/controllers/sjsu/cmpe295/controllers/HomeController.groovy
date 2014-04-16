@@ -30,7 +30,7 @@ class HomeController {
 		}
 	}
 
-	def listingSingleAddress() {
+	def listSingleAddress() {
 		println("In class DataQueryController/listings()")
 		def errorMessage
 
@@ -148,21 +148,25 @@ class HomeController {
 		}
 	}
 
-	/*
+	
 	 def getUserWatchlist() {
-	 def user = User.findByEmail(session.email)
-	 for (prop in user.props) {
-	 println (prop.Address.toString())
-	 println (prop.city.toString())
-	 println (prop.state.toString())
+		 def user = User.findByEmail(session.email)
+		 List properties
+		 for (prop in user.properties)
+		  {
+			  println (prop.Address.toString())
+			  properties.add(prop)
+		  }
+		  
+		  def total = properties.size()
+		  render(view: "watchlist", model:['properties':properties, 'total': total])
 	 }
-	 }*/
 
 	def AddToUserWatchList() {
 		println("In class DataQueryController/AddToUserWatchList()")
 		def address = params.address
 		printf(address)
-		Property property = dataQueryService.findSingleAddress(address)
+		MasterUnSoldProperty property = dataQueryService.findSingleAddress(address)
 
 		User user = User.findByEmail(session.email) // find user by email from session
 
@@ -170,16 +174,18 @@ class HomeController {
 		// set association
 		Set properties = new HashSet()
 		properties.add(property)
-		user.props =  properties
+		printf(properties.toString())
+		user.properties =  properties
 
 		// save objects
 		user.save(flush:true)
 		printf(user.getErrors().toString())
+		printf(user.properties.toString())
 
-		for (prop in user.props)
-		{ 	println (prop.Address.toString())
-			println (prop.city.toString())
-			println (prop.state.toString())
+		for (it in user.properties)
+		{ //	println (it.address.toString())
+			println (it.city.toString())
+			println (it.state.toString())
 		}
 
 		render(view: "index")
