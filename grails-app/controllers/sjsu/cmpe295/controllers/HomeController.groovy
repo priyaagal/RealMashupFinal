@@ -7,7 +7,7 @@ import sjsu.cmpe295.models.User
 
 class HomeController {
 	def dataQueryService
-
+	
 	def index() {
 		println("In class HomeController/index()")
 		render(view: "index")
@@ -69,7 +69,24 @@ class HomeController {
 				flash.education = property.getEducation()
 				flash.employment = property.getEmployment()
 				flash.weather = property.getWeather()
-
+				flash.costOfLiving = property.getCostofliving()
+				flash.priceAppreciated = property.getPriceAppreciated()
+				println(property.getPriceAppreciated())
+		
+				if(flash.costOfLiving > 1.5 && flash.priceAppreciated && flash.crimeRate <= 0.5) {
+					flash.ifBuy = false;
+				}
+				else if (flash.costOfLiving < 1.5 && flash.priceAppreciated) {
+					if(flash.weather > 0.5 && flash.education > 0.5 && flash.education > 0.5 && flash.crimeRate > 0.5)
+						flash.ifBuy = true;	
+					else {
+						flash.ifBuy = false;
+					}
+				}
+				else {
+					flash.ifBuy = true;
+				}
+		
 			}
 			else {
 				errorMessage = "Address not provided"

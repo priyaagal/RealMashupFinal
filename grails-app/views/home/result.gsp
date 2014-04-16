@@ -9,20 +9,16 @@
 
 <!-- Le styles -->
 <style type="text/css">
-<
-style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc div
-	{
+style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc div {
 	font-weight: 400
 }
 </style>
 <style type="text/css">
-.gm-style .gm-style-cc span,.gm-style .gm-style-cc a,.gm-style .gm-style-mtc div
-	{
+.gm-style .gm-style-cc span,.gm-style .gm-style-cc a,.gm-style .gm-style-mtc div {
 	font-size: 10px
 }
 </style>
-<link type="text/css" rel="stylesheet"
-	href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
 <style type="text/css">
 @media print {
 	.gm-style .gmnoprint,.gmnoprint {
@@ -47,34 +43,71 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
 <link rel="stylesheet" href="css/font-awesome.css">
-<script src="//www.google-analytics.com/ga.js" style=""></script>
+<%--<script src="//www.google-analytics.com/ga.js" style=""></script>
+--%>
 <script src="js/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
 <!-- body { padding-top: 60px; padding-bottom: 40px; } -->
 <!-- Bootstrap -->
-<link rel="stylesheet" type="text/css"
-	href="${resource(dir: 'css', file: 'bootstrap.min.css')}">
-<link rel="stylesheet" type="text/css"
-	href="${resource(dir: 'css', file: 'bootstrap-responsive.min.css')}">
-<link rel="stylesheet" type="text/css"
-	href="${resource(dir: 'css', file: 'bootstrap-responsive.css')}">
+<link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'bootstrap.min.css')}">
+<link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'bootstrap-responsive.min.css')}">
+<link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'bootstrap-responsive.css')}">
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<link rel="stylesheet"
-	href="${resource(dir: 'fancybox', file: 'jquery.fancybox-v=2.1.5.css')}"
-	type="text/css" media="screen">
+<link rel="stylesheet" href="${resource(dir: 'fancybox', file: 'jquery.fancybox-v=2.1.5.css')}" type="text/css" media="screen">
 
 
 <!-- CSS (necessary for Bootstrap's CSS ) -->
 
-<link rel="stylesheet"
-	href="${resource(dir: 'css', file: 'font-awesome.min.css')}"
-	rel="stylesheet">
-<link rel="stylesheet" type="text/css"
-	href="${resource(dir: 'css', file: 'style.css')}">
+<link rel="stylesheet" href="${resource(dir: 'css', file: 'font-awesome.min.css')}" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'style.css')}">
 
-<link
-	href='http://fonts.googleapis.com/css?family=Titillium+Web:400,600,300,200&subset=latin,latin-ext'
-	rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,600,300,200&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+<script src="js/html5shiv.js"></script>
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="js/jquery-migrate-1.2.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="fancybox/jquery.fancybox.pack-v=2.1.5.js"></script>
+<script src="js/script.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+<!-- fancybox init -->
+<script>
+	$(document).ready(function(e) {
+		var lis = $('.nav > li');
+		menu_focus(lis[0], 1);
+
+		$(".fancybox").fancybox({
+			padding : 10,
+			helpers : {
+				overlay : {
+					locked : false
+				}
+			}
+		});
+
+	});
+</script>
+<script>
+	$(document).ready(
+			function(ev) {
+				$('#custom_carousel').on(
+						'slide.bs.carousel',
+						function(evt) {
+							$('#custom_carousel .controls li.active')
+									.removeClass('active');
+							$('#custom_carousel .controls li:eq('
+											+ $(evt.relatedTarget).index()
+											+ ')').addClass('active');
+						})
+			});
+</script>
+<script>
+   $(function () {
+      $('#widgets li:eq(1) a').tab('show');
+   });
+</script>
+
+
 </head>
 <body>
 	<header>
@@ -87,50 +120,47 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 							class="icon-bar"></span>
 					</button>
 					<a class="brand" href="#">Real Realty</a>
-					<div class="nav-collapse collapse">
-						<!--  <ul class="nav nav-pills pull-center">-->
+					<div class="nav-collapse collapse navbar-responsive-collapse">
 						<ul class="nav">
+						<!--  <ul class="nav nav-pills pull-center">-->
 							<li class="active"><a href="#">Home</a></li>
 							<li><a href="#about">About</a></li>
 							<li><a href="#contact">Contact</a></li>
-							<!--  
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Brand Options <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                  <li><a href="dell/dell-home.jsp">Dell</a></li>
-                     <li class="divider"></li>
-                  <li><a href="lenovo/lenovo-home.jsp">Lenovo</a></li>
-                     <li class="divider"></li>
-                  <li><a href="sony/sony-home.jsp">Sony</a></li>
-                    <li class="divider"></li>
-                 <li><a href="hp/hp-home.jsp">HP</a></li>
-                </ul>
-              </li> -->
 						</ul>
-
-					</div>
-					<!--/.nav-collapse -->
-
-					<div class="nav-collapse collapse pull-right">
-						<%--<%
-							String userName = "";
-							if (session.getAttribute("user") != null) {
-								User userDto = (User) session.getAttribute("user");
-								userName = userDto.getUsername();
-							}
-						%>
-						--%>
-						<ul class="nav">
+						<!--/.nav-collapse -->
+						<div class="navbar-search pull-left">
+							<g:form class="navbar-form navbar-left" controller="home" action="listingSingleAddress">
+								<div class="form-group fieldcontain text-center">
+									<input type="text" title="Search" value="" placeholder="Search ..." class="form-control nav-search" name="query"> 
+									<span class="input-group-btn">
+										<button class="btn btn-lg btn-primary" type="submit">Go!</button>
+									</span>
+								</div>
+							</g:form>
+						</div>
+						<ul class="nav pull-right">
 							<% if(session.username != null){ %>
-							<li style="color: white; padding-top: 10px;"><i
-								class="icon-user icon-white"></i> ${session.username}</li>
-							<li><g:link controller="user" action="logout" > Logout</g:link></li>
+							<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">WatchList<b class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<li>
+										<a href=“#watchlist”>My Watclist</a>
+									</li>
+								</ul>
+							</li>
+							<li style="color: white; padding-top: 10px;">
+							<i class="icon-user icon-white"></i> ${session.username}</li>
+							<li>
+								<g:link controller="user" action="logout"> Logout</g:link>
+							</li>
 							<% }
 							else
 							{ %>
-								<li style="color: white; padding-top: 10px;"><i
-								class="icon-user icon-white"></i>  </li>
-								<li><g:link mapping="register"> Sign In</g:link></li>
+								<li style="color: white; padding-top: 10px;">
+									<i class="icon-user icon-white"></i>  
+								</li>
+								<li>
+									<g:link mapping="register"> Sign In</g:link>
+								</li>
 							<%}%>
 						</ul>
 					</div>
@@ -140,7 +170,7 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 	</header>
 
 	<!-- === MAIN Background === -->
-	<g:javascript src="mapUtil.js"></g:javascript>
+<div id="wrap">
 	<div class="container">
 		<hr>
 		<% 
@@ -219,54 +249,12 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
                     action="paginateAddresses" params="${['query':params.query, 'total':total]}" />
     	</div>
 	</div>
+	<div id="footer">
+		<div class="container">
+			<p class="text-muted credit">&copy; Real Realty 2014</p>
+		</div>
+	</div>
+</div>
+	
 </body>
-
-
-<script src="js/html5shiv.js"></script>
-<script src="js/jquery-1.10.2.min.js"></script>
-<script src="js/jquery-migrate-1.2.1.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.easing.1.3.js"></script>
-<script type="text/javascript"
-	src="fancybox/jquery.fancybox.pack-v=2.1.5.js"></script>
-<script src="js/script.js"></script>
-<script
-	src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
-<!-- fancybox init -->
-<script>
-	$(document).ready(function(e) {
-		var lis = $('.nav > li');
-		menu_focus(lis[0], 1);
-
-		$(".fancybox").fancybox({
-			padding : 10,
-			helpers : {
-				overlay : {
-					locked : false
-				}
-			}
-		});
-
-	});
-</script>
-<script>
-	$(document).ready(
-			function(ev) {
-				$('#custom_carousel').on(
-						'slide.bs.carousel',
-						function(evt) {
-							$('#custom_carousel .controls li.active')
-									.removeClass('active');
-							$(
-									'#custom_carousel .controls li:eq('
-											+ $(evt.relatedTarget).index()
-											+ ')').addClass('active');
-						})
-			});
-</script>
-<script>
-   $(function () {
-      $('#widgets li:eq(1) a').tab('show');
-   });
-</script>
 </html>
