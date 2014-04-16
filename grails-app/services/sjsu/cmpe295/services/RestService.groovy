@@ -26,7 +26,8 @@ class RestService {
 		}
 		else if(params.city){
 			//masterUnSoldProperty = MasterUnSoldProperty.findByCity(city)
-			properties = MasterUnSoldProperty.findAllByCity(params.city, filters)
+			String city = params.city
+			properties = MasterUnSoldProperty.findAllByCity(city.toLowerCase().replace(" ", ""), filters)
 		}
 		else if(params.address) {
 			properties = MasterUnSoldProperty.findByAddress("\"" + params.address + "\"", filters)

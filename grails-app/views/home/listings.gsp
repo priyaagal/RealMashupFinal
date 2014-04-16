@@ -268,6 +268,7 @@
 			</div>
 		</div>
 	</div>
+	
 	<!-- Tab bar for widgets ends -->
 
 <%-- 

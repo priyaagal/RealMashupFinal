@@ -1,6 +1,6 @@
 <html>
 <head>Error</head>
 <body>
-<h1> Error </h1>
+<h1> Error: ${flash.errorMessage}</h1>
 </body>
 </html>

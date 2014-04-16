@@ -1,7 +1,6 @@
-<script src="http://maps.googleapis.com/maps/api/js?v=3&sensor=true"></script>
+
 function loadMap2(address) {
 
-	alert(address)
 	var lat = 37.37172
 	var lon = -122.03801
 
@@ -20,16 +19,17 @@ function loadMap2(address) {
 }
 
 
-//Reference https://developers.google.com/maps/documentation/javascript/geocoding
+// Reference
+// https://developers.google.com/maps/documentation/javascript/geocoding
 
 var geocoder;
 var map;
 function initialize() {
   geocoder = new google.maps.Geocoder();
-  //var latlng = new google.maps.LatLng(-34.397, 150.644);
+  // var latlng = new google.maps.LatLng(-34.397, 150.644);
   var mapOptions = {
     zoom: 12,
-    //center: latlng,
+    // center: latlng,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   }
   map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
@@ -38,33 +38,87 @@ function initialize() {
 function codeAddress() {
 	if(!geocoder || !map) initialize();
 	
-	  var address = document.getElementById('address').innerText;	//check outer browsers
-	  alert(address)
-	  geocoder.geocode( { 'address': address}, function(results, status) {
+	  var query = getParameterByName('query');
+	  var offset = getParameterByName('offset');
+	  var max = getParameterByName('max');
+	  if(!offset) {
+		  offset = 0;
+	  }
+	  if(!max) {
+		  max = 20;
+	  }
+	  
+	  //get surrounding properties
+	  getProperties(query, offset, max);
+	  
+	  geocoder.geocode( { 'address': query}, function(results, status) {
 	    if (status == google.maps.GeocoderStatus.OK) {
 	      map.setCenter(results[0].geometry.location);
 	      var marker = new google.maps.Marker({
 	          map: map,
 	          position: results[0].geometry.location
 	      });
-	      propertyMarkers(null);
+	      
 	    } else {
 	      alert('Geocode was not successful for the following reason: ' + status);
 	    }
 	  });
 }
 
-function propertyMarkers(properties){
+function propertyMarkers(xmlDoc){
 	if(geocoder && map) {
-	    var pinImage = new google.maps.MarkerImage("http://localhost:8080/RealEstate/static/images/marker_blue.png");//"${resource(dir : 'images', file : 'marker_blue.png')}");
-	    
-		var pos = new google.maps.LatLng(37.40074, -122.01629);
-		var marker = new google.maps.Marker({
-	          map: map,
-	          position: pos,
-	          icon: pinImage
-	     });
+		var properties = xmlDoc.documentElement.getElementsByTagName('masterUnSoldProperty');
+	    var pinImage = new google.maps.MarkerImage("http://localhost:8080/RealEstate/static/images/marker_blue.png");
+	    // "${resource(dir : 'images', file : 'marker_blue.png')}");
+	    for(var i=0; i< properties.length; i++){
+	    	var property = properties[i];
+	    	var lat = property.getElementsByTagName("latitude");
+	    	var lon = property.getElementsByTagName("longitude");
+	    	
+	    	var pos = new google.maps.LatLng(lat[0].firstChild.nodeValue, lon[0].firstChild.nodeValue);
+	    	var marker = new google.maps.Marker({
+	    		map: map,
+	    		position: pos,
+	    		icon: pinImage
+	    	});
+		}
 	}
+}
+
+function getProperties(city, offset, max) {
+	var xmlhttp;
+	if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}else{// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.onreadystatechange=function() {
+		if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+			propertyMarkers(xmlhttp.responseXML);
+		}
+	}
+
+	xmlhttp.open("GET","http://localhost:8080/RealMashupFinal/rest?city=" + city + "&dtype=xml&offset=" + offset + "&max=" + max,true);
+	xmlhttp.send();
+}
+
+function StringToXML(oString) {
+	 //code for IE
+	 if (window.ActiveXObject) { 
+		 var oXML = new ActiveXObject("Microsoft.XMLDOM"); oXML.loadXML(oString);
+		 return oXML;
+	 }
+	 // code for Chrome, Safari, Firefox, Opera, etc. 
+	 else {
+		 return (new DOMParser()).parseFromString(oString, "text/xml");
+	 }
+}
+
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
 google.maps.event.addDomListener(window, 'load', codeAddress);

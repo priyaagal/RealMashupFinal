@@ -14,6 +14,7 @@ class HomeController {
 	}
 
 	def parseRequest() {
+		println("In class HomeController/parseRequest()")
 		def query = params.query
 
 		if(query.contains(",") ) {
@@ -26,7 +27,8 @@ class HomeController {
 			redirect(action : 'listAddressesFromCity' , params: [query: query])
 		else {
 			printf("Invalid input")
-			render(view: "/error")
+			flash.errorMessage = "Invalid input"
+			render(view: "/home/error")
 		}
 	}
 
@@ -77,8 +79,10 @@ class HomeController {
 			}
 
 			render(view: "listings")
+			
 		} catch(Exception e) {
-			flash.errorMessage = e.getMessage()
+			System.out.println(e.getMessage())
+			flash.errorMessage = "Internal Error"
 			render(view: "/home/error")
 		}
 	}
@@ -106,8 +110,13 @@ class HomeController {
 
 				render(view: "result", model:['properties':properties, 'total': total])
 			}
+			else {
+				flash.errorMessage = "Invalid City"
+				render(view: "/home/error")
+			}
 		} catch(Exception e) {
-			flash.errorMessage = e.getMessage()
+			System.out.println(e.getMessage())
+			flash.errorMessage = "Internal Error"
 			render(view: "/home/error")
 		}
 	}
@@ -126,8 +135,14 @@ class HomeController {
 
 				render(view: "result", model:['properties':properties, 'total': total])
 			}
+			else {
+				flash.errorMessage = "Invalid input"
+				render(view: "/home/error")
+			}
 		} catch (Exception e) {
-			flash.errorMessage = e.getMessage()
+			System.out.println(e.getMessage())
+			flash.errorMessage = "Internal Error"
+			render(view: "/home/error")
 		}
 	}
 
@@ -142,30 +157,41 @@ class HomeController {
 	 }*/
 
 	def AddToUserWatchList() {
-		println("In class DataQueryController/AddToUserWatchList()")
-		def address = params.address
-		printf(address)
-		Property property = dataQueryService.findSingleAddress(address)
+		println("In class HomeController/AddToUserWatchList()")
+		try{
+			def address = params.address
+			printf(address)
 
-		User user = User.findByEmail(session.email) // find user by email from session
+			if(address && session.email) {
+				Property property = dataQueryService.findSingleAddress(address)
 
+				User user = User.findByEmail(session.email) // find user by email from session
 
-		// set association
-		Set properties = new HashSet()
-		properties.add(property)
-		user.props =  properties
+				// set association
+				Set properties = new HashSet()
+				properties.add(property)
+				user.props =  properties
 
-		// save objects
-		user.save(flush:true)
-		printf(user.getErrors().toString())
+				// save objects
+				user.save(flush:true)
+				printf(user.getErrors().toString())
 
-		for (prop in user.props)
-		{ 	println (prop.Address.toString())
-			println (prop.city.toString())
-			println (prop.state.toString())
+				for (prop in user.props)
+				{ 	println (prop.Address.toString())
+					println (prop.city.toString())
+					println (prop.state.toString())
+				}
+				
+				render(view: "index")
+				
+			} else {
+				flash.errorMessage = "Please login or provide appropriate address"
+			}
+		} catch(Exception e) {
+			System.out.println(e.getMessage())
+			flash.errorMessage = "Internal Error"
+			render(view: "/home/error")
 		}
-
-		render(view: "index")
 	}
 
 

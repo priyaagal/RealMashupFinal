@@ -49,6 +49,7 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 <link rel="stylesheet" href="css/font-awesome.css">
 <script src="//www.google-analytics.com/ga.js" style=""></script>
 <script src="js/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 <!-- body { padding-top: 60px; padding-bottom: 40px; } -->
 <!-- Bootstrap -->
 <link rel="stylesheet" type="text/css"
@@ -141,6 +142,10 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 
 	<!-- === MAIN Background === -->
 	<g:javascript src="mapUtil.js"></g:javascript>
+	
+	<table>
+	<tr>
+	<td>
 	<div class="container">
 		<hr>
 		<% 
@@ -219,6 +224,12 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
                     action="paginateAddresses" params="${['query':params.query, 'total':total]}" />
     	</div>
 	</div>
+	</td>
+	<td>
+		<div id="map-canvas" style="width: 400px; height: 400px"></div>
+	</td>
+	</tr>
+	</table>
 </body>
 
 
