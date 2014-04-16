@@ -13,7 +13,6 @@ class HomeController {
 		render(view: "index")
 	}
 
-
 	def listingSingleAddress() {
 		println("In class DataQueryController/listings()")
 		def errorMessage
@@ -55,62 +54,78 @@ class HomeController {
 				flash.employment = property.getEmployment()
 				flash.weather = property.getWeather()
 
-				render(view: "listings")
 			}
 			else {
 				errorMessage = "Address not provided"
-				render(view: "error")
+				flash.errorMessage = errorMessage
 			}
+
+			render(view: "listings")
 		} catch(Exception e) {
-			errorMessage = e.getMessage()
-			render(view: "error")
+			flash.errorMessage = e.getMessage()
+			render(view: "/home/error")
 		}
 	}
 
 	def listAddressesFromCity() {
 		println("In class DataQueryController/listAddressesFromCity()")
-		def city = params.query.replace(" ", "")
-		printf(city)
-		//List properties = dataQueryService.findAddressFromCtiy(city,[params])
-		List properties = MasterUnSoldProperty.findAllByCity(city,[params])
-		def total = properties.size()
-		printf(properties.size().toString())
-		flash.properties = properties
+		try{
 
-		/*
-		 for (it in properties)
-		 { 	println (it.address.toString())
-		 println (it.city.toString())
-		 println (it.state.toString())
-		 }
-		 */
+			if(params.query) {
+				def city = params.query.replace(" ", "")
+				printf(city)
+				//List properties = dataQueryService.findAddressFromCtiy(city,[params])
+				List properties = MasterUnSoldProperty.findAllByCity(city,[params])
+				def total = properties.size()
+				printf(properties.size().toString())
+				flash.properties = properties
 
-		def maxPageCount = 0
-		render(view: "result", model:['properties':properties, 'total': total])
+				/*
+				 for (it in properties)
+				 { 	println (it.address.toString())
+				 println (it.city.toString())
+				 println (it.state.toString())
+				 }
+				 */
 
+				def maxPageCount = 0
+				render(view: "result", model:['properties':properties, 'total': total])
+			}
+		} catch(Exception e) {
+			flash.errorMessage = e.getMessage()
+			render(view: "/home/error")
+		}
 	}
 
 	def paginateAddresses() {
 		println("In class DataQueryController/paginateAddresses()")
-		def city = params.query
-		def total = params.total
-		printf(total.toString())
-		printf(city.toString())
-		printf(params.toString())
-		List properties = MasterUnSoldProperty.findAllByCity(city,[ max : params.max, offset : params.offset ])
-		printf(properties.toString())
-		printf(properties.size().toString())
+		try {
 
-		render(view: "result", model:['properties':properties, 'total': total])
+			if(params.query && params.total) {
+				def city = params.query
+				def total = params.total
+				printf(total.toString())
+				printf(city.toString())
+				printf(params.toString())
+				
+				List properties = MasterUnSoldProperty.findAllByCity(city,[ max : params.max, offset : params.offset ])
+				printf(properties.toString())
+				printf(properties.size().toString())
 
-		/*
-		 def properties = flash.properties as List
-		 def maxPageCount = params.offset.toInteger() + 20
-		 //['properties':properties, 'offset':maxPageCount]
-		 printf(maxPageCount.toString())
-		 printf(properties.toString())
-		 render(view: "result", model:['properties':properties, 'offset':maxPageCount])
-		 */
+				render(view: "result", model:['properties':properties, 'total': total])
+
+				/*
+				 def properties = flash.properties as List
+				 def maxPageCount = params.offset.toInteger() + 20
+				 //['properties':properties, 'offset':maxPageCount]
+				 printf(maxPageCount.toString())
+				 printf(properties.toString())
+				 render(view: "result", model:['properties':properties, 'offset':maxPageCount])
+				 */
+			}
+		} catch (Exception e) {
+			flash.errorMessage = e.getMessage()
+		}
 	}
 
 	/*
