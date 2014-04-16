@@ -1,54 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
 <title>Real Estate Prediction Engine</title>
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <meta content="" name="description">
 <meta content="" name="author">
 
-<!-- Le styles -->
-
-<style type="text/css">
-<style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc div
-	{
-	font-weight: 400
-}
-</style>
-<style type="text/css">
-.gm-style .gm-style-cc span,.gm-style .gm-style-cc a,.gm-style .gm-style-mtc div
-	{
-	font-size: 10px
-}
-</style>
-<link type="text/css" rel="stylesheet"
-	href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
-<style type="text/css">
-@media print {
-	.gm-style .gmnoprint,.gmnoprint {
-		display: none
-	}
-}
-
-@media screen {
-	.gm-style .gmnoscreen,.gmnoscreen {
-		display: none
-	}
-}
-</style>
-<style type="text/css">
-.gm-style {
-	font-family: Roboto, Arial, sans-serif;
-	font-size: 11px;
-	font-weight: 400;
-	text-decoration: none
-}
-</style>
+<link rel="stylesheet" href="css/main.css">
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
 <link rel="stylesheet" href="css/font-awesome.css">
-<script src="//www.google-analytics.com/ga.js" style=""></script>
 <script src="js/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
+
+
 <!-- body { padding-top: 60px; padding-bottom: 40px; } -->
 <!-- Bootstrap -->
 <link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'bootstrap.min.css')}">
@@ -63,75 +28,66 @@
 <link rel="stylesheet" href="${resource(dir: 'css', file: 'font-awesome.min.css')}" rel="stylesheet">
 <link rel="stylesheet" type="text/css"href="${resource(dir: 'css', file: 'style.css')}">
 
-<link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,600,300,200&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-
-<g:javascript src="html5shiv.js"></g:javascript>
-<g:javascript src="jquery-1.10.2.min.js"></g:javascript>
-<g:javascript src="jquery-migrate-1.2.1.min.js"></g:javascript>
-<g:javascript src="bootstrap.min.js"></g:javascript>
-<g:javascript src="jquery.easing.1.3.js"></g:javascript>
-<g:javascript src="jquery.raty.js"></g:javascript>
-<g:javascript src="application.js"></g:javascript>
-<g:javascript src="script.js"></g:javascript>
-<g:javascript src="gmaps.js"></g:javascript>
-<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<%--<link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,600,300,200&subset=latin,latin-ext' rel='stylesheet' type='text/css'>--%>
+<style type="text/css">
+.my-container {
+	margin: 20px;
+}
+</style>
 
 </head>
+
 <body>
 	<header>
-		<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar navbar-inverse" id="navbarInversePreview">
 			<div class="navbar-inner">
 				<div class="container">
-					<button type="button" class="btn btn-navbar" data-toggle="collapse"
-						data-target=".nav-collapse">
-						<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-							class="icon-bar"></span>
-					</button>
+					<a data-target=".navbar-responsive-collapse" data-toggle="collapse" class="btn btn-navbar">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</a>
 					<a class="brand" href="#">Real Realty</a>
-					<div class="nav-collapse collapse">
-						<!--  <ul class="nav nav-pills pull-center">-->
+					<div class="nav-collapse collapse navbar-responsive-collapse">
 						<ul class="nav">
+						<!--  <ul class="nav nav-pills pull-center">-->
 							<li class="active"><a href="#">Home</a></li>
 							<li><a href="#about">About</a></li>
 							<li><a href="#contact">Contact</a></li>
-							<!--  
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Brand Options <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                  <li><a href="dell/dell-home.jsp">Dell</a></li>
-                     <li class="divider"></li>
-                  <li><a href="lenovo/lenovo-home.jsp">Lenovo</a></li>
-                     <li class="divider"></li>
-                  <li><a href="sony/sony-home.jsp">Sony</a></li>
-                    <li class="divider"></li>
-                 <li><a href="hp/hp-home.jsp">HP</a></li>
-                </ul>
-              </li> -->
 						</ul>
-
-					</div>
 					<!--/.nav-collapse -->
-
-					<div class="nav-collapse collapse pull-right">
-						<%--<%
-							String userName = "";
-							if (session.getAttribute("user") != null) {
-								User userDto = (User) session.getAttribute("user");
-								userName = userDto.getUsername();
-							}
-						%>
-						--%>
-						<ul class="nav">
+						<div class="navbar-search pull-left">
+							<g:form class="navbar-form navbar-left" controller="home" action="listingSingleAddress">
+								<div class="form-group fieldcontain text-center">
+									<input type="text" title="Search" value="" placeholder="Search ..." class="form-control nav-search" name="query"> 
+									<span class="input-group-btn">
+										<button class="btn btn-lg btn-primary" type="submit">Go!</button>
+									</span>
+								</div>
+							</g:form>
+						</div>
+						<ul class="nav pull-right">
 							<% if(session.username != null){ %>
-							<li style="color: white; padding-top: 10px;"><i
-								class="icon-user icon-white"></i> ${session.username}</li>
-							<li><g:link controller="user" action="logout" > Logout</g:link></li>
+							<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">WatchList<b class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<li>
+										<a href=“#watchlist”>My Watclist</a>
+									</li>
+								</ul>
+							</li>
+							<li style="color: white; padding-top: 10px;">
+								<i class="icon-user icon-white"></i> ${session.username}</li>
+							<li>
+								<g:link controller="user" action="logout" > Logout</g:link>
+							</li>
 							<% }
 							else
 							{ %>
-								<li style="color: white; padding-top: 10px;"><i
-								class="icon-user icon-white"></i>  </li>
-								<li><g:link mapping="register"> Sign In</g:link></li>
+								<li style="color: white; padding-top: 10px;">
+								<i class="icon-user icon-white"></i></li>
+								<li>
+									<g:link mapping="register"> Sign In</g:link>
+								</li>
 							<%}%>
 						</ul>
 					</div>
@@ -139,91 +95,173 @@
 			</div>
 		</div>
 	</header>
+<style>
+    #map-canvas {
+       height: 300px;
+       width: 400px; 
+       margin:50px 25px 15px 500px;
+       padding: 50px;
+       overflow: visible;
+       border-style: ridge;
+       border-width:5px;
+       border-color: white;
+     }
+     
+     #map-canvas img { max-width: none }
+</style>
+<style>
+/* Wrapper for page content to push down footer */
+#wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  /* Negative indent footer by its height */
+  margin: 0 auto -60px;
+  /* Pad bottom by footer height */
+  padding: 0 0 60px;
+}
 
-	<!-- === MAIN Background === -->
-	<div class="container">
-		<hr>
-		<div class="row-fluid">
-			<div class="panel panel-default">
-				<div class="right-sec">
-					<ul class="media-list">
-						<li class="media span7">
-						<a class="pull-left" href="#"> 
-							<img class="media-object" src="http://photos.foter.com/68/new-money-movement_300x300.jpg" style="" alt="64x64" data-src="holder.js/64x64">
-						</a>
-						<div class="media-body">
-							<h4>
-								${flash.address}
-								<span class="label label-success pull-right">$123,456</span>
-							</h4>
-							<dl class="dl-horizontal">
-								<dt>City</dt>
-								<dd>
-									${flash.city}
-								</dd>
-								<dt>Zip</dt>
-								<dd>
-									${flash.zip}
-								</dd>
-								<dt>Bathrooms</dt>
-								<dd>
-									${flash.bathroom}
-								</dd>
-								<dt>Bedrooms</dt>
-								<dd>
-									${flash.bedroom}
-								</dd>
-								<dt>Finished Sq.Ft Area</dt>
-								<dd>
-									${flash.fArea}
-								</dd>
-								<dt>Lot Sq.Ft Area</dt>
-								<dd>
-									${flash.lArea}
-								</dd>
-								<dt>Estimated Price</dt>
-								<dd>
-									${flash.zestAmt}
-								</dd>
-							</dl>
-							<div class="col-md-2">
-								<p>
-									<% if(session.username != null){  %>
-									<g:form class="col-lg-12" controller="home"
-										action="AddToUserWatchList"
-										params="${ [address: flash.address]}">
-										<button class="btn btn-lg btn-primary" type="submit">
-											Watchlist!</button>
-									</g:form>
-									<% } %>
-								</p>
+/* Set the fixed height of the footer here */
+#footer {
+  height: 60px;
+  background-color: #f5f5f5;
+}
+
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+#wrap > .container {
+  padding: 60px 15px 0;
+}
+.container .credit {
+  margin: 20px 0;
+}
+
+#footer > .container {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+code {
+  font-size: 80%;
+}
+
+</style>
+<!-- === MAIN Background === -->
+<div id="wrap">
+	<div class="my-container">
+		<div class="container-fluid">
+			<hr>
+			<div class="row-fluid">
+				<div class="col-md-7">
+					<div class="panel panel-default">
+						<ul class="media-list">
+							<li class="media span7">
+							<div class="panel-heading">
+								<h4> ${flash.address}
+                  					<span class="label label-success pull-right">${flash.zestAmt}</span>
+               					</h4>
+               				</div>
+               				<div class="panel-body my-container">
+								<a class="pull-left" href="#"> 
+									<img class="media-object img-polaroid" src="http://photos.foter.com/68/new-money-movement_300x300.jpg" style="" alt="64x64" data-src="holder.js/64x64">
+								</a>
+								<div class="media-body">
+									<dl class="dl-horizontal">
+										<dt>City</dt>
+										<dd>
+											${flash.city}
+										</dd>
+										<dt>Zip</dt>
+										<dd>
+											${flash.zip}
+										</dd>
+										<dt>Bathrooms</dt>
+										<dd>
+											${flash.bathroom}
+										</dd>
+										<dt>Bedrooms</dt>
+										<dd>
+											${flash.bedroom}
+										</dd>
+										<dt>Finished Sq.Ft Area</dt>
+										<dd>
+											${flash.fArea}
+										</dd>
+										<dt>Lot Sq.Ft Area</dt>
+										<dd>
+											${flash.lArea}
+										</dd>
+									</dl>
+									<div class="col-md-2">
+										<p>
+										<% if(session.username != null){  %>
+											<g:form class="col-lg-12" controller="home" action="AddToUserWatchList" params="${ [address: flash.address]}">
+												<button class="btn btn-lg btn-primary" type="submit"> Watchlist!</button>
+											</g:form>
+										<% } %>
+										</p>
+									</div>
+								</div>
 							</div>
-							<div class="col-md-6">
-								<div id="map"></div>
-							</div>
-						</div>
-						</li>
-					</ul>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div id="map-canvas" align="right"></div>
 				</div>
 			</div>
 		</div>
 	</div>
-
 	<!--  Tab bar for widgets -->
 	<div class="container">
 		<ul id="widgets" class="nav nav-tabs">
-			<li class="active">
-				<a href="#amenities" data-toggle="tab">Amenities</a>
-			</li>
+			<li class="active"><a href="#pricePrediction" data-toggle="tab">Price Predictions</a></li>
+			<li><a href="#ifBuy" data-toggle="tab">Buying Advise</a></li>
+			<li><a href="#amenities" data-toggle="tab">Amenities</a></li>
 			<li><a href="#crimerate" data-toggle="tab">Crime Rate</a></li>
 			<li><a href="#education" data-toggle="tab">Education</a></li>
 			<li><a href="#employment" data-toggle="tab">Employment</a></li>
 			<li><a href="#weather" data-toggle="tab">Weather</a></li>
+			<li><a href="#costOfLiving" data-toggle="tab">Cost of Living</a></li>
 		</ul>
 		<div id="tabscontent" class="tab-content">
-			<div class="tab-pane fade in active" id="amenities">
+			<div class="tab-pane fade in active" id="pricePrediction">
 				<div class="thumbnail pull-left">
-					<img src="/RealMashupFinal/static/images/weather.jpg" alt="">
+					<div class="caption">
+						<h3>Price Trend</h3>
+					</div>
+					<g:if test="${flash.priceAppreciated}">
+						<img src="/RealMashupFinal/static/images/prices-up.jpg" alt="">
+						<span class="label label-warning">Prices are Up</span>
+					</g:if>
+					<g:else> 
+						<img src="/RealMashupFinal/static/images/prices-down.jpg" alt="">
+						<span class="label label-success">Prices are Down</span>
+					</g:else>
+				</div>
+			</div>
+			<div class="tab-pane fade" id="ifBuy">
+				<div class="thumbnail pull-left">
+					<div class="caption">
+						<h3>Buy/Not Buy</h3>
+					</div>
+					<g:if test="${flash.ifBuy}">
+						<img src="/RealMashupFinal/static/images/thumbs-up.jpg" alt="">
+						<span class="label label-warning">Time to buy</span>
+					</g:if>
+					<g:else> 
+						<img src="/RealMashupFinal/static/images/thumbs-down.jpg" alt="">
+						<span class="label label-success">Not a time to buy</span>
+					</g:else>
+				</div>
+			</div>
+			<div class="tab-pane fade" id="amenities">
+				<div class="thumbnail pull-left">
+					<img src="/RealMashupFinal/static/images/amenities.jpg" alt="">
 					<div class="caption">
 						<h3>Amenities</h3>
 						<div id="amenitiesStar"></div>
@@ -232,7 +270,7 @@
 			</div>
 			<div class="tab-pane fade" id="crimerate">
 				<div class="thumbnail pull-left">
-					<img src="/RealMashupFinal/static/images/weather.jpg" alt="">
+					<img src="/RealMashupFinal/static/images/crimerate.jpg" alt="">
 					<div class="caption">
 						<h3>Crime Rate</h3>
 						<div id="crimeRateStar"></div>
@@ -241,7 +279,7 @@
 			</div>
 			<div class="tab-pane fade" id="education">
 				<div class="thumbnail pull-left">
-					<img src="/RealMashupFinal/static/images/weather.jpg" alt="">
+					<img src="/RealMashupFinal/static/images/education1.jpg" alt="">
 					<div class="caption">
 						<h3>Education</h3>
 						<div id="educationStar"></div>
@@ -250,7 +288,7 @@
 			</div>
 			<div class="tab-pane fade" id="employment">
 				<div class="thumbnail pull-left">
-					<img src="/RealMashupFinal/static/images/weather.jpg" alt="">
+					<img src="/RealMashupFinal/static/images/employment.jpg" alt="">
 					<div class="caption">
 						<h3>Employment</h3>
 						<div id="employmentStar"></div>
@@ -266,20 +304,34 @@
 					</div>
 				</div>
 			</div>
+			<div class="tab-pane fade" id="costOfLiving">
+				<div class="thumbnail pull-left">
+					<img src="/RealMashupFinal/static/images/costofliving.jpg" alt="">
+					<div class="caption">
+						<h3>Cost Of Living</h3>
+						<div id="costOfLivingStar"></div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
+	<div id="footer">
+		<div class="container">
+			<p class="text-muted credit">&copy; Real Realty 2014</p>
+		</div>
+	</div>
+</div>	
 	<!-- Tab bar for widgets ends -->
-
-<%-- 
-			<button type="button" class="btn btn-primary" onclick="codeAddress()"
-				data-loading-text="LOading...">View Map!</button>
-			<div id="map-canvas" style="width: 300px; height: 300px"></div>
---%>
-
-	<!-- /container -->
-</body>
-
-
+		
+		
+<g:javascript src="html5shiv.js"></g:javascript>
+<g:javascript src="jquery-1.10.2.min.js"></g:javascript>
+<g:javascript src="jquery-migrate-1.2.1.min.js"></g:javascript>
+<g:javascript src="bootstrap.min.js"></g:javascript>
+<g:javascript src="jquery.easing.1.3.js"></g:javascript>
+<g:javascript src="jquery.raty.js"></g:javascript>
+<g:javascript src="script.js"></g:javascript>
+<g:javascript src="jquery.raty.js"></g:javascript>
 <!-- fancybox init -->
 <script>
 	$(document).ready(function(e) {
@@ -297,7 +349,7 @@
 
 	});
 </script>
-<script type="text/javascript">
+		<script type="text/javascript">
 	var amenitiesScore =${flash.amenities}+3
 	$('#amenitiesStar').raty({
 		readOnly : true,
@@ -327,8 +379,14 @@
 		readOnly : true,
 		score : weatherScore
 	});
+
+	var costOfLivingScore =${flash.costOfLiving}+3
+	$('#costOfLivingStar').raty({
+		readOnly : true,
+		score : costOfLivingScore
+	});
 </script>
-<script>
+		<script>
 	$(document).ready(
 			function(ev) {
 				$('#custom_carousel').on(
@@ -343,22 +401,37 @@
 						})
 			});
 </script>
-<script>
+		<script>
 	$(function() {
 		$('#widgets li:eq(1) a').tab('show');
 	});
 </script>
+		<script>
+function initialize() {
+  var lat = ${flash.lat}
+  var lon = ${flash.lon}
+  var mapOptions = {
+    zoom: 10,
+    center: new google.maps.LatLng(lat, lon)
+  };
+  var map = new google.maps.Map(document.getElementById('map-canvas'),
+      mapOptions);
 
+  var marker = new google.maps.Marker({
+	  position: new google.maps.LatLng(lat, lon),    
+	  map: map    
+   });
+}
 
-<%--<script>
-var map;
-$(document).ready(function(){
-  map = new GMaps({
-	div: '#map',
-    lat: ${flash.lat},
-    lng: ${flash.lon},
-    title:'${flash.address}'
-  });
-});
+function loadScript() {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&' +
+      'callback=initialize';
+  document.body.appendChild(script);
+}
+
+window.onload = loadScript;
 </script>
---%></html>
+</body>
+</html>
