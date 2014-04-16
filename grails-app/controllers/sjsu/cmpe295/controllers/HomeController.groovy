@@ -111,8 +111,8 @@ class HomeController {
 				render(view: "result", model:['properties':properties, 'total': total])
 			}
 			else {
-				flash.errorMessage = "Invalid City"
-				render(view: "/home/error")
+				flash.errorMessage = "Please enter valid address"
+				render(view: "/home/index")
 			}
 		} catch(Exception e) {
 			System.out.println(e.getMessage())

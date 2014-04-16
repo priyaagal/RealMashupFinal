@@ -167,7 +167,7 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 						</a>
 							<div class="media-body">
 								<h4>
-									<g:link controller="home" action="listSingleAddress" params="${['query':properties[i].address]}" >
+									<g:link controller="home" action="listingSingleAddress" params="${['query':properties[i].address]}" >
 									${properties[i].address}</g:link>
 									<span class="label label-success pull-right">$123,456</span>
 								</h4>
@@ -226,7 +226,7 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 	</div>
 	</td>
 	<td>
-		<div id="map-canvas" style="width: 400px; height: 400px"></div>
+		<div id="map-canvas" style="width: 400px; height: 400px"><script>getAllProperties()</script></div>
 	</td>
 	</tr>
 	</table>
