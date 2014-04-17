@@ -18,7 +18,6 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 	font-size: 10px
 }
 </style>
-<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
 <style type="text/css">
 @media print {
 	.gm-style .gmnoprint,.gmnoprint {
@@ -43,8 +42,6 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
 <link rel="stylesheet" href="css/font-awesome.css">
-<%--<script src="//www.google-analytics.com/ga.js" style=""></script>
---%>
 <script src="js/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
 <!-- body { padding-top: 60px; padding-bottom: 40px; } -->
 <!-- Bootstrap -->
@@ -101,12 +98,6 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 						})
 			});
 </script>
-<script>
-   $(function () {
-      $('#widgets li:eq(1) a').tab('show');
-   });
-</script>
-
 
 </head>
 <body>

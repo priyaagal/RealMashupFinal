@@ -30,7 +30,7 @@ class HomeController {
 		}
 	}
 
-	def listingSingleAddress() {
+	def listSingleAddress() {
 		println("In class DataQueryController/listings()")
 		def errorMessage
 

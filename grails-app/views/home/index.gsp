@@ -9,8 +9,7 @@
 
 <!-- Le styles -->
 <style type="text/css">
-<
-style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc div
+.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc div
 {
 	font-weight: 400
 }
@@ -21,7 +20,6 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 	font-size: 10px
 }
 </style>
-<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
 <style type="text/css">
 @media print {
 	.gm-style .gmnoprint,.gmnoprint {
@@ -65,7 +63,36 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 
 <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,600,300,200&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 
+<script>
+$(document).ready(function(e) {
+	var lis = $('.nav > li');
+	menu_focus(lis[0], 1);
 
+	$(".fancybox").fancybox({
+		padding : 10,
+		helpers : {
+			overlay : {
+				locked : false
+			}
+		}
+	});
+
+});
+</script>
+<script>
+$(document).ready(
+		function(ev) {
+			$('#custom_carousel').on(
+					'slide.bs.carousel',
+					function(evt) {
+						$('#custom_carousel .controls li.active')
+								.removeClass('active');
+						$('#custom_carousel .controls li:eq('
+										+ $(evt.relatedTarget).index()
+										+ ')').addClass('active');
+					})
+		});
+</script>
 </head>
 
 <body>
@@ -73,34 +100,42 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 		<div class="navbar navbar-inverse navbar-fixed-top">
 			<div class="navbar-inner">
 				<div class="container">
-					<a data-target=".navbar-responsive-collapse" data-toggle="collapse" class="btn btn-navbar">
+					<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+						<span class="icon-bar"></span> 
+						<span class="icon-bar"></span> 
 						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</a>
+					</button>
 					<a class="brand" href="#">Real Realty</a>
-					 <div class="nav-collapse collapse navbar-responsive-collapse">
+					<div class="nav-collapse collapse navbar-responsive-collapse">
 						<ul class="nav">
-						<!--  <ul class="nav nav-pills pull-center">-->
 							<li class="active"><a href="#">Home</a></li>
 							<li><a href="#about">About</a></li>
 							<li><a href="#contact">Contact</a></li>
 						</ul>
-					</div>
-					<!--/.nav-collapse -->
-					<div class="nav-collapse collapse pull-right">
-						<ul class="nav">
+						<div class="navbar-search pull-left">
+							<g:form class="navbar-form navbar-left" controller="home" action="listingSingleAddress">
+								<div class="form-group fieldcontain text-center">
+									<input type="text" title="Search" value="" placeholder="Search ..." class="form-control nav-search" name="query"> 
+									<span class="input-group-btn">
+										<button class="btn btn-lg btn-primary" type="submit">Go!</button>
+									</span>
+								</div>
+							</g:form>
+						</div>
+						<ul class="nav pull-right">
 							<% if(session.username != null){ %>
-								<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown">WatchList<b class="caret"></b></a>
-								  <ul class="dropdown-menu">
-									<li><a href=“#watchlist”>My Watclist</a></li>
-									   <li class="divider"></li>
-								  </ul>
-								</li>
+							<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">WatchList<b class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<li>
+										<a href=“#watchlist”>My Watclist</a>
+									</li>
+								</ul>
+							</li>
 							<li style="color: white; padding-top: 10px;">
-								<i class="icon-user icon-white"></i>${session.username}</li>
-							<li><g:link controller="user" action="logout" > Logout</g:link></li>
+							<i class="icon-user icon-white"></i> ${session.username}</li>
+							<li>
+								<g:link controller="user" action="logout"> Logout</g:link>
+							</li>
 							<% }
 							else
 							{ %>
@@ -160,18 +195,23 @@ code {
 <!-- === MAIN Background === -->
 <div id="wrap">
 	<div class="container">
-		<!-- Carousel
+	<!-- Carousel
     ================================================== -->
 		<div id="myCarousel" class="carousel slide">
+			<ol class="carousel-indicators">
+				<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				<li data-target="#myCarousel" data-slide-to="1"></li>
+				<li data-target="#myCarousel" data-slide-to="2"></li>
+			</ol>
 			<div class="carousel-inner">
 				<div class="item active">
-					<img src="/RealMashupFinal/static/images/property-main-1.jpg" alt="">
+					<img src="/RealMashupFinal/static/images/property-main-1.jpg" class="img-responsive">
 				</div>
 				<div class="item">
-					<img src="/RealMashupFinal/static/images/property-main-2.jpg" alt="">
+					<img src="/RealMashupFinal/static/images/property-main-2.jpg" class="img-responsive">
 				</div>
 				<div class="item">
-					<img src="/RealMashupFinal/static/images/property-main-3.jpg" alt="">
+					<img src="/RealMashupFinal/static/images/property-main-3.jpg" class="img-responsive">
 				</div>
 			</div>
 			<a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
@@ -209,10 +249,14 @@ code {
 
 	<!-- /container -->
 
-<g:javascript src="jquery-1.10.2.min.js"></g:javascript>
-<g:javascript src="bootstrap.js"></g:javascript>
-<g:javascript src="operations.js"></g:javascript>
-<g:javascript src="script.js"></g:javascript>
+<link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,600,300,200&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+<script src="js/html5shiv.js"></script>
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="js/jquery-migrate-1.2.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="fancybox/jquery.fancybox.pack-v=2.1.5.js"></script>
+<script src="js/script.js"></script>
 <script>
 	!function($) {
 		(function() {
