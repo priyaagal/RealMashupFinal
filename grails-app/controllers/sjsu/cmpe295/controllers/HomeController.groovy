@@ -32,7 +32,7 @@ class HomeController {
 		}
 	}
 
-	def listingSingleAddress() {
+	def listSingleAddress() {
 		println("In class DataQueryController/listings()")
 		def errorMessage
 
@@ -71,6 +71,23 @@ class HomeController {
 				flash.education = property.getEducation()
 				flash.employment = property.getEmployment()
 				flash.weather = property.getWeather()
+				flash.costOfLiving = property.getCostofliving()
+				flash.priceAppreciated = property.getPriceAppreciated()
+				println(property.getPriceAppreciated())
+
+				if(flash.costOfLiving > 1.5 && flash.priceAppreciated && flash.crimeRate <= 0.5) {
+					flash.ifBuy = false;
+				}
+				else if (flash.costOfLiving < 1.5 && flash.priceAppreciated) {
+					if(flash.weather > 0.5 && flash.education > 0.5 && flash.education > 0.5 && flash.crimeRate > 0.5)
+						flash.ifBuy = true;
+					else {
+						flash.ifBuy = false;
+					}
+				}
+				else {
+					flash.ifBuy = true;
+				}
 
 			}
 			else {
@@ -79,7 +96,7 @@ class HomeController {
 			}
 
 			render(view: "listings")
-			
+
 		} catch(Exception e) {
 			System.out.println(e.getMessage())
 			flash.errorMessage = "Internal Error"
@@ -146,15 +163,35 @@ class HomeController {
 		}
 	}
 
-	/*
-	 def getUserWatchlist() {
-	 def user = User.findByEmail(session.email)
-	 for (prop in user.props) {
-	 println (prop.Address.toString())
-	 println (prop.city.toString())
-	 println (prop.state.toString())
-	 }
-	 }*/
+
+	def getUserWatchlist() {
+		println("In class DataQueryController/getUserWatchlist()")
+		try {
+			if(session.email) {
+				def user = User.findByEmail(session.email)
+
+				def properties = []
+				for (prop in user.props)
+				{
+					println (prop.address.toString())
+					println (prop.city.toString())
+					println (prop.state.toString())
+					properties.add(prop)
+				}
+
+				def total = properties.size()
+				render(view: "watchlist", model:['properties':properties, 'total': total])
+			} else {
+				flash.errorMessage = "Please login or provide appropriate address"
+				render(view: "/home/register")
+			}
+
+		} catch(Exception e) {
+			System.out.println(e.getMessage())
+			flash.errorMessage = "Internal Error"
+			render(view: "/home/error")
+		}
+	}
 
 	def AddToUserWatchList() {
 		println("In class HomeController/AddToUserWatchList()")
@@ -163,30 +200,37 @@ class HomeController {
 			printf(address)
 
 			if(address && session.email) {
-				Property property = dataQueryService.findSingleAddress(address)
+				MasterUnSoldProperty property = dataQueryService.findSingleAddress(address)
 
 				User user = User.findByEmail(session.email) // find user by email from session
 
+				def properties
+
 				// set association
-				Set properties = new HashSet()
+				if(user.props != null)
+					properties =  user.props
+				else
+					properties = new HashSet()
+
 				properties.add(property)
+				printf(properties.toString())
 				user.props =  properties
 
 				// save objects
 				user.save(flush:true)
 				printf(user.getErrors().toString())
+				printf(user.props.toString())
 
-				for (prop in user.props)
-				{ 	println (prop.Address.toString())
-					println (prop.city.toString())
-					println (prop.state.toString())
+				for (props in user.props)
+				{ 	println (props.address.toString())
+					println (props.city.toString())
+					println (props.state.toString())
 				}
-				
-				render(view: "index")
-				
+
 			} else {
 				flash.errorMessage = "Please login or provide appropriate address"
 			}
+			render(view: "index")
 		} catch(Exception e) {
 			System.out.println(e.getMessage())
 			flash.errorMessage = "Internal Error"

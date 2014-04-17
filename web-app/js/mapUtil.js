@@ -1,3 +1,4 @@
+
 function loadMap2(address) {
 
 	var lat = 37.37172
@@ -119,7 +120,7 @@ function getAllProperties() {
 	}
 
 	xmlhttp.open("GET", "http://localhost:8080/RealMashupFinal/rest?city="
-			+ address + "&dtype=xml&offset=" + offset + "&max=" + max, true);
+			+ query + "&dtype=xml&offset=" + offset + "&max=" + max, true);
 	xmlhttp.send();
 }
 

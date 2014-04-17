@@ -8,8 +8,6 @@
 <meta content="" name="author">
 
 <!-- Le styles -->
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
-<g:javascript src="mapUtil.js"></g:javascript>
 <style type="text/css">
 style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc div {
 	font-weight: 400
@@ -48,7 +46,6 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 <%--<script src="//www.google-analytics.com/ga.js" style=""></script>
 --%>
 <script src="js/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 <!-- body { padding-top: 60px; padding-bottom: 40px; } -->
 <!-- Bootstrap -->
 <link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'bootstrap.min.css')}">
@@ -72,6 +69,7 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 <script src="js/jquery.easing.1.3.js"></script>
 <script type="text/javascript" src="fancybox/jquery.fancybox.pack-v=2.1.5.js"></script>
 <script src="js/script.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 <!-- fancybox init -->
 <script>
 	$(document).ready(function(e) {
@@ -142,12 +140,12 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 						</div>
 						<ul class="nav pull-right">
 							<% if(session.username != null){ %>
-							<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">WatchList<b class="caret"></b></a>
-							  <ul class="dropdown-menu">
-								<li><g:link controller="home" action="getUserWatchlist" >My Watclist</g:link></li>
-								   <li class="divider"></li>
-							  </ul>
+							<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">WatchList<b class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<li>
+										<a href=“#watchlist”>My Watclist</a>
+									</li>
+								</ul>
 							</li>
 							<li style="color: white; padding-top: 10px;">
 							<i class="icon-user icon-white"></i> ${session.username}</li>
@@ -172,7 +170,7 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 	</header>
 
 	<!-- === MAIN Background === -->
-	<div id="wrap">
+<div id="wrap">
 	<div class="container">
 		<hr>
 		<% 
@@ -194,7 +192,7 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 						</a>
 							<div class="media-body">
 								<h4>
-									<g:link controller="home" action="listingSingleAddress" params="${['query':properties[i].address]}" >
+									<g:link controller="home" action="listSingleAddress" params="${['query':properties[i].address]}" >
 									${properties[i].address}</g:link>
 									<span class="label label-success pull-right">$123,456</span>
 								</h4>
@@ -233,7 +231,7 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 										<% if(session.username != null){ %>
 										<g:form class="col-lg-12" controller="home"
 											action="AddToUserWatchList"
-											params="[address: properties[i].address]">
+											params="${ [address: flash.address]}">
 											<button class="btn btn-lg btn-primary" type="submit">
 												Watchlist!</button>
 										</g:form>
@@ -251,16 +249,12 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
                     action="paginateAddresses" params="${['query':params.query, 'total':total]}" />
     	</div>
 	</div>
-
 	<div id="footer">
 		<div class="container">
 			<p class="text-muted credit">&copy; Real Realty 2014</p>
 		</div>
 	</div>
 </div>
-
-<div id="map-canvas" style="width: 800px; height: 800px"><script>getAllProperties()</script></div>
-
 	
 </body>
 </html>
