@@ -114,13 +114,13 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 					<div class="nav-collapse collapse navbar-responsive-collapse">
 						<ul class="nav">
 						<!--  <ul class="nav nav-pills pull-center">-->
-							<li class="active"><a href="#">Home</a></li>
+							<li class="active"><g:link controller="home" action="index">Home</g:link>Home</li>
 							<li><a href="#about">About</a></li>
 							<li><a href="#contact">Contact</a></li>
 						</ul>
 						<!--/.nav-collapse -->
 						<div class="navbar-search pull-left">
-							<g:form class="navbar-form navbar-left" controller="home" action="listingSingleAddress">
+							<g:form class="navbar-form navbar-left" controller="home" action="parseRequest">
 								<div class="form-group fieldcontain text-center">
 									<input type="text" title="Search" value="" placeholder="Search ..." class="form-control nav-search" name="query"> 
 									<span class="input-group-btn">
@@ -131,12 +131,8 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 						</div>
 						<ul class="nav pull-right">
 							<% if(session.username != null){ %>
-							<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">WatchList<b class="caret"></b></a>
-								<ul class="dropdown-menu">
-									<li>
-										<a href=“#watchlist”>My Watclist</a>
-									</li>
-								</ul>
+							<li>
+								<g:link controller="home" action="getUserWatchlist">My Watclist</g:link>
 							</li>
 							<li style="color: white; padding-top: 10px;">
 							<i class="icon-user icon-white"></i> ${session.username}</li>
@@ -170,6 +166,9 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 	
 		if (max ==null)
 			max = 10
+		
+		if(	max > properties.size())
+			max = properties.size()
 	
 		for(int i=offset;i<offset+max;i++){ %>
 		<div class="row-fluid">
@@ -219,12 +218,12 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 								</dl>
 								<div class="col-md-2">
 									<p>
-										<% if(session.username != null){ %>
+										<% if(session.username != null && watchlist != true){ %>
 										<g:form class="col-lg-12" controller="home"
 											action="AddToUserWatchList"
-											params="${ [address: flash.address]}">
+											params="${ [address: properties[i].address]}">
 											<button class="btn btn-lg btn-primary" type="submit">
-												Watchlist!</button>
+												Add to Watchlist!</button>
 										</g:form>
 										<% } %>
 									</p>

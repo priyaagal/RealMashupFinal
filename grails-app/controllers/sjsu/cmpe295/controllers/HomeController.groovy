@@ -31,7 +31,7 @@ class HomeController {
 	}
 
 	def listSingleAddress() {
-		println("In class DataQueryController/listings()")
+		println("In class HomeController/listings()")
 		def errorMessage
 
 		try{
@@ -101,7 +101,7 @@ class HomeController {
 	}
 
 	def listAddressesFromCity() {
-		println("In class DataQueryController/listAddressesFromCity()")
+		println("In class HomeController/listAddressesFromCity()")
 
 		try{
 
@@ -121,7 +121,7 @@ class HomeController {
 				 }
 				 */
 
-				render(view: "result", model:['properties':properties, 'total': total])
+				render(view: "result", model:['properties':properties, 'total': total, 'watchlist': false])
 			}
 		} catch(Exception e) {
 			flash.errorMessage = e.getMessage()
@@ -130,7 +130,7 @@ class HomeController {
 	}
 
 	def paginateAddresses() {
-		println("In class DataQueryController/paginateAddresses()")
+		println("In class HomeController/paginateAddresses()")
 
 		try {
 
@@ -148,42 +148,63 @@ class HomeController {
 		}
 	}
 
-	/*
-	 def getUserWatchlist() {
-	 def user = User.findByEmail(session.email)
-	 for (prop in user.props) {
-	 println (prop.Address.toString())
-	 println (prop.city.toString())
-	 println (prop.state.toString())
-	 }
-	 }*/
-
-	def AddToUserWatchList() {
-		println("In class DataQueryController/AddToUserWatchList()")
-		def address = params.address
-		printf(address)
-		Property property = dataQueryService.findSingleAddress(address)
-
-		User user = User.findByEmail(session.email) // find user by email from session
-
-
-		// set association
-		Set properties = new HashSet()
-		properties.add(property)
-		user.props =  properties
-
-		// save objects
-		user.save(flush:true)
-		printf(user.getErrors().toString())
-
-		for (prop in user.props)
-		{ 	println (prop.Address.toString())
-			println (prop.city.toString())
-			println (prop.state.toString())
+	
+	def getUserWatchlist() {
+		println("In class HomeController/getUserWatchlist()")
+		def user = User.findByEmail(session.email)
+		//MasterUnSoldProperty[] properties = user.props
+		//println(properties.size().toString())
+		
+		if(user.props !=null && user.props.size() > 0)
+		{
+			List properties = new ArrayList<MasterUnSoldProperty>()
+			properties.addAll(user.props)
+			
+			 println( properties[0].address.toString())
+			 def total = properties.size()
+			 
+			 render(view: "result", model:['properties':properties, 'total': total, 'watchlist': true])
 		}
-
-		render(view: "index")
+		else
+		{
+			render(view: "index")
+		}
 	}
+
+   def AddToUserWatchList() {
+	   println("In class HomeController/AddToUserWatchList()")
+	   def address = params.address
+	   printf(address)
+	   MasterUnSoldProperty property = dataQueryService.findSingleAddress(address)
+
+	   User user = User.findByEmail(session.email) // find user by email from session
+	   
+	   HashSet<MasterUnSoldProperty> properties
+
+	   // set association
+	   if(user.props != null)
+		   properties =  user.props
+	   else
+		   properties = new HashSet<MasterUnSoldProperty>()
+		   
+	   properties.add(property)
+	   printf(properties.toString())
+	   user.props =  properties
+
+	   // save objects
+	   user.save(flush:true)
+	   printf(user.getErrors().toString())
+	   printf(user.props.toString())
+
+	   for (props in user.props)
+	   { 	println (props.address.toString())
+		   	println (props.city.toString())
+			println (props.state.toString())
+	   }
+
+	   render(view: "index")
+   }
+
 
 
 }
