@@ -55,18 +55,19 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 
 <!-- CSS (necessary for Bootstrap's CSS ) -->
 
-<link rel="stylesheet" href="${resource(dir: 'css', file: 'font-awesome.min.css')}" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'font-awesome.min.css')}">
 <link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'style.css')}">
+<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Titillium+Web:400,600,300,200&subset=latin,latin-ext">
 
-<link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,600,300,200&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-<script src="js/html5shiv.js"></script>
-<script src="js/jquery-1.10.2.min.js"></script>
-<script src="js/jquery-migrate-1.2.1.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.easing.1.3.js"></script>
+
+<script type="text/javascript" src="js/html5shiv.js"></script>
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="js/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
 <script type="text/javascript" src="fancybox/jquery.fancybox.pack-v=2.1.5.js"></script>
-<script src="js/script.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+<script type="text/javascript" src="js/script.js"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 <!-- fancybox init -->
 <script>
 	$(document).ready(function(e) {
@@ -84,20 +85,6 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 
 	});
 </script>
-<script>
-	$(document).ready(
-			function(ev) {
-				$('#custom_carousel').on(
-						'slide.bs.carousel',
-						function(evt) {
-							$('#custom_carousel .controls li.active')
-									.removeClass('active');
-							$('#custom_carousel .controls li:eq('
-											+ $(evt.relatedTarget).index()
-											+ ')').addClass('active');
-						})
-			});
-</script>
 
 </head>
 <body>
@@ -105,20 +92,18 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 		<div class="navbar navbar-inverse navbar-fixed-top">
 			<div class="navbar-inner">
 				<div class="container">
-					<button type="button" class="btn btn-navbar" data-toggle="collapse"
-						data-target=".nav-collapse">
-						<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-							class="icon-bar"></span>
+					<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+						<span class="icon-bar"></span> 
+						<span class="icon-bar"></span> 
+						<span class="icon-bar"></span>
 					</button>
 					<a class="brand" href="#">Real Realty</a>
 					<div class="nav-collapse collapse navbar-responsive-collapse">
 						<ul class="nav">
-						<!--  <ul class="nav nav-pills pull-center">-->
 							<li class="active"><a href="#">Home</a></li>
 							<li><a href="#about">About</a></li>
 							<li><a href="#contact">Contact</a></li>
 						</ul>
-						<!--/.nav-collapse -->
 						<div class="navbar-search pull-left">
 							<g:form class="navbar-form navbar-left" controller="home" action="listingSingleAddress">
 								<div class="form-group fieldcontain text-center">
@@ -159,8 +144,8 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 			</div>
 		</div>
 	</header>
-
-	<!-- === MAIN Background === -->
+	
+<!-- === MAIN Background === -->
 <div id="wrap">
 	<div class="container">
 		<hr>
@@ -176,11 +161,11 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 			<div class="panel panel-default">
 				<div class="right-sec">
 					<ul class="media-list">
-						<li class="media span7"><a class="pull-left" href="#"> <img
-								class="media-object"
-								src="http://photos.foter.com/68/new-money-movement_300x300.jpg"
+						<li class="media span7">
+							<a class="pull-left" href="#"> 
+								<img class="media-object" src="http://photos.foter.com/68/new-money-movement_300x300.jpg"
 								style="" alt="64x64" data-src="holder.js/64x64">
-						</a>
+							</a>
 							<div class="media-body">
 								<h4>
 									<g:link controller="home" action="listSingleAddress" params="${['query':properties[i].address]}" >
@@ -220,23 +205,21 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 								<div class="col-md-2">
 									<p>
 										<% if(session.username != null){ %>
-										<g:form class="col-lg-12" controller="home"
-											action="AddToUserWatchList"
-											params="${ [address: flash.address]}">
-											<button class="btn btn-lg btn-primary" type="submit">
-												Watchlist!</button>
+										<g:form class="col-lg-12" controller="home" action="AddToUserWatchList" params="${ [address: flash.address]}">
+											<button class="btn btn-lg btn-primary" type="submit">Watchlist!</button>
 										</g:form>
 										<% } %>
 									</p>
 								</div>
-							</div></li>
+							</div>
+						</li>
 					</ul>
 				</div>
 			</div>
 		</div> <% } %>
 		
 		<div class="pagination">
-        <g:paginate class="btn btn-lg btn-primary"  total="${ total}" next="Forward" prev="Back" controller="home" 
+        	<g:paginate class="btn btn-lg btn-primary"  total="${ total}" next="Forward" prev="Back" controller="home" 
                     action="paginateAddresses" params="${['query':params.query, 'total':total]}" />
     	</div>
 	</div>

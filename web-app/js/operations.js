@@ -2,26 +2,6 @@
  * 
  */
 
-/**$('#registerBtn').click(function(e){
-	var formData = $("#registerForm").serializeArray();
-	var URL = $("#registerForm").attr("action");
-	$.post(URL,formData, function(data) {
-	
-
-		if(data=='success')
-			{
-			$reply = $("#successMsg").fadeIn(1000);
-			$("#registerForm").prepend($reply)[1].reset();
-			}else
-			{
-				$reply = $("#failureMsg").fadeIn(1000);
-				$("#registerForm").prepend($reply)[1].reset();
-			}
-	});
-	
-	
-});*/
-
 $('#registerBtn').click(function(e){
 	var formData = $("#registerForm").serializeArray();
 	var URL = $("#registerForm").attr("action");
@@ -62,7 +42,7 @@ $("#loginForm").submit(function(e){
 			var result = data.split(":");
 			if(result[0]=='success')
 			{
-				window.location.href = "Landing.jsp";
+				window.location.href = "index.gsp";
 				// forward the request to landing page and remove the below code.
 				//$reply = $("#loginMsgSuccess").append(result[1]).fadeIn(1000);
 				//$form.prepend($reply)[0].reset();
@@ -77,7 +57,25 @@ $("#loginForm").submit(function(e){
 		});
 		
 	});
+/**$('#registerBtn').click(function(e){
+var formData = $("#registerForm").serializeArray();
+var URL = $("#registerForm").attr("action");
+$.post(URL,formData, function(data) {
 
+
+	if(data=='success')
+		{
+		$reply = $("#successMsg").fadeIn(1000);
+		$("#registerForm").prepend($reply)[1].reset();
+		}else
+		{
+			$reply = $("#failureMsg").fadeIn(1000);
+			$("#registerForm").prepend($reply)[1].reset();
+		}
+});
+
+
+});*/
 
 //$('#lenovoBtn').click(function(e){
 //
