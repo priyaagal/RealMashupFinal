@@ -7,6 +7,7 @@ class RestController {
 
 	def getProperties() {
 		println("In RestController/getProperties()")
+		println(params.toString())
 		
 		def properties
 
@@ -18,50 +19,91 @@ class RestController {
 			max = params.max
 		
 		def query = params.query
+		def valid = true
 			
-		if(query.contains(",") ) {
-				def address = query.split(",")
-				params.address = address[0]
-			}
+		if(query.contains(",") )
+		{
+			def address = query.split(",")
+			params.address = address[0]
+		}
 		else if (query.count(" ") > 1 && query.count(" ") < 4 )
-				 params.address = query
+		{
+			params.address = query
+		}
 		else if( query.count(" ") <= 1)
-				 params.city = query.replace(" ", "")
-		else {
-				printf("Invalid input")
-				render(view: "/error")
-			}
+		{	
+			params.city = query.replace(" ", "")
+		}
+		else
+		{	
+			valid = false
+			def message = "Invalid input"
+			render JSON.parse("{\"error\" : \"" + message + "\"}") as JSON
+		}
 			
-
-		def filters = [ max : max, offset : offset, sort : "id"]
-		
-		if(params.city){
-			//masterUnSoldProperty = MasterUnSoldProperty.findByCity(city)
-			properties = MasterUnSoldProperty.findAllByCity(params.city, filters)
+		if(valid)
+		{
+			def filters = [ max : max, offset : offset, sort : "id"]
+			
+			if(params.city)
+			{
+				properties = MasterUnSoldProperty.findAllByCity(params.city, filters)
+				if(properties)
+				{
+					render properties as JSON
+				}
+				else
+				{
+					def message = "Record not found"
+					render JSON.parse("{\"error\" : \"" + message + "\"}") as JSON
+				}
+			}
+			else if(params.address) 
+			{
+				properties = MasterUnSoldProperty.findByAddress(params.address, filters)
+				if(properties)
+				{	
+					render properties as JSON
+				}
+				else
+				{
+					def message = "Property not found"
+					render JSON.parse("{\"error\" : \"" + message + "\"}") as JSON
+				}
+			}
 		}
-		else if(params.address) {
-			properties = MasterUnSoldProperty.findByAddress(params.address, filters)
-		}
-		
-		print(params.toString())
-		
-		print(properties.toString())
-		
-		if(properties) 
-			render properties as JSON
-				
+	
 	}
 
-	def getUser() {
-		println("In RestController/getUser()")
+	def authenticateUser() {
+		println("In RestController/authenticateUser()")
 		def user
 			
-		if(params.email) {
+		if(request.JSON.email && request.JSON.password) {
 			
-			def email = params.email
-			user = User.findByEmail(email)
-			printf(user.toString())
-			render user as JSON
+			def email = request.JSON.email
+			def password = request.JSON.password
+			user = User.findByEmailAndPassword(email, password)
+			println(user.toString())
+			
+			if(user)
+			{
+				session.username = user.getFirstname()
+				session.lastname = user.getLastname()
+				session.email = user.getEmail()
+				render user as JSON
+			}
+			else
+			{
+					def message = "User not found"
+					render JSON.parse("{\"error\" : \"" + message + "\"}") as JSON
+			}
+				
+		}
+		else
+		{
+			def message = "invalid username or password"
+			render JSON.parse("{\"error\" : \"" + message + "\"}") as JSON
 		}
 		
 	}
@@ -76,40 +118,99 @@ class RestController {
 			println( "params: $key = $value" )
 		}
 		
-		if(request.JSON.fname && request.JSON.lname && request.JSON.email && request.JSON.pass)
-		{
+		if(request.JSON.fname && request.JSON.lname && request.JSON.email && request.JSON.password)
+		{	
 			User ruser = new User();
 			ruser.setFirstname(request.JSON.fname )
 			ruser.setLastname(request.JSON.lname)
 			ruser.setEmail(request.JSON.email)
-			ruser.setPassword(request.JSON.pass)
+			ruser.setPassword(request.JSON.password)
 			
 			ruser.save(flush: true)
 			
-			render User.findByEmail(request.JSON.email) as JSON
-		}
-		
-	}
-
-	def addToWatchList(){
-		def user
-		def property
-
-		
-		if(params.uid){
-			user = User.findById(params.uid)
-		}else if(params.email) {
-			user = User.findByEmail(params.email)
-		}
-
-		if(user && params.pid) {
-			property = MasterUnSoldProperty.findById(params.pid)
-			if(property) {
-				//fix issue here
-				//user.addToProperties(property).save()
+			def cuser =  User.findByEmail(request.JSON.email)
+			if(cuser)
+			{
+				render cuser as JSON
+			}
+			else
+			{
+				def message = "User not inserted"
+				render JSON.parse("{\"error\" : \"" + message + "\"}") as JSON
 			}
 		}
+		else
+		{	
+			 def message = "invalid or incorrect parameters provided"
+			 render JSON.parse("{\"error\" : \"" + message + "\"}") as JSON
+		}
+	}
 
-		return user
+	def addToUserWatchlist()
+	{
+		
+		println("In RestController/addToUserWatchlist()")
+		
+		def user
+		def property
+		def address = request.JSON.address
+		
+		if(address)
+		{
+		
+		   property = MasterUnSoldProperty.findByAddress(address)
+		   user = User.findByEmail(session.email) // find user by email from session
+		   HashSet<MasterUnSoldProperty> properties
+	 
+		   // set association
+		   if(user.props != null)
+			   properties =  user.props
+		   else
+			   properties = new HashSet<MasterUnSoldProperty>()
+			   
+		   properties.add(property)
+		   printf(properties.toString())
+		   user.props =  properties
+	
+		   // save objects
+		   user.save(flush:true)
+		   printf(user.getErrors().toString())
+	
+		   for (props in user.props)
+		   { 	println (props.address.toString())
+			   	println (props.city.toString())
+				println (props.state.toString())
+		   }
+			
+		   render user as JSON
+		}
+		else
+		{
+			def message = "invalid parameters provided"
+			render JSON.parse("{\"error\" : \"" + message + "\"}") as JSON
+		}
+	}
+	
+	def getUserWatchlist() {
+		println("In class RestController/getUserWatchlist()")
+		def user = User.findByEmail(session.email)
+		//MasterUnSoldProperty[] properties = user.props
+		//println(properties.size().toString())
+		
+		if(user.props !=null && user.props.size() > 0)
+		{
+			List properties = new ArrayList<MasterUnSoldProperty>()
+			properties.addAll(user.props)
+			
+			def total = properties.size()
+			 
+			// render(view: "result", model:['properties':properties, 'total': total, 'watchlist': true])
+			 render user as JSON
+		}
+		else
+		{
+			def message = "Empty"
+			render JSON.parse("{\"error\" : \"" + message + "\"}") as JSON
+		}
 	}
 }

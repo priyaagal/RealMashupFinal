@@ -15,7 +15,11 @@ class UrlMappings {
 		}
 		
 		"/rest/user/$sku?"(controller: "rest", parseRequest: true) {
-			action = [GET: "getUser", PUT: "registerUser"]
+			action = [POST: "authenticateUser", PUT: "registerUser"]
+		}
+		
+		"/rest/watchlist/$sku?"(controller: "rest", parseRequest: true) {
+			action = [POST: "addToUserWatchlist", GET: "getUserWatchlist"]
 		}
 		
 		name register: "/register"(view:"/home/register")
