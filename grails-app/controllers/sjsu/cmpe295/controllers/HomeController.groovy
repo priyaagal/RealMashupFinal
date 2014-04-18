@@ -13,6 +13,12 @@ class HomeController {
 		render(view: "index")
 	}
 
+	def listings()
+	{
+		println("In class HomeController/listings()")
+		render(view: "listings")
+	}
+	/*
 	def parseRequest() {
 		def query = params.query
 
@@ -113,13 +119,7 @@ class HomeController {
 				printf(properties.size().toString())
 				flash.properties = properties
 
-				/*
-				 for (it in properties)
-				 { 	println (it.address.toString())
-				 println (it.city.toString())
-				 println (it.state.toString())
-				 }
-				 */
+				
 
 				render(view: "result", model:['properties':properties, 'total': total, 'watchlist': false])
 			}
@@ -182,6 +182,7 @@ class HomeController {
 
 	   render(view: "index")
    }
+   */
 
    def showResult()
    {

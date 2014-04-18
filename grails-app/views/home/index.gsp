@@ -108,12 +108,12 @@ $(document).ready(
 					<a class="brand" href="#">Real Realty</a>
 					<div class="nav-collapse collapse navbar-responsive-collapse">
 						<ul class="nav">
-							<li class="active"><a href="index.gsp">Home</a></li>
+							<li class="active"><g:link controller="home" action="index">Home</g:link></li>
 							<li><a href="#about">About</a></li>
 							<li><a href="#contact">Contact</a></li>
 						</ul>
 						<div class="navbar-search pull-left">
-							<g:form class="navbar-form navbar-left" controller="home" action="parseRequest">
+							<g:form class="navbar-form navbar-left" controller="restClient" action="getProperties">
 								<div class="form-group fieldcontain text-center">
 									<input type="text" title="Search" value="" placeholder="Search ..." class="form-control nav-search" name="query"> 
 									<span class="input-group-btn">
