@@ -190,10 +190,12 @@ $(document).ready(function(e) {
 							<li style="color: white; padding-top: 10px;">
 								<span class="icon-envelope icon-white"></span>  
 							</li>
+							<li class="active"><g:link controller="home" action="index">Home</g:link></li>
+							<li><a href="#about">About</a></li>
 							<li><a href="#contact">Contact</a></li>
 						</ul>
 						<div class="navbar-search pull-left">
-							<g:form class="navbar-form navbar-left" controller="home" action="parseRequest">
+							<g:form class="navbar-form navbar-left" controller="restClient" action="getProperties">
 								<div class="form-group fieldcontain text-center">
 									<input type="text" title="Search" value="" placeholder="Search " class="form-control nav-search" name="query"> 
 									<span class="input-group-btn">
@@ -208,7 +210,7 @@ $(document).ready(function(e) {
 									<i class="icon-th-list icon-white"></i>
 								</li>
 								<li>
-									<g:link controller="home" action="getUserWatchlist">My Watclist</g:link>
+									<g:link controller="restClient" action="getUserWatchlist">My Watclist</g:link>
 								</li>
 								<li style="color: white; padding-top: 10px;">
 									<i class="icon-user icon-white"></i> ${session.username}</li>
@@ -258,7 +260,7 @@ $(document).ready(function(e) {
 		<div class="col-lg-12 text-center v-center">
 			<h1>Welcome to Real Realty!</h1>
 			<p class="lead">Find the Best Places to Live</p>
-			<g:form class="navbar-form navbar-left" controller="home" action="parseRequest">
+			<g:form class="col-lg-12" controller="restClient" action="getProperties">
 				<div class="form-group fieldcontain text-center">
 					<input class="center-block form-control input-lg" type="text" title="Search" placeholder="e.g. San Jose" name="query">
 					<span class="input-group-btn">
@@ -274,7 +276,6 @@ $(document).ready(function(e) {
 		<div class="marketing">
 			<h2>Introducing </h2>
 			<p class="marketing-byline">Team Real Realty</p>
-
 			<div class="row-fluid">
 				<div class="span4">
 					<img src="/RealMashupFinal/static/images/Minion-1.jpg" style="width: 388px; padding-left: 4px; padding-right: 6px; border-left-width: 6px; border-right-width: 6px;"/>

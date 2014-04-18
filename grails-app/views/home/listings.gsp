@@ -124,7 +124,7 @@ code {
 							<li><a href="#contact">Contact</a></li>
 						</ul>
 						<div class="navbar-search pull-left">
-							<g:form class="navbar-form navbar-left" controller="home" action="parseRequest">
+							<g:form class="navbar-form navbar-left" controller="restClient" action="getProperties">
 								<div class="form-group fieldcontain text-center">
 									<input type="text" title="Search" value="" placeholder="Search ..." class="form-control nav-search" name="query"> 
 									<span class="input-group-btn">
@@ -136,7 +136,7 @@ code {
 						<ul class="nav pull-right">
 							<% if(session.username != null){ %>
 							<li>
-								<g:link controller="home" action="getUserWatchlist">My Watclist</g:link>
+								<g:link controller="restClient" action="getUserWatchlist">My Watclist</g:link>
 							</li>
 							<li style="color: white; padding-top: 10px;">
 								<i class="icon-user icon-white"></i> ${session.username}</li>
@@ -208,8 +208,8 @@ code {
 									</dl>
 									<div class="col-md-2">
 										<p>
-										<% if(session.username != null){  %>
-											<g:form class="col-lg-12" controller="home" action="AddToUserWatchList" params="${ [address: flash.address]}">
+										<% if(session.username != null && params.watchlist!= true){  %>
+											<g:form class="col-lg-12" controller="restClient" action="AddToUserWatchList" params="${ [address: flash.address]}">
 												<button class="btn btn-lg btn-primary" type="submit"> Add to Watchlist!</button>
 											</g:form>
 										<% } %>
