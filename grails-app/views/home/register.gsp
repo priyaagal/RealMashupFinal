@@ -27,34 +27,42 @@
 
 <body>
 	<!-- Navigation Bar -->
-	<div class="navbar navbar-inverse navbar-fixed-top">
-		<div class="navbar-inner">
-			<div class="container">
-				<a data-target=".navbar-responsive-collapse" data-toggle="collapse" class="btn btn-navbar">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</a> 
-				<a class="brand" href="#">Real Realty</a>
-				 <div class="nav-collapse collapse navbar-responsive-collapse">
-					<ul class="nav">
-						<li class="active"><a href="#">Home</a></li>
-						<li><a href="#about">About</a></li>
-						<li><a href="#contact">Contact</a></li>
-					</ul>
-				</div>
-				<div class="nav-collapse collapse pull-right">
-				    <ul class="nav">
+	<header>
+		<div class="navbar navbar-inverse navbar-fixed-top">
+			<div class="navbar-inner" style="height: 60px;">
+				<div class="container">
+					<div class="navbar-header">
+						<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+							<span class="icon-bar"></span> 
+							<span class="icon-bar"></span> 
+							<span class="icon-bar"></span>
+						</button>
+						<a class="brand" href="#">Real Realty</a>
+					</div>
+					<div class="nav-collapse collapse navbar-responsive-collapse">
+						<ul class="nav">
+							<li style="color: white; padding-top: 10px;">
+								<i class="icon-home icon-white"></i>  
+							</li>
+							<li class="active">
+								<g:link controller="home" action="index">Home</g:link>
+							</li>
+							<li style="color: white; padding-top: 10px;">
+								<span class="icon-envelope icon-white"></span>  
+							</li>
+							<li><a href="#contact">Contact</a></li>
+						</ul>
+					</div>
+					<ul class="nav-collapse collapse pull-right">
 				        <li>
 				        	<a href="#register" data-toggle="modal">
-				        	<i class="icon-user icon-white"></i> Register Here</a>
+				        	<i class="icon-pencil icon-white"></i> Register Here</a>
 				        </li>
-				        <li class="divider-vertical"></li>
 				    </ul>
 				</div>
 			</div>
 		</div>
-	</div>
+	</header>
 	<!-- Navigation Ends -->
 	<!-- Main Container -->
 	<section>
@@ -86,7 +94,7 @@
 			</div>
 		</div>
 	</div>
-	<p class="text-center muted ">&copy; Copyright 2013 - Real Realty</p>
+	<p class="text-center muted ">&copy; Copyright 2014 - Real Realty</p>
 	</section>
 	<!-- Main Container Ends -->
 
