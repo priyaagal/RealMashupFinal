@@ -21,15 +21,13 @@ class RestService {
 
 
 		def filters = [ max : max, offset : offset, sort : "id"]
-		if(params.pid){
-			properties = MasterUnSoldProperty.findById(params.pid)
-		}
-		else if(params.city){
+		
+		if(params.city){
 			//masterUnSoldProperty = MasterUnSoldProperty.findByCity(city)
 			properties = MasterUnSoldProperty.findAllByCity(params.city, filters)
 		}
 		else if(params.address) {
-			properties = MasterUnSoldProperty.findByAddress("\"" + params.address + "\"", filters)
+			properties = MasterUnSoldProperty.findByAddress(params.address, filters)
 		}
 
 		return properties
