@@ -109,24 +109,29 @@ code {
 <body>
 	<header>
 		<div class="navbar navbar-inverse navbar-fixed-top">
-			<div class="navbar-inner">
+			<div class="navbar-inner" style="height: 60px;">
 				<div class="container">
-					<a data-target=".navbar-responsive-collapse" data-toggle="collapse" class="btn btn-navbar">
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</a>
-					<a class="brand" href="#">Real Realty</a>
+					<div class="navbar-header">
+						<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+							<span class="icon-bar"></span> 
+							<span class="icon-bar"></span> 
+							<span class="icon-bar"></span>
+						</button>
+						<a class="brand" href="#">Real Realty</a>
+					</div>
 					<div class="nav-collapse collapse navbar-responsive-collapse">
 						<ul class="nav">
-							<li class="active"><g:link controller="home" action="index">Home</g:link>Home</li>
-							<li><a href="#about">About</a></li>
-							<li><a href="#contact">Contact</a></li>
+							<li style="color: white; padding-top: 10px;">
+								<i class="icon-home icon-white"></i>  
+							</li>
+							<li class="active">
+								<g:link controller="home" action="index">Home</g:link>
+							</li>
 						</ul>
 						<div class="navbar-search pull-left">
 							<g:form class="navbar-form navbar-left" controller="restClient" action="getProperties">
 								<div class="form-group fieldcontain text-center">
-									<input type="text" title="Search" value="" placeholder="Search ..." class="form-control nav-search" name="query"> 
+									<input type="text" title="Search" value="" placeholder="Search " class="form-control nav-search" name="query"> 
 									<span class="input-group-btn">
 										<button class="btn btn-lg btn-primary" type="submit">Go!</button>
 									</span>
@@ -135,14 +140,21 @@ code {
 						</div>
 						<ul class="nav pull-right">
 							<% if(session.username != null){ %>
-							<li>
-								<g:link controller="restClient" action="getUserWatchlist">My Watclist</g:link>
-							</li>
-							<li style="color: white; padding-top: 10px;">
-								<i class="icon-user icon-white"></i> ${session.username}</li>
-							<li>
-								<g:link controller="user" action="logout"> Logout</g:link>
-							</li>
+								<li style="color: white; padding-top: 10px;">
+									<i class="icon-th-list icon-white"></i>
+								</li>
+								<li>
+									<g:link controller="restClient" action="getUserWatchlist">My Watclist</g:link>
+								</li>
+								<li style="color: white; padding-top: 10px;">
+									<i class="icon-user icon-white"></i> ${session.username}</li>
+								<li class="divider-vertical"></li>
+								<li style="color: white; padding-top: 10px;">
+									<i class="icon-user icon-white"></i>
+								</li>
+								<li>
+									<g:link controller="user" action="logout"> Logout</g:link>
+								</li>
 							<% }
 							else
 							{ %>

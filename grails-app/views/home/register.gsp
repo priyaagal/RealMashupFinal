@@ -47,10 +47,6 @@
 							<li class="active">
 								<g:link controller="home" action="index">Home</g:link>
 							</li>
-							<li style="color: white; padding-top: 10px;">
-								<span class="icon-envelope icon-white"></span>  
-							</li>
-							<li><a href="#contact">Contact</a></li>
 						</ul>
 					</div>
 					<ul class="nav-collapse collapse pull-right">
