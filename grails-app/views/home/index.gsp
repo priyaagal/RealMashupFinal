@@ -178,7 +178,9 @@ $(document).ready(function(e) {
 							<li style="color: white; padding-top: 10px;">
 								<i class="icon-home icon-white"></i>  
 							</li>
-							<li class="active"><g:link controller="home" action="index">Home</g:link></li>
+							<li class="active">
+								<g:link controller="home" action="index">Home</g:link>
+							</li>
 							<li style="color: white; padding-top: 10px;">
 								<i class="icon-user icon-white"></i>  
 							</li>
@@ -190,9 +192,7 @@ $(document).ready(function(e) {
 							<li style="color: white; padding-top: 10px;">
 								<span class="icon-envelope icon-white"></span>  
 							</li>
-							<li class="active"><g:link controller="home" action="index">Home</g:link></li>
-							<li><a href="#about">About</a></li>
-							<li><a href="#contact">Contact</a></li>
+							<li><a href="#contact">Contact Us</a></li>
 						</ul>
 						<div class="navbar-search pull-left">
 							<g:form class="navbar-form navbar-left" controller="restClient" action="getProperties">
@@ -214,6 +214,7 @@ $(document).ready(function(e) {
 								</li>
 								<li style="color: white; padding-top: 10px;">
 									<i class="icon-user icon-white"></i> ${session.username}</li>
+								<li class="divider-vertical"></li>
 								<li style="color: white; padding-top: 10px;">
 									<i class="icon-user icon-white"></i>
 								</li>
@@ -275,7 +276,7 @@ $(document).ready(function(e) {
 	<section id="about" class="section appear clearfix">
 		<div class="marketing">
 			<h2>Introducing </h2>
-			<p class="marketing-byline">Team Real Realty</p>
+			<p class="lead marketing-byline">Team Real Realty</p>
 			<div class="row-fluid">
 				<div class="span4">
 					<img src="/RealMashupFinal/static/images/Minion-1.jpg" style="width: 388px; padding-left: 4px; padding-right: 6px; border-left-width: 6px; border-right-width: 6px;"/>
@@ -291,6 +292,8 @@ $(document).ready(function(e) {
 				</div>
 			</div>
 		</div>
+	</section>
+	<section>
 	</section>
 	<hr class="soften">
 	<div id="footer">
