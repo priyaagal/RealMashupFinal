@@ -57,6 +57,8 @@ $("#loginForm").submit(function(e){
 		});
 		
 	});
+
+
 /**$('#registerBtn').click(function(e){
 var formData = $("#registerForm").serializeArray();
 var URL = $("#registerForm").attr("action");

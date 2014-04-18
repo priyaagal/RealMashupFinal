@@ -7,40 +7,6 @@
 <meta content="" name="description">
 <meta content="" name="author">
 
-<!-- Le styles -->
-<style type="text/css">
-.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc div
-{
-	font-weight: 400
-}
-</style>
-<style type="text/css">
-.gm-style .gm-style-cc span,.gm-style .gm-style-cc a,.gm-style .gm-style-mtc div
-	{
-	font-size: 10px
-}
-</style>
-<style type="text/css">
-@media print {
-	.gm-style .gmnoprint,.gmnoprint {
-		display: none
-	}
-}
-
-@media screen {
-	.gm-style .gmnoscreen,.gmnoscreen {
-		display: none
-	}
-}
-</style>
-<style type="text/css">
-.gm-style {
-	font-family: Roboto, Arial, sans-serif;
-	font-size: 11px;
-	font-weight: 400;
-	text-decoration: none
-}
-</style>
 <style type="text/css">
 .my-container {
 	margin: 20px;
@@ -65,9 +31,9 @@
   min-height: 100%;
   height: auto !important;
   height: 100%;
-  /* Negative indent footer by its height */
-  margin: 0 auto -60px;
   /* Pad bottom by footer height */
+  margin: 0 auto -60px;
+  /* Negative indent footer by its height */
   padding: 0 0 60px;
 }
 
@@ -103,23 +69,18 @@ code {
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
 <link rel="stylesheet" href="css/font-awesome.css">
-<script src="js/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
 <!-- body { padding-top: 60px; padding-bottom: 40px; } -->
 <!-- Bootstrap -->
 <link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'bootstrap.min.css')}">
 <link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'bootstrap-responsive.min.css')}">
 <link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'bootstrap-responsive.css')}">
 
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<link rel="stylesheet" href="${resource(dir: 'fancybox', file: 'jquery.fancybox-v=2.1.5.css')}" type="text/css" media="screen">
-
 <!-- CSS (necessary for Bootstrap's CSS ) -->
 
-<link rel="stylesheet" href="${resource(dir: 'css', file: 'font-awesome.min.css')}" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'style.css')}">
-<link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,600,300,200&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 
-<script type="text/javascript" src="js/html5shiv.js"></script>
+<link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,600,300,200&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+<%--
+
 <script type="text/javascript" src="js/html5shiv.js"></script>
 <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="js/jquery-migrate-1.2.1.min.js"></script>
@@ -129,91 +90,20 @@ code {
 <script type="text/javascript" src="js/script.js"></script>
 <script type="text/javascript" src="js/jquery.raty.js"></script>
 
-<script type="text/javascript">
-var amenitiesScore =${flash.amenities}+3
-$('#amenitiesStar').raty({
-	readOnly : true,
-	score : amenitiesScore
-});
+--%>
+<g:javascript src="html5shiv.js"></g:javascript>
+<g:javascript src="jquery-1.10.2.min.js"></g:javascript>
+<g:javascript src="jquery-migrate-1.2.1.min.js"></g:javascript>
+<g:javascript src="bootstrap.min.js"></g:javascript>
+<g:javascript src="jquery.easing.1.3.js"></g:javascript>
+<script type="text/javascript" src="fancybox/jquery.fancybox.pack-v=2.1.5.js"></script>
+<g:javascript src="jquery.raty.js"></g:javascript>
 
-var crimeRateScore = ${flash.crimeRate}+3
-$('#crimeRateStar').raty({
-	readOnly : true,
-	score : crimeRateScore
-});
+<link rel="stylesheet" href="${resource(dir: 'css', file: 'font-awesome.min.css')}" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'style.css')}">
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<link rel="stylesheet" href="${resource(dir: 'fancybox', file: 'jquery.fancybox-v=2.1.5.css')}" type="text/css" media="screen">
 
-var educationScore = ${flash.education}+3
-$('#educationStar').raty({
-	readOnly : true,
-	score : educationScore
-});
-
-var employmentScore = ${flash.employment}+3
-$('#employmentStar').raty({
-	readOnly : true,
-	score : employmentScore
-});
-
-var weatherScore =${flash.weather}+3
-$('#weatherStar').raty({
-	readOnly : true,
-	score : weatherScore
-});
-
-var costOfLivingScore =${flash.costOfLiving}+3
-$('#costOfLivingStar').raty({
-	readOnly : true,
-	score : costOfLivingScore
-});
-</script>
-<script>
-	$(function() {
-		$('#widgets li:eq(1) a').tab('show');
-	});
-</script>
-<script>
-function initialize() {
-  var lat = ${flash.lat}
-  var lon = ${flash.lon}
-  var mapOptions = {
-    zoom: 10,
-    center: new google.maps.LatLng(lat, lon)
-  };
-  var map = new google.maps.Map(document.getElementById('map-canvas'),
-      mapOptions);
-
-  var marker = new google.maps.Marker({
-	  position: new google.maps.LatLng(lat, lon),    
-	  map: map    
-   });
-}
-
-function loadScript() {
-  var script = document.createElement('script');
-  script.type = 'text/javascript';
-  script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&' +
-      'callback=initialize';
-  document.body.appendChild(script);
-}
-
-window.onload = loadScript;
-</script>
-<script>
-$(document).ready(function(e) {
-	var lis = $('.nav > li');
-	menu_focus(lis[0], 1);
-
-	$(".fancybox").fancybox({
-		padding : 10,
-		helpers : {
-			overlay : {
-				locked : false
-			}
-		}
-	});
-
-});
-</script>
 </head>
 
 <body>
@@ -221,11 +111,11 @@ $(document).ready(function(e) {
 		<div class="navbar navbar-inverse navbar-fixed-top">
 			<div class="navbar-inner">
 				<div class="container">
-					<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-						<span class="icon-bar"></span> 
-						<span class="icon-bar"></span> 
+					<a data-target=".navbar-responsive-collapse" data-toggle="collapse" class="btn btn-navbar">
 						<span class="icon-bar"></span>
-					</button>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</a>
 					<a class="brand" href="#">Real Realty</a>
 					<div class="nav-collapse collapse navbar-responsive-collapse">
 						<ul class="nav">
@@ -253,7 +143,7 @@ $(document).ready(function(e) {
 								</ul>
 							</li>
 							<li style="color: white; padding-top: 10px;">
-							<i class="icon-user icon-white"></i> ${session.username}</li>
+								<i class="icon-user icon-white"></i> ${session.username}</li>
 							<li>
 								<g:link controller="user" action="logout"> Logout</g:link>
 							</li>
@@ -341,7 +231,6 @@ $(document).ready(function(e) {
 			</div>
 		</div>
 	</div>
-	<!--  Tab bar for widgets -->
 	<div class="container">
 		<ul id="widgets" class="nav nav-tabs">
 			<li class="active"><a href="#pricePrediction" data-toggle="tab">Price Predictions</a></li>
@@ -440,12 +329,115 @@ $(document).ready(function(e) {
 			</div>
 		</div>
 	</div>
-	<!-- Tab bar for widgets ends -->
+	
 	<div id="footer">
 		<div class="container">
-			<p class="text-muted credit">&copy; Real Realty 2014</p>
+			<p class="text-muted credit"> &copy; Real Realty 2014</p>
 		</div>
 	</div>
-</div>	
+</div>
+
+<script>
+	$(function() {
+		$('#widgets li:eq(1) a').tab('show');
+	});
+</script>
+
+<script>
+	var amenitiesScore =${flash.amenities}+3
+	$('#amenitiesStar').raty({
+		readOnly : true,
+		score : amenitiesScore
+	});
+	
+	var crimeRateScore = ${flash.crimeRate}+3
+	$('#crimeRateStar').raty({
+		readOnly : true,
+		score : crimeRateScore
+	});
+	
+	var educationScore = ${flash.education}+3
+	$('#educationStar').raty({
+		readOnly : true,
+		score : educationScore
+	});
+	
+	var employmentScore = ${flash.employment}+3
+	$('#employmentStar').raty({
+		readOnly : true,
+		score : employmentScore
+	});
+	
+	var weatherScore =${flash.weather}+3
+	$('#weatherStar').raty({
+		readOnly : true,
+		score : weatherScore
+	});
+	
+	var costOfLivingScore =${flash.costOfLiving}+3
+	$('#costOfLivingStar').raty({
+		readOnly : true,
+		score : costOfLivingScore
+	});
+
+</script>
+<script>
+function initialize() {
+  var lat = ${flash.lat}
+  var lon = ${flash.lon}
+  var mapOptions = {
+    zoom: 10,
+    center: new google.maps.LatLng(lat, lon)
+  };
+  var map = new google.maps.Map(document.getElementById('map-canvas'),
+      mapOptions);
+
+  var marker = new google.maps.Marker({
+	  position: new google.maps.LatLng(lat, lon),    
+	  map: map    
+   });
+}
+
+function loadScript() {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&' +
+      'callback=initialize';
+  document.body.appendChild(script);
+}
+
+window.onload = loadScript;
+</script>
+<script>
+$(document).ready(
+		function(ev) {
+			$('#custom_carousel').on(
+					'slide.bs.carousel',
+					function(evt) {
+						$('#custom_carousel .controls li.active')
+								.removeClass('active');
+						$(
+								'#custom_carousel .controls li:eq('
+										+ $(evt.relatedTarget).index()
+										+ ')').addClass('active');
+					})
+		});
+</script>
+<script>
+$(document).ready(function(e) {
+	var lis = $('.nav > li');
+	menu_focus(lis[0], 1);
+
+	$(".fancybox").fancybox({
+		padding : 10,
+		helpers : {
+			overlay : {
+				locked : false
+			}
+		}
+	});
+
+});
+</script>
 </body>
 </html>
