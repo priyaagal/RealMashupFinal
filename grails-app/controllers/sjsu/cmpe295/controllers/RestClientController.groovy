@@ -84,7 +84,8 @@ class RestClientController
 						flash.ifBuy = true;
 					}
 					
-					render(view: "/home/listings")
+					//render(view: "/home/listings")
+					redirect(controller:"home", action:"listings")	
 				}
 				else if(json.type == "city")
 				{	
@@ -100,13 +101,13 @@ class RestClientController
 				else
 				{
 					flash.errorMessage = (json.error.split(":"))[1]
-					render(view: "/home/error")
+					redirect(controller:"home", action: "index")
 				}
 			}
 			else
 			{
 				flash.errorMessage = (json.error.split(":"))[1]
-				render(view: "/home/error")
+				redirect(controller:"home", action: "index")
 			}
 		}	
 	}
@@ -128,6 +129,22 @@ class RestClientController
 		render(view: "/home/result", model:['properties':properties, 'total': total, 'watchlist': false])
 	}
 	
+	def paginateWatchList()
+	{
+		println("In RestClientController/paginateWatchList()")
+		
+		// make the REST api call
+		def data = new URL("http://localhost:8080/RealMashupFinal/rest/watchlist/getUserWatchlist?email="+session.email
+			+"&paginate=true"+"&max="+params.max+"&offset="+params.offset).getText()
+		println(data)
+		
+		def json = new JsonSlurper().parseText(data)
+		def properties = json.properties
+		def total = params.total
+		println(properties.size())
+		flash.properties = properties
+		render(view: "/home/result", model:['properties':properties, 'total': total, 'watchlist': true])
+	}
 	
 	def authenticateUser() 
 	{
@@ -159,7 +176,7 @@ class RestClientController
 		else
 		{
 			flash.errorMessage = (error.split(":"))[1]
-			render(view: '/home/error')
+			redirect(controller:"home", action: "index")
 		}
 		
 	}
@@ -193,7 +210,7 @@ class RestClientController
 		else
 		{
 			flash.errorMessage = (error.split(":"))[1]
-			render(view: '/home/error')
+			redirect(controller:"home", action: "index")
 		}
 		
 	}
@@ -229,7 +246,8 @@ class RestClientController
 	   println("In class RestClientController/addToUserWatchList()")
 	   
 	   def error
-	   def http = new HTTPBuilder("http://localhost:8080/RealMashupFinal/rest/watchlist/addToUserWatchList")
+	   def properties
+	   def http = new HTTPBuilder("http://localhost:8080/RealMashupFinal/rest/watchlist/addToUserWatchList?email="+session.email)
 	   
 	   http.request(Method.POST, groovyx.net.http.ContentType.JSON)
 	   {
@@ -237,14 +255,19 @@ class RestClientController
 		   response.success = { resp, json ->
 							   println(json)
 							   error =json.error
+							   properties = json.properties
 						   }
 	   }
 	  
 	   
 	   if(error == "success")
-	   {
-	
-		   redirect(controller: "home", action:"index")
+	   {	
+		   def total = properties.size()
+		   println(total.toString())
+		   printf(properties.size().toString())
+		   flash.properties = properties
+		   render(view: "/home/result", model:['properties':properties, 'total': total, 'watchlist': true])
+		   //redirect(controller: "home", action:"index")
 	   }
 	   else
 	   {

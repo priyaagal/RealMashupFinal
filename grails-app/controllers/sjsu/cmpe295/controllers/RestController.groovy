@@ -194,7 +194,7 @@ class RestController {
 		{
 		
 		   property = MasterUnSoldProperty.findByAddress(address)
-		   user = User.findByEmail(session.email) // find user by email from session
+		   user = User.findByEmail(params.email) // find user by email from session
 		   HashSet<MasterUnSoldProperty> properties
 	 
 		   // set association
@@ -222,6 +222,7 @@ class RestController {
 		   render(contentType: 'text/json')
 		   {[
 				   'error': "success",
+				   'properties': properties
 		   ]}
 		}
 		else
@@ -234,16 +235,40 @@ class RestController {
 	def getUserWatchlist() {
 		println("In class RestController/getUserWatchlist()")
 		println(params.email)
+		def offset = 0
+		def max = 10
+		println(params.toString())
+		
+		if(params.offset)
+			offset = params.offset
+		
+		println(max)
+		println(offset)
+		
+		
 		def user = User.findByEmail(params.email)
-		//MasterUnSoldProperty[] properties = user.props
-		//println(properties.size().toString())
 		
 		if(user.props !=null && user.props.size() > 0 )
 		{
 			List properties = new ArrayList<MasterUnSoldProperty>()
-			properties.addAll(user.props)
-			
-			def total = properties.size()
+
+			if(params.paginate == "true")
+			{	println("paginated")
+				properties.addAll(user.props)
+				println(properties.size().toString())
+				def total = properties.size()
+					
+					println("total "+total)
+					println("max "+max)
+				if((max+offset.toInteger()) >  total )
+					 properties =  properties.subList(offset.toInteger(),total.toInteger())
+				else
+					properties =  properties.subList(offset.toInteger(), max.toInteger())
+			}
+			else
+			{
+				properties.addAll(user.props)
+			}
 			
 			render(contentType: 'text/json')
 			{[
@@ -252,8 +277,6 @@ class RestController {
 					'properties': properties
 			]}
 			 
-			// render(view: "result", model:['properties':properties, 'total': total, 'watchlist': true])
-			// render user as JSON
 		}
 		else
 		{

@@ -120,7 +120,7 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 						</ul>
 						<!--/.nav-collapse -->
 						<div class="navbar-search pull-left">
-							<g:form class="navbar-form navbar-left" controller="home" action="parseRequest">
+							<g:form class="navbar-form navbar-left" controller="restClient" action="getProperties">
 								<div class="form-group fieldcontain text-center">
 									<input type="text" title="Search" value="" placeholder="Search ..." class="form-control nav-search" name="query"> 
 									<span class="input-group-btn">
@@ -132,7 +132,7 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 						<ul class="nav pull-right">
 							<% if(session.username != null){ %>
 							<li>
-								<g:link controller="home" action="getUserWatchlist">My Watclist</g:link>
+								<g:link controller="restClient" action="getUserWatchlist">My Watclist</g:link>
 							</li>
 							<li style="color: white; padding-top: 10px;">
 							<i class="icon-user icon-white"></i> ${session.username}</li>
@@ -182,7 +182,7 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 						</a>
 							<div class="media-body">
 								<h4>
-									<g:link controller="home" action="listSingleAddress" params="${['query':properties[i].address]}" >
+									<g:link controller="restClient" action="getProperties" params="${['query':properties[i].address, 'watchlist':true]}" >
 									${properties[i].address}</g:link>
 									<span class="label label-success pull-right">${properties[i].zest_amt}</span>
 								</h4>
@@ -219,8 +219,8 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 								<div class="col-md-2">
 									<p>
 										<% if(session.username != null && watchlist != true){ %>
-										<g:form class="col-lg-12" controller="home"
-											action="AddToUserWatchList"
+										<g:form class="col-lg-12" controller="restClient"
+											action="addToUserWatchList"
 											params="${ [address: properties[i].address]}">
 											<button class="btn btn-lg btn-primary" type="submit">
 												Add to Watchlist!</button>
@@ -233,11 +233,17 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 				</div>
 			</div>
 		</div> <% } %>
-		
+		<%if(watchlist){ %>
 		<div class="pagination">
         <g:paginate class="btn btn-lg btn-primary"  total="${ total}" next="Forward" prev="Back" controller="restClient" 
-                    action="paginateAddresses" params="${['query':params.query, 'total':total]}" />
+                    action="paginateWatchList" params="${['query':params.query, 'total':total]}" />
     	</div>
+		<%} else {%>
+			<div class="pagination">
+			<g:paginate class="btn btn-lg btn-primary"  total="${ total}" next="Forward" prev="Back" controller="restClient"
+						action="paginateAddresses" params="${['query':params.query, 'total':total]}" />
+			</div>
+		<%} %>	
 	</div>
 	<div id="footer">
 		<div class="container">
