@@ -1,50 +1,68 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
 <head>
 
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Real Estate Prediction Engine</title>
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="" name="description">
+<meta content="" name="author">
 
 <link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'bootstrap.min.css')}">
 <link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'bootstrap-responsive.min.css')}">
 <link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'bootstrap-responsive.css')}">
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<link rel="stylesheet" href="${resource(dir: 'fancybox', file: 'jquery.fancybox-v=2.1.5.css')}" type="text/css" media="screen">
+<link rel="stylesheet" type="text/css" href="${resource(dir: 'fancybox', file: 'jquery.fancybox-v=2.1.5.css')}" media="screen">
 
 <!-- CSS (necessary for Bootstrap's CSS ) -->
-<link rel="stylesheet" href="${resource(dir: 'css', file: 'font-awesome.min.css')}" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'font-awesome.min.css')}">
 <link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'style.css')}">
+
+<!-- JavaScript -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/operations.js"></script>
 </head>
 
 <body>
 	<!-- Navigation Bar -->
-	<div class="navbar navbar-inverse navbar-fixed-top">
-		<div class="navbar-inner">
-			<div class="container">
-				<a data-target=".navbar-responsive-collapse" data-toggle="collapse" class="btn btn-navbar">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</a> 
-				<a class="brand" href="#">Real Realty</a>
-				 <div class="nav-collapse collapse navbar-responsive-collapse">
-					<ul class="nav">
-						<li class="active"><g:link controller="home" action="index">Home</g:link></li>
-						<li><a href="#about">About</a></li>
-						<li><a href="#contact">Contact</a></li>
-					</ul>
-				</div>
-				<div class="nav-collapse collapse pull-right">
-				    <ul class="nav">
-				        <li><a href="#register" data-toggle="modal"><i class="icon-user icon-white"></i> Register Here</a></li>
-				        <li class="divider-vertical"></li>
+	<header>
+		<div class="navbar navbar-inverse navbar-fixed-top">
+			<div class="navbar-inner" style="height: 60px;">
+				<div class="container">
+					<div class="navbar-header">
+						<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+							<span class="icon-bar"></span> 
+							<span class="icon-bar"></span> 
+							<span class="icon-bar"></span>
+						</button>
+						<a class="brand" href="#">Real Realty</a>
+					</div>
+					<div class="nav-collapse collapse navbar-responsive-collapse">
+						<ul class="nav">
+							<li style="color: white; padding-top: 10px;">
+								<i class="icon-home icon-white"></i>  
+							</li>
+							<li class="active">
+								<g:link controller="home" action="index">Home</g:link>
+							</li>
+							<li style="color: white; padding-top: 10px;">
+								<span class="icon-envelope icon-white"></span>  
+							</li>
+							<li><a href="#contact">Contact</a></li>
+						</ul>
+					</div>
+					<ul class="nav-collapse collapse pull-right">
+				        <li>
+				        	<a href="#register" data-toggle="modal">
+				        	<i class="icon-pencil icon-white"></i> Register Here</a>
+				        </li>
 				    </ul>
 				</div>
 			</div>
 		</div>
-	</div>
+	</header>
 	<!-- Navigation Ends -->
 	<!-- Main Container -->
 	<section>
@@ -76,42 +94,34 @@
 			</div>
 		</div>
 	</div>
-	<p class="text-center muted ">&copy; Copyright 2013 - Real Realty</p>
+	<p class="text-center muted ">&copy; Copyright 2014 - Real Realty</p>
 	</section>
 	<!-- Main Container Ends -->
 
 	<!-- Forgot Password Model Box -->
 	<div id="register" class="modal hide fade in" style="display: none;">
 		<div class="modal-header">
-			<a class="close" data-dismiss="modal" aria-hidden="true"><i
-				class="icon-remove"> </i></a>
+			<a class="close" data-dismiss="modal" aria-hidden="true">
+				<i class="icon-remove"></i>
+			</a>
 			<h3 id="registerModalLbl">Registration Form</h3>
 		</div>
 		<div class="modal-body">
-
-			<div id="successMsg" class="alert alert-success" hidden="true">
-			</div>
+			<div id="successMsg" class="alert alert-success" hidden="true"></div>
 			<div id="failureMsg" class="alert alert-danger" hidden="true"></div>
 			<g:form id="registerForm" controller="restClient" action="registerUser">
 				<div class="controls controls-row">
-
-					<input id="fname" name="fname" type="text" class="span2"
-						placeholder="First Name" required="true" /> <input id="lname"
-						name="lname" type="text" class="span2" placeholder="Last Name" />
+					<input id="fname" name="fname" type="text" class="span2" placeholder="First Name" required="true"/> 
+					<input id="lname" name="lname" type="text" class="span2" placeholder="Last Name"/>
 				</div>
 				<div class="controls controls-row">
-					<input id="email" name="email" class="span4"
-						placeholder="Email address" required="true" />
+					<input id="email" name="email" class="span4" placeholder="Email address" required="true"/>
 				</div>
 				<div class="controls controls-row">
-
-					<input type="password" id="regpassword" class="span4"
-						name="password" placeholder="Password" required="true" />
+					<input type="password" id="regpassword" class="span4" name="password" placeholder="Password" required="true" />
 				</div>
 				<div class="controls controls-row">
-
-					<input type="password" id="regpasswordrep" class="span4"
-						name="passwordrep" placeholder="Re-enter Password" required="true" />
+					<input type="password" id="regpasswordrep" class="span4" name="passwordrep" placeholder="Re-enter Password" required="true" />
 					<input type="hidden" value="register" name="operation" />
 				</div>
 				<div class="modal-footer">
@@ -120,12 +130,6 @@
 				</div>
 			</g:form>
 		</div>
-
 	</div>
-
-	<!-- JavaScript -->
-	<script src="http://code.jquery.com/jquery-latest.js"></script>
-	<script src="js/bootstrap.js"></script>
-	<script src="js/operations.js"></script>
 </body>
 </html>
