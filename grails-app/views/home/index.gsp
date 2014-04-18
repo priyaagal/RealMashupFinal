@@ -190,9 +190,6 @@ $(document).ready(function(e) {
 							<li style="color: white; padding-top: 10px;">
 								<span class="icon-envelope icon-white"></span>  
 							</li>
-							<li class="active"><g:link controller="home" action="index">Home</g:link></li>
-							<li><a href="#about">About</a></li>
-							<li><a href="#contact">Contact</a></li>
 						</ul>
 						<div class="navbar-search pull-left">
 							<g:form class="navbar-form navbar-left" controller="restClient" action="getProperties">
@@ -291,6 +288,8 @@ $(document).ready(function(e) {
 				</div>
 			</div>
 		</div>
+	</section>
+	<section>
 	</section>
 	<hr class="soften">
 	<div id="footer">
