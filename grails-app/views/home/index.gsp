@@ -124,9 +124,9 @@ $(document).ready(
 						</div>
 						<ul class="nav pull-right">
 							<% if(session.username != null){ %>
-							<li>
-								<g:link controller="home" action="getUserWatchlist">My Watclist</g:link>
-							</li>
+								<li>
+									<g:link controller="restClient" action="getUserWatchlist">My Watclist</g:link>
+								</li>
 							<li style="color: white; padding-top: 10px;">
 							<i class="icon-user icon-white"></i> ${session.username}</li>
 							<li>
@@ -221,7 +221,7 @@ code {
 			<div class="col-lg-12 text-center v-center">
 				<h1>Welcome to Real Realty!</h1>
 				<p class="lead">Find the Best Places to Live</p>
-				<g:form class="col-lg-12" controller="home" action="parseRequest">
+					<g:form class="col-lg-12" controller="restClient" action="getProperties">
 					<div class="input-group input-group-lg col-sm-offset-4 col-sm-4">
 						<input type="text" class="center-block form-control input-lg" title="Search" placeholder="e.g. San Jose" name="query">
 						<span class="input-group-btn">

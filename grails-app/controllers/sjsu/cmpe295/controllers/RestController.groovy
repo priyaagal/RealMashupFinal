@@ -3,6 +3,8 @@ import grails.converters.JSON
 import sjsu.cmpe295.models.MasterUnSoldProperty
 import sjsu.cmpe295.models.User
 
+// This class acts as a backend for all the urls mapped from urlMappings.groovy
+
 class RestController {
 
 	def getProperties() {
@@ -13,12 +15,14 @@ class RestController {
 
 		def offset = 0
 		def max = 10
+		println(params.toString())
+		
 		if(params.offset)
 			offset = params.offset
 		if(params.max)
 			max = params.max
 		
-		def query = params.query
+		def query = params.query.replace("+", " ")
 		def valid = true
 			
 		if(query.contains(",") )
@@ -37,24 +41,38 @@ class RestController {
 		else
 		{	
 			valid = false
-			def message = "Invalid input"
+			def message = "failue:Invalid input"
 			render JSON.parse("{\"error\" : \"" + message + "\"}") as JSON
 		}
 			
 		if(valid)
 		{
-			def filters = [ max : max, offset : offset, sort : "id"]
+			def filters = [ max : max, offset : offset, sort : "zest_amt"]
 			
 			if(params.city)
-			{
-				properties = MasterUnSoldProperty.findAllByCity(params.city, filters)
+			{	
+				println(params.paginate)
+				if(params.paginate == "true")
+					{	println("paginated")
+						properties = MasterUnSoldProperty.findAllByCity(params.city, filters)
+						println(properties.size().toString())
+					}
+				else
+					properties = MasterUnSoldProperty.findAllByCity(params.city)
+				
 				if(properties)
 				{
-					render properties as JSON
+					//render properties as JSON
+					render(contentType: 'text/json')
+					{[
+							'error': "success",
+							'type' : "city",
+							'properties': properties
+					]}
 				}
 				else
 				{
-					def message = "Record not found"
+					def message = "failue:Record not found"
 					render JSON.parse("{\"error\" : \"" + message + "\"}") as JSON
 				}
 			}
@@ -63,11 +81,17 @@ class RestController {
 				properties = MasterUnSoldProperty.findByAddress(params.address, filters)
 				if(properties)
 				{	
-					render properties as JSON
+					//render properties as JSON
+					render(contentType: 'text/json') 
+						{[
+								'error': "success",
+								'type' : "address",
+								'properties': properties
+						]}
 				}
 				else
 				{
-					def message = "Property not found"
+					def message = "failue:Property not found"
 					render JSON.parse("{\"error\" : \"" + message + "\"}") as JSON
 				}
 			}
@@ -76,33 +100,37 @@ class RestController {
 	}
 
 	def authenticateUser() {
+		
 		println("In RestController/authenticateUser()")
-		def user
-			
+		
 		if(request.JSON.email && request.JSON.password) {
 			
 			def email = request.JSON.email
 			def password = request.JSON.password
-			user = User.findByEmailAndPassword(email, password)
+			User user = User.findByEmailAndPassword(email, password)
 			println(user.toString())
 			
+			
 			if(user)
-			{
-				session.username = user.getFirstname()
-				session.lastname = user.getLastname()
-				session.email = user.getEmail()
-				render user as JSON
+			{	
+			
+				//render user as JSON
+				render(contentType: 'text/json')
+				{[
+						'error': "success",
+						'user': user
+				]}
 			}
 			else
 			{
-					def message = "User not found"
+					def message = "failue:User not found"
 					render JSON.parse("{\"error\" : \"" + message + "\"}") as JSON
 			}
 				
 		}
 		else
 		{
-			def message = "invalid username or password"
+			def message = "failue:invalid username or password"
 			render JSON.parse("{\"error\" : \"" + message + "\"}") as JSON
 		}
 		
@@ -117,6 +145,7 @@ class RestController {
 		params?.each { key, value ->
 			println( "params: $key = $value" )
 		}
+		println(request.JSON.fname )
 		
 		if(request.JSON.fname && request.JSON.lname && request.JSON.email && request.JSON.password)
 		{	
@@ -130,18 +159,24 @@ class RestController {
 			
 			def cuser =  User.findByEmail(request.JSON.email)
 			if(cuser)
-			{
-				render cuser as JSON
+			{	
+				
+				//render cuser as JSON
+				render(contentType: 'text/json')
+				{[
+						'error': "success",
+						'user': cuser
+				]}
 			}
 			else
 			{
-				def message = "User not inserted"
+				def message = "failue:User not inserted"
 				render JSON.parse("{\"error\" : \"" + message + "\"}") as JSON
 			}
 		}
 		else
 		{	
-			 def message = "invalid or incorrect parameters provided"
+			 def message = "failue:invalid or incorrect parameters provided"
 			 render JSON.parse("{\"error\" : \"" + message + "\"}") as JSON
 		}
 	}
@@ -175,41 +210,54 @@ class RestController {
 		   // save objects
 		   user.save(flush:true)
 		   printf(user.getErrors().toString())
-	
+		   println(user.errors)
+		   
 		   for (props in user.props)
 		   { 	println (props.address.toString())
 			   	println (props.city.toString())
 				println (props.state.toString())
 		   }
 			
-		   render user as JSON
+		   //render user as JSON
+		   render(contentType: 'text/json')
+		   {[
+				   'error': "success",
+		   ]}
 		}
 		else
 		{
-			def message = "invalid parameters provided"
+			def message = "failue:Property not added to Watchlist"
 			render JSON.parse("{\"error\" : \"" + message + "\"}") as JSON
 		}
 	}
 	
 	def getUserWatchlist() {
 		println("In class RestController/getUserWatchlist()")
-		def user = User.findByEmail(session.email)
+		println(params.email)
+		def user = User.findByEmail(params.email)
 		//MasterUnSoldProperty[] properties = user.props
 		//println(properties.size().toString())
 		
-		if(user.props !=null && user.props.size() > 0)
+		if(user.props !=null && user.props.size() > 0 )
 		{
 			List properties = new ArrayList<MasterUnSoldProperty>()
 			properties.addAll(user.props)
 			
 			def total = properties.size()
+			
+			render(contentType: 'text/json')
+			{[
+					'error': "success",
+					'type' : "address",
+					'properties': properties
+			]}
 			 
 			// render(view: "result", model:['properties':properties, 'total': total, 'watchlist': true])
-			 render user as JSON
+			// render user as JSON
 		}
 		else
 		{
-			def message = "Empty"
+			def message = "failue:Empty Watchlist"
 			render JSON.parse("{\"error\" : \"" + message + "\"}") as JSON
 		}
 	}

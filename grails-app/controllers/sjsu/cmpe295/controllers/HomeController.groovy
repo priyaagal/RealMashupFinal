@@ -149,29 +149,7 @@ class HomeController {
 	}
 
 	
-	def getUserWatchlist() {
-		println("In class HomeController/getUserWatchlist()")
-		def user = User.findByEmail(session.email)
-		//MasterUnSoldProperty[] properties = user.props
-		//println(properties.size().toString())
-		
-		if(user.props !=null && user.props.size() > 0)
-		{
-			List properties = new ArrayList<MasterUnSoldProperty>()
-			properties.addAll(user.props)
-			
-			 println( properties[0].address.toString())
-			 def total = properties.size()
-			 
-			 render(view: "result", model:['properties':properties, 'total': total, 'watchlist': true])
-		}
-		else
-		{
-			render(view: "index")
-		}
-	}
-
-   def AddToUserWatchList() {
+   def AddToUserWatchList2() {
 	   println("In class HomeController/AddToUserWatchList()")
 	   def address = params.address
 	   printf(address)
@@ -205,7 +183,17 @@ class HomeController {
 	   render(view: "index")
    }
 
-
+   def showResult()
+   {
+	   println("In class HomeController/showResult()")
+	   render(view:"result")
+   }
+	
+   def showError()
+   {
+	   println("In class HomeController/showError()")
+	   render(view:"error")
+   }
 
 }
 

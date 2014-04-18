@@ -184,7 +184,7 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 								<h4>
 									<g:link controller="home" action="listSingleAddress" params="${['query':properties[i].address]}" >
 									${properties[i].address}</g:link>
-									<span class="label label-success pull-right">$123,456</span>
+									<span class="label label-success pull-right">${properties[i].zest_amt}</span>
 								</h4>
 								<dl class="dl-horizontal">
 									<dt>City</dt>
@@ -235,7 +235,7 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 		</div> <% } %>
 		
 		<div class="pagination">
-        <g:paginate class="btn btn-lg btn-primary"  total="${ total}" next="Forward" prev="Back" controller="home" 
+        <g:paginate class="btn btn-lg btn-primary"  total="${ total}" next="Forward" prev="Back" controller="restClient" 
                     action="paginateAddresses" params="${['query':params.query, 'total':total]}" />
     	</div>
 	</div>

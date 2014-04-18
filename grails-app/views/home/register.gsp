@@ -55,7 +55,7 @@
 				<div id="loginMsgSuccess" class="alert alert-success" hidden="true">
 				</div>
 				<legend>Please Sign In</legend>
-				<g:form method="post" controller="user" action="authenticateUser" accept-charset="UTF-8" id="loginForm">
+				<g:form method="post" controller="restClient" action="authenticateUser" accept-charset="UTF-8" id="loginForm">
 					<div class="input-prepend">
 						<span class="add-on">
 							<i class="icon-user"></i>
@@ -92,7 +92,7 @@
 			<div id="successMsg" class="alert alert-success" hidden="true">
 			</div>
 			<div id="failureMsg" class="alert alert-danger" hidden="true"></div>
-			<g:form id="registerForm" controller="user" action="registerUser">
+			<g:form id="registerForm" controller="restClient" action="registerUser">
 				<div class="controls controls-row">
 
 					<input id="fname" name="fname" type="text" class="span2"

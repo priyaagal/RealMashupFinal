@@ -1,82 +1,259 @@
 package sjsu.cmpe295.controllers
 
 import sjsu.cmpe295.models.MasterUnSoldProperty
+import sjsu.cmpe295.models.User
 import grails.converters.XML
 import grails.converters.JSON
+import groovy.json.JsonSlurper
 import groovyx.net.http.HTTPBuilder
+import groovyx.net.http.RESTClient
+import grails.plugins.rest.client.*
+import grails.rest.*
+import java.text.DecimalFormat
+import static groovyx.net.http.ContentType.JSON
+import groovyx.net.http.*
 
-class RestClientController {
-	def restService
+// This class calls all the URLs defined in REST controllers making making REST API calls
 
-	def getProperties() {
-		
-		def http = new HTTPBuilder("http://localhost:8080/RealMashupFinal/rest")
-		
+class RestClientController 
+{
+	def getProperties() 
+	{
 		println("In RestClientController/getProperties()")
-		/*
-		def errorMessage
-		try{
+		
+		if(params.query)
+		{
+			// make the REST api call
+			def data = new URL("http://localhost:8080/RealMashupFinal/rest/getProperties?query="+params.query.replace(" ","+")+"&paginate=false").getText()
+			println(data)
 			
+			def json = new JsonSlurper().parseText(data)
+			println(json.properties)
 			
-			def properties = restService.getProperties(params)
-			if(properties) {
-				
-				if(params.dtype &&  "xml".equals(params.dtype.toLowerCase()))
-					render properties as XML
+			if(json.error == "success")
+			{
+				if(json.type == "address")
+				{
+					flash.address = json.properties.address
+					//		char[] a = city.toLowerCase().toCharArray();
+					//		for (int i = 0; i < a.length; i++ ) {
+					//			a[i] = i == 0 || a[i-1] == ' ' ? a[i].toString().toUpperCase().toCharacter() : a[i];
+					//		}
+					//		String convertedCity = new String(a);
+					flash.city = json.properties.city;
+					
+					
+					DecimalFormat dFormat = new DecimalFormat("####,###,###.00");
+					String zestAmount = '$' + (dFormat.format(json.properties.zest_amt));
+					println(zestAmount)
+					
+					flash.zestAmt = zestAmount;
+					flash.bathroom = String.valueOf(json.properties.bathroom);
+					flash.bedroom = String.valueOf(json.properties.bedroom);
+					flash.fArea = json.properties.finishedSqFt
+					flash.lArea = json.properties.lotSizeSqFt
+					flash.lat = json.properties.latitude
+					flash.lon = json.properties.longitude
+					flash.zip = json.properties.zipcode
+					flash.amenities = json.properties.amenities
+					flash.crimeRate = json.properties.crimerate
+					flash.education = json.properties.education
+					flash.employment = json.properties.employment
+					flash.weather = json.properties.weather
+					flash.costOfLiving = json.properties.costofliving
+					flash.priceAppreciated = json.properties.priceAppreciated
+					println(json.properties.priceAppreciated)
+					
+					if(flash.costOfLiving > 1.5 && flash.priceAppreciated && flash.crimeRate <= 0.5)
+					{
+						flash.ifBuy = false;
+					}
+					else if (flash.costOfLiving < 1.5 && flash.priceAppreciated) 
+					{
+						if(flash.weather > 0.5 && flash.education > 0.5 && flash.education > 0.5 && flash.crimeRate > 0.5)
+						{
+							flash.ifBuy = true;
+						}
+						else
+						 {
+							flash.ifBuy = false;
+						 }
+					}
+					else 
+					{
+						flash.ifBuy = true;
+					}
+					
+					render(view: "/home/listings")
+				}
+				else if(json.type == "city")
+				{	
+					def properties = json.properties
+					def total = properties.size()
+					println(total.toString())
+					printf(properties.size().toString())
+					flash.properties = properties
+					
+					//redirect(controller: "home", action:"showResult",  model:['properties':properties, 'total': total, 'watchlist': false])
+					render(view: "/home/result", model:['properties':properties, 'total': total, 'watchlist': false])
+				}
 				else
-					render properties as JSON
+				{
+					flash.errorMessage = (json.error.split(":"))[1]
+					render(view: "/home/error")
+				}
 			}
 			else
-				errorMessage = "No properties available"
-		}
-		catch(Exception e){
-			errorMessage = e.getMessage()
-		}
-		render  JSON.parse("{\"error\" : \"" + errorMessage + "\"}") as JSON
-		*/
+			{
+				flash.errorMessage = (json.error.split(":"))[1]
+				render(view: "/home/error")
+			}
+		}	
+	}
+	
+	def paginateAddresses()
+	{
+		println("In RestClientController/paginateAddresses()")
+		
+		// make the REST api call
+		def data = new URL("http://localhost:8080/RealMashupFinal/rest/getProperties?query="+params.query.replace(" ","+")
+			+"&paginate=true"+"&max="+params.max+"&offset="+params.offset).getText()
+		println(data)
+		
+		def json = new JsonSlurper().parseText(data)
+		def properties = json.properties
+		def total = params.total
+		println(properties.size())
+		flash.properties = properties
+		render(view: "/home/result", model:['properties':properties, 'total': total, 'watchlist': false])
 	}
 	
 	
-	def getUsers() {
-		println("In getUsers()")
-		def errorMessage
-		try{
-			def user = restService.getUser(params)
-			if(user){
-				println("User Present")
-				if(params.dtype &&  "xml".equals(params.dtype.toLowerCase()))
-					render user as XML
-				else
-					render user as JSON	
-			}
-			else
-				errorMessage = "No user available"
+	def authenticateUser() 
+	{
+		println("In RestClientController/authenticateUser()")
+		// make the REST api call
+		//def data = new URL("http://localhost:8080/RealMashupFinal/rest/user/authenticateUser").getText()
+		println(params.toString())
+		def error
+		User user
+		def http = new HTTPBuilder("http://localhost:8080/RealMashupFinal/rest/user/authenticateUser")
+		http.request(Method.POST, groovyx.net.http.ContentType.JSON)
+		{
+			body = [email:params.email, password:params.password];
+			response.success = { resp, json ->
+								println(json)
+								user = json.user
+								error =json.error
+							}
 		}
-		catch(Exception e){
-			errorMessage = e.getMessage()
+		
+		if(error == "success")
+		{	
+			//render(view: '/home/index')
+			session.username = user.firstname
+			session.lastname = user.lastname
+			session.email = user.email
+			redirect(controller: "home", action:"index")
 		}
-		render  JSON.parse("{\"error\" : \"" + errorMessage + "\"}") as JSON
+		else
+		{
+			flash.errorMessage = (error.split(":"))[1]
+			render(view: '/home/error')
+		}
+		
 	}
 	
-	def watchlist(){
-		println("In watchlist()")
-		def errorMessage
-		try{
-			def user = restService.addToWatchList(params)
-			if(user){
-				println("User Present")
-				if(params.dtype &&  "xml".equals(params.dtype.toLowerCase()))
-					render user as XML
-				else
-					render user as JSON
-			}
-			else
-				errorMessage = "No user available"
+	def registerUser()
+	{
+		println("In RestClientController/registerUser()")
+		// make the REST api call
+		//def data = new URL("http://localhost:8080/RealMashupFinal/rest/user/registerUser").getText()
+		def error
+		User user
+		def http = new HTTPBuilder("http://localhost:8080/RealMashupFinal/rest/user/registerUser")
+		http.request(Method.PUT, groovyx.net.http.ContentType.JSON)
+		{
+			body = [fname:params.fname, lname:params.lname, email:params.email, password:params.password];
+			response.success = { resp, json ->
+								println(json)
+								user = json.user
+								error =json.error
+							}
 		}
-		catch(Exception e){
-			errorMessage = e.getMessage()
+		
+		if(error == "success")
+		{
+			//render(view: '/home/index')
+			session.username = user.firstname
+			session.lastname = user.lastname
+			session.email = user.email
+			redirect(controller: "home", action:"index")
 		}
-		render  JSON.parse("{\"error\" : \"" + errorMessage + "\"}") as JSON
+		else
+		{
+			flash.errorMessage = (error.split(":"))[1]
+			render(view: '/home/error')
+		}
+		
 	}
+	
+	def getUserWatchlist() {
+		println("In class RestClientController/getUserWatchlist()")
+		
+		def data = new URL("http://localhost:8080/RealMashupFinal/rest/watchlist/getUserWatchlist?email="+session.email).getText()
+		println(data)
+		
+		def json = new JsonSlurper().parseText(data)
+		
+		
+		//redirect(controller: "home", action:"showResult",  model:['properties':properties, 'total': total, 'watchlist': false])
+		if(json.error == "success")
+		{	
+			def properties = json.properties
+			def total = properties.size()
+			println(total.toString())
+			printf(properties.size().toString())
+			flash.properties = properties
+			render(view: "/home/result", model:['properties':properties, 'total': total, 'watchlist': true])
+		}
+		else
+		{
+			flash.errorMessage = (json.error.split(":"))[1]
+			println(flash.errorMessage)
+			redirect(controller:"home", action: "index")
+		}
+	}
+
+   def addToUserWatchList() {
+	   println("In class RestClientController/addToUserWatchList()")
+	   
+	   def error
+	   def http = new HTTPBuilder("http://localhost:8080/RealMashupFinal/rest/watchlist/addToUserWatchList")
+	   
+	   http.request(Method.POST, groovyx.net.http.ContentType.JSON)
+	   {
+		   body = [address:params.address];
+		   response.success = { resp, json ->
+							   println(json)
+							   error =json.error
+						   }
+	   }
+	  
+	   
+	   if(error == "success")
+	   {
+	
+		   redirect(controller: "home", action:"index")
+	   }
+	   else
+	   {
+		   flash.errorMessage = (error.split(":"))[1]
+		   println(flash.errorMessage)
+		   redirect(controller:"home", action: "showError")
+	   }
+	   
+   }
+
 	
 }
