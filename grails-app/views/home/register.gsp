@@ -94,7 +94,26 @@
 	<p class="text-center muted ">&copy; Copyright 2014 - Real Realty</p>
 	</section>
 	<!-- Main Container Ends -->
-
+	
+	<script type="text/javascript">
+		window.onload = function () 
+		{
+		    document.getElementById("regpassword").onchange = validatePassword;
+		    document.getElementById("regpasswordrep").onchange = validatePassword;
+		}
+		
+		function validatePassword()
+		{
+			var pass2=document.getElementById("regpasswordrep").value;
+			var pass1=document.getElementById("regpassword").value;
+			if(pass1!=pass2)
+			    document.getElementById("regpasswordrep").setCustomValidity("Passwords Don't Match");
+			else
+			    document.getElementById("regpasswordrep").setCustomValidity('');  
+			//empty string means no validation error
+		}
+</script>
+	
 	<!-- Forgot Password Model Box -->
 	<div id="register" class="modal hide fade in" style="display: none;">
 		<div class="modal-header">
@@ -109,10 +128,10 @@
 			<g:form id="registerForm" controller="restClient" action="registerUser">
 				<div class="controls controls-row">
 					<input id="fname" name="fname" type="text" class="span2" placeholder="First Name" required="true"/> 
-					<input id="lname" name="lname" type="text" class="span2" placeholder="Last Name"/>
+					<input id="lname" name="lname" type="text" class="span2" placeholder="Last Name" required="true"/>
 				</div>
 				<div class="controls controls-row">
-					<input id="email" name="email" class="span4" placeholder="Email address" required="true"/>
+					<input id="email" name="email" type="email" class="span4" placeholder="Email address" required="true"/>
 				</div>
 				<div class="controls controls-row">
 					<input type="password" id="regpassword" class="span4" name="password" placeholder="Password" required="true" />
@@ -122,7 +141,7 @@
 					<input type="hidden" value="register" name="operation" />
 				</div>
 				<div class="modal-footer">
-					<button type="submit" id="registerBtn" class="btn btn-primary">Submit</button>
+					<button type="submit" id="registerBtn" class="btn btn-primary" >Submit</button>
 					<a href="#" class="btn" data-dismiss="modal">Close</a>
 				</div>
 			</g:form>
