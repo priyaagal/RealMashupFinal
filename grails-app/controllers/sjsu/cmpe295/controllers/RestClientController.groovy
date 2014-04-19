@@ -93,6 +93,15 @@ class RestClientController
 					def total = properties.size()
 					println(total.toString())
 					printf(properties.size().toString())
+					
+					for (it in properties)
+					{
+						DecimalFormat dFormat = new DecimalFormat("####,###,###.00");
+						String zestAmount = '$' + (dFormat.format(it.zest_amt));
+						println(zestAmount)
+						it.zest_amt = zestAmount
+					}
+					
 					flash.properties = properties
 					
 					//redirect(controller: "home", action:"showResult",  model:['properties':properties, 'total': total, 'watchlist': false])
@@ -107,7 +116,7 @@ class RestClientController
 			else
 			{
 				flash.errorMessage = (json.error.split(":"))[1]
-				redirect(controller:"home", action: "index")
+				redirect(controller:"home", action: "error")
 			}
 		}	
 	}
