@@ -54,14 +54,51 @@
   margin: 20px 0;
 }
 
-#footer > .container {
-  padding-left: 15px;
-  padding-right: 15px;
-}
-
 code {
   font-size: 80%;
 }
+
+.col-lg-12 {
+    min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.propertyContent {
+    padding: 9px;
+}
+
+.propertyItem {
+    background-color: #FFFFFF;
+    box-shadow: 0 1px 3px #D4D4D4;
+    margin-bottom: 30px;
+}
+
+col-lg-4 col-md-4 col-sm-4{
+    min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+    position: relative;
+    float: left
+}
+
+.rowText {
+    padding-right: 33px;
+    padding-top: 17px;
+}
+
+.col-lg-8 {
+    width: 66.6667%;
+    float: left;
+    padding-left: 15px;
+}
+
+.row {
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+
 </style>
 
 
@@ -173,67 +210,61 @@ code {
 	</header>
 
 <!-- === MAIN Background === -->
-<div id="wrap">
 	<div class="my-container">
 		<div class="container-fluid">
 			<hr>
 			<div class="row-fluid">
-				<div class="col-md-7">
-					<div class="panel panel-default">
-						<ul class="media-list">
-							<li class="media span7">
-							<div class="panel-heading">
-								<h4> ${flash.address}
-                  					<span class="label label-success pull-right">${flash.zestAmt}</span>
-               					</h4>
-               				</div>
-               				<div class="panel-body my-container">
+				<div class="col-lg-12"  style="padding-top: 20px;">
+					<div class="propertyItem">
+				
+						<div class="propertyContent row" style="margin-left: 40px; margin-right: 20px;">
+							<div class="col-lg-4 col-md-4 col-sm-4">
 								<a class="pull-left" href="#"> 
-									<img class="media-object img-polaroid" src="http://photos.foter.com/68/new-money-movement_300x300.jpg" style="" alt="64x64" data-src="holder.js/64x64">
+									<img class="media-object img-responsive" style="width: 300px; height: 250px; padding-top: 20px;" 
+									src="http://images.prd.mris.com/image/V2/1/Yu59d899Ocpyr_RnF0-8qNJX1oYibjwp9TiLy-bZvU9vRJ2iC1zSQgFwW-fTCs6tVkKrj99s7FFm5Ygwl88xIA.jpg" 
+									alt="64x64" data-src="holder.js/64x64">
 								</a>
-								<div class="media-body">
-									<dl class="dl-horizontal">
-										<dt>City</dt>
-										<dd>
-											${flash.city}
-										</dd>
-										<dt>Zip</dt>
-										<dd>
-											${flash.zip}
-										</dd>
-										<dt>Bathrooms</dt>
-										<dd>
-											${flash.bathroom}
-										</dd>
-										<dt>Bedrooms</dt>
-										<dd>
-											${flash.bedroom}
-										</dd>
-										<dt>Finished Sq.Ft Area</dt>
-										<dd>
-											${flash.fArea}
-										</dd>
-										<dt>Lot Sq.Ft Area</dt>
-										<dd>
-											${flash.lArea}
-										</dd>
-									</dl>
-									<div class="col-md-2">
-										<p>
-										<% if(session.username != null && watchlist!= "true"){  %>
-											<g:form class="col-lg-12" controller="restClient" action="AddToUserWatchList" params="${ [address: flash.address]}">
-												<button class="btn btn-lg btn-primary" type="submit"> Add to Watchlist!</button>
-											</g:form>
-										<% } %>
-										</p>
-									</div>
+							</div>
+							<div class="col-lg-8 rowText">
+								<h4 style="padding-top: 10px; border-top-width: 20px; margin-top: 20px;">
+									${flash.address}<a>,</a> ${flash.city}<a>,</a> ${flash.zip}
+									&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+									<span class="label label-success"> ${flash.zestAmt}</span>
+								</h4>
+								<dl class="dl-horizontal">
+									<dt>Bathrooms</dt>
+									<dd>
+										${flash.bathroom}
+									</dd>
+									<dt>Bedrooms</dt>
+									<dd>
+										${flash.bedroom}
+									</dd>
+									<dt>Finished Sq.Ft Area</dt>
+									<dd>
+										${flash.fArea} <p>sqFt</p>
+									</dd>
+									<dt>Lot Sq.Ft Area</dt>
+									<dd>
+										${flash.lArea}<p>sqFt</p>
+									</dd>
+								</dl>
+								<div class="col-md-2">
+									<p>
+									<% if(session.username != null && watchlist!= "true"){  %>
+										<g:form class="col-lg-12" controller="restClient" action="AddToUserWatchList" params="${ [address: flash.address]}">
+											<button class="btn btn-lg btn-primary" type="submit"> Add to Watchlist!</button>
+										</g:form>
+									<% } %>
+									</p>
 								</div>
 							</div>
-							</li>
-						</ul>
+						</div>
 					</div>
 				</div>
-				<div class="col-md-4">
+			</div>
+			<div class="row-fluid">
+				<div class="col-md-12">
 					<div id="map-canvas" align="right"></div>
 				</div>
 			</div>
@@ -337,13 +368,12 @@ code {
 			</div>
 		</div>
 	</div>
-	
-	<div id="footer">
-		<div class="container">
-			<p class="text-muted credit"> &copy; Real Realty 2014</p>
+	<br>
+	<div id="footer" class="section footer" style = "height: 100px; background-color:#000000">
+		<div class="container align-center" style="margin-top: 0px; border-top-width: 50px; padding-top: 50px;">
+			<p class="text-muted credit align-center" style = "color: #777777; font-size: 16px; font-weight: 300; line-height: 1.6em;">&copy; Real Realty 2014</p>
 		</div>
 	</div>
-</div>
 
 <script>
 	$(function() {
