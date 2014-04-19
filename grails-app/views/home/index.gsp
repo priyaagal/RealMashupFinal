@@ -197,7 +197,7 @@ $(document).ready(function(e) {
 						<div class="navbar-search pull-left">
 							<g:form class="navbar-form navbar-left" controller="restClient" action="getProperties">
 								<div class="form-group fieldcontain text-center">
-									<input type="text" title="Search" value="" placeholder="Search " class="form-control nav-search" name="query"> 
+									<input type="text" title="Search" required = "required" value="" placeholder="Search " class="form-control nav-search" name="query"> 
 									<span class="input-group-btn">
 										<button class="btn btn-lg btn-primary" type="submit">Go!</button>
 									</span>
@@ -263,7 +263,7 @@ $(document).ready(function(e) {
 			<p class="lead">Find the Best Places to Live</p>
 			<g:form class="col-lg-12" controller="restClient" action="getProperties">
 				<div class="form-group fieldcontain text-center">
-					<input class="center-block form-control input-lg" type="text" title="Search" placeholder="e.g. San Jose" name="query">
+					<input class="center-block form-control input-lg" required = "required" type="text" title="Search" placeholder="e.g. San Jose" name="query">
 					<span class="input-group-btn">
 						<button class="btn btn-lg btn-primary btn-inverse" type="submit">
 							<i class="icon-search icon-white"></i>

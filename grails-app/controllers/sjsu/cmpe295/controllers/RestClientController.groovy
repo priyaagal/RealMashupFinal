@@ -85,7 +85,8 @@ class RestClientController
 					}
 					
 					//render(view: "/home/listings")
-					redirect(controller:"home", action:"listings")	
+					//redirect(controller:"home", action:"listings"  )
+					render(view: "/home/listings", model:['watchlist': params.watchlist])
 				}
 				else if(json.type == "city")
 				{	
@@ -257,6 +258,7 @@ class RestClientController
 	   def error
 	   def properties
 	   def http = new HTTPBuilder("http://localhost:8080/RealMashupFinal/rest/watchlist/addToUserWatchList?email="+session.email)
+	   println(params.toString())
 	   
 	   http.request(Method.POST, groovyx.net.http.ContentType.JSON)
 	   {
