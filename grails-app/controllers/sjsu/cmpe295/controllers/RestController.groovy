@@ -264,7 +264,7 @@ class RestController {
 				if((max+offset.toInteger()) >  total )
 					 properties =  properties.subList(offset.toInteger(),total.toInteger())
 				else
-					properties =  properties.subList(offset.toInteger(), max.toInteger())
+					properties =  properties.subList(offset.toInteger(), max.toInteger() + offset.toInteger())
 			}
 			else
 			{

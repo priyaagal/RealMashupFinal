@@ -131,7 +131,7 @@ code {
 						<div class="navbar-search pull-left">
 							<g:form class="navbar-form navbar-left" controller="restClient" action="getProperties">
 								<div class="form-group fieldcontain text-center">
-									<input type="text" title="Search" value="" placeholder="Search " class="form-control nav-search" name="query"> 
+									<input type="text" title="Search" required = "required" value="" placeholder="Search " class="form-control nav-search" name="query"> 
 									<span class="input-group-btn">
 										<button class="btn btn-lg btn-primary" type="submit">Go!</button>
 									</span>
@@ -220,7 +220,7 @@ code {
 									</dl>
 									<div class="col-md-2">
 										<p>
-										<% if(session.username != null && params.watchlist!= true){  %>
+										<% if(session.username != null && watchlist!= "true"){  %>
 											<g:form class="col-lg-12" controller="restClient" action="AddToUserWatchList" params="${ [address: flash.address]}">
 												<button class="btn btn-lg btn-primary" type="submit"> Add to Watchlist!</button>
 											</g:form>

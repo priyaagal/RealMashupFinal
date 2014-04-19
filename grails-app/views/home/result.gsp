@@ -7,6 +7,8 @@
 <meta content="" name="description">
 <meta content="" name="author">
 
+<g:javascript library="jquery" />
+
 <!-- Le styles -->
 <style type="text/css">
 style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc div {
@@ -112,7 +114,7 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 						<div class="navbar-search pull-left">
 							<g:form class="navbar-form navbar-left" controller="restClient" action="getProperties">
 								<div class="form-group fieldcontain text-center">
-									<input type="text" title="Search" value="" placeholder="Search " class="form-control nav-search" name="query"> 
+									<input type="text" required = "required" title="Search" value="" placeholder="Search " class="form-control nav-search" name="query"> 
 									<span class="input-group-btn">
 										<button class="btn btn-lg btn-primary" type="submit">Go!</button>
 									</span>
@@ -153,6 +155,12 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 		</div>
 	</header>
 	
+	<g:javascript>
+		function isPropertyAddedtoWL()
+		{	alert("In");
+			alert(document.getElementById("WLButton").value);
+		}
+	</g:javascript>
 <!-- === MAIN Background === -->
 <div id="wrap">
 	<div class="container">
@@ -179,7 +187,7 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 							</a>
 							<div class="media-body">
 								<h4>
-									<g:link controller="restClient" action="getProperties" params="${['query':properties[i].address, 'watchlist':true]}" >
+									<g:link controller="restClient" action="getProperties" params="${['query':properties[i].address, 'watchlist':watchlist]}" >
 									${properties[i].address}</g:link>
 									<span class="label label-success pull-right">${flash.properties[i].zest_amt}</span>
 								</h4>
@@ -217,12 +225,9 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 									<p>
 
 										<% if(session.username != null && watchlist != true){ %>
-										<g:form class="col-lg-12" controller="restClient"
-											action="addToUserWatchList"
-											params="${ [address: properties[i].address]}">
-											<g:submitButton  class="btn btn-lg btn-primary" name="Add to Watchlist!" type="submit">
-											</g:submitButton >
-										</g:form>
+											<g:form class="col-lg-12" controller="restClient" action="AddToUserWatchList" params="${ [address: properties[i].address]}">
+												<button class="btn btn-lg btn-primary" type="submit"> Add to Watchlist!</button>
+											</g:form>
 										<% } %>
 									</p>
 								</div>
