@@ -147,5 +147,11 @@
 			</g:form>
 		</div>
 	</div>
+	<br>
+	<div id="footer" class="section footer" style = "height: 100px; background-color:#000000">
+		<div class="container align-center" style="margin-top: 0px; border-top-width: 50px; padding-top: 50px;">
+			<p class="text-muted credit align-center" style = "color: #777777; font-size: 16px; font-weight: 300; line-height: 1.6em;">&copy; Real Realty 2014</p>
+		</div>
+	</div>
 </body>
 </html>
