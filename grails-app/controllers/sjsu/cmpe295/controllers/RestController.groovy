@@ -48,18 +48,21 @@ class RestController {
 			
 		if(valid)
 		{
-			def filters = [ max : max, offset : offset, sort : "zest_amt"]
+			def filters 
 			
 			if(params.city)
 			{	
 				println(params.paginate)
 				if(params.paginate == "true")
 					{	println("paginated")
+						filters = [ max : max, offset : offset, sort : "zest_amt", order: 'desc']
 						properties = MasterUnSoldProperty.findAllByCity(params.city, filters)
 						println(properties.size().toString())
 					}
 				else
-					properties = MasterUnSoldProperty.findAllByCity(params.city)
+				{	filters = [sort : "zest_amt", order: 'desc']
+					properties = MasterUnSoldProperty.findAllByCity(params.city, filters)
+				}
 				
 				if(properties)
 				{

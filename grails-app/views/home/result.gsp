@@ -183,36 +183,68 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 								<h4>
 									<g:link controller="restClient" action="getProperties" params="${['query':properties[i].address, 'watchlist':watchlist]}" >
 									${properties[i].address}</g:link>
-									<span class="label label-success pull-right">${flash.properties[i].zest_amt}</span>
+									<%if(!flash.properties[i].zest_amt.equals('$.00')){%>
+										<span class="label label-success pull-right">${flash.properties[i].zest_amt}</span>
+									<%}else{%>
+										<span class="label label-success pull-right">NA</span>
+										<%}%>
 								</h4>
 								<dl class="dl-horizontal">
 									<dt>City</dt>
 									<dd>
+									<%if(!flash.properties[i].city.equals(0)){%>
 										${properties[i].city}
+									<%}else{%>
+										NA
+									<%}%>
 									</dd>
 									<dt>Zip</dt>
 									<dd>
+									<%if(!flash.properties[i].zipcode.equals(0)){%>
 										${properties[i].zipcode}
+									<%}else{%>
+										NA
+									<%}%>
 									</dd>
 									<dt>Bathrooms</dt>
 									<dd>
+									<%if(!flash.properties[i].bathroom.equals(0)){%>
 										${properties[i].bathroom}
+									<%}else{%>
+										NA
+									<%}%>
 									</dd>
 									<dt>Bedrooms</dt>
 									<dd>
+									<%if(!flash.properties[i].bedroom.equals(0)){%>
 										${properties[i].bedroom}
+									<%}else{%>
+										NA
+									<%}%>
 									</dd>
 									<dt>Finished Sq.Ft Area</dt>
 									<dd>
+									<%if(!flash.properties[i].finishedSqFt.equals(0)){%>
 										${properties[i].finishedSqFt}
+									<%}else{%>
+										NA
+									<%}%>
 									</dd>
 									<dt>Lot Sq.Ft Area</dt>
 									<dd>
+									<%if(!flash.properties[i].lotSizeSqFt.equals(0)){%>
 										${properties[i].lotSizeSqFt}
+									<%}else{%>
+										NA
+									<%}%>
 									</dd>
 									<dt>Estimated Price</dt>
 									<dd>
+									<%if(!flash.properties[i].zest_amt.equals('$.00')){%>
 										${properties[i].zest_amt}
+									<%}else{%>
+										NA
+									<%}%>	
 									</dd>
 								</dl>
 								<div class="col-md-2">
