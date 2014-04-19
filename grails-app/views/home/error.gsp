@@ -166,17 +166,13 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 								<br>
 								<br>
 								<br>
-								<h4>${ flash.errorMessage} </h4>
+								<h1>${ flash.errorMessage} </h1>
 							</div>
 			</div>
 		</div> 
 		
 	</div>
-	<div id="footer">
-		<div class="container">
-			<p class="text-muted credit">&copy; Real Realty 2014</p>
-		</div>
-	</div>
+	
 </div>
 	
 </body>

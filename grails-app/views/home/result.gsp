@@ -232,14 +232,22 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 			</div>
 		</div> <% } %>
 		<%if(watchlist){ %>
-			<div class="pagination">
-	       		<g:paginate class="btn btn-lg btn-primary"  total="${ total}" next="Forward" prev="Back" controller="restClient" 
-	                    action="paginateWatchList" params="${['query':params.query, 'total':total]}" />
-	    	</div>
+			<div class="modal-footer">
+				<div class="pagination pagination-large pagination-centered">
+		       		<div class="btn-primary  btn-large"> 
+						<g:paginate class="btn btn-lg btn-primary"  total="${ total}" next="Forward" prev="Back" controller="restClient" 
+		                    action="paginateWatchList" params="${['query':params.query, 'total':total]}" />
+					</div>
+		    	</div>
+			</div>
 		<%} else {%>
-			<div class="pagination">
-				<g:paginate class="btn btn-lg btn-primary"  total="${ total}" next="Forward" prev="Back" controller="restClient"
-						action="paginateAddresses" params="${['query':params.query, 'total':total]}" />
+			<div class="modal-footer" >
+					<div class="pagination pagination-large pagination-centered ">
+					<div class="btn-primary btn-large"> 	
+						<g:paginate class="btn btn-lg btn-primary"  total="${ total}" next="Forward" prev="Back" controller="restClient"
+								action="paginateAddresses" params="${['query':params.query, 'total':total]}" />
+					</div>
+				</div>
 			</div>
 		<%} %>	
 	</div>
