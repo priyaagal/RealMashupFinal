@@ -127,5 +127,11 @@
 			</g:form>
 		</div>
 	</div>
+	<hr class="soften">
+	<div id="footer">
+		<div class="container">
+			<p class="text-muted credit">&copy; Real Realty 2014</p>
+		</div>
+	</div>
 </body>
 </html>

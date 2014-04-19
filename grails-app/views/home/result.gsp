@@ -38,6 +38,160 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 	font-weight: 400;
 	text-decoration: none
 }
+
+/**** MODULE ****/
+.bgc-fff {
+    background-color: #fff!important;
+}
+.box-shad {
+    -webkit-box-shadow: 1px 1px 0 rgba(0,0,0,.2);
+    box-shadow: 1px 1px 0 rgba(0,0,0,.2);
+}
+.brdr {
+    border: 1px solid #ededed;
+}
+
+/* Padding - Margins */
+.pad-10 {
+    padding: 10px!important;
+}
+.btm-mrg-20 {
+    margin-bottom: 20px!important;
+}
+
+@media only screen and (max-width: 991px) {
+    #property-listings .property-listing {
+        padding: 5px!important;
+    }
+    #property-listings .property-listing a {
+        margin: 0;
+    }
+    #property-listings .property-listing .media-body {
+        padding: 10px;
+    }
+}
+
+
+*, *:before, *:after {
+    -moz-box-sizing: border-box;
+}
+*, *:before, *:after {
+    -moz-box-sizing: border-box;
+}
+.propertyContent {
+    padding: 9px;
+}
+.row {
+    margin-left: -15px;
+    margin-right: -15px;
+}
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.row:before, .row:after {
+    content: " ";
+    display: table;
+}
+
+body {
+    color: #464646;
+    font-family: Proxima Nova Light,Helvetica,Arial;
+    font-size: 15px;
+}
+body {
+    color: #333333;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.42857;
+}
+html {
+    font-size: 62.5%;
+}
+html {
+    font-family: sans-serif;
+}
+
+.col-lg-12 {
+    min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.propertyContent {
+    padding: 9px;
+}
+
+.propertyItem {
+    background-color: #FFFFFF;
+    box-shadow: 0 1px 3px #D4D4D4;
+    margin-bottom: 30px;
+}
+
+col-lg-4 col-md-4 col-sm-4{
+    min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+    position: relative;
+    float: left
+}
+
+.rowText {
+    padding-right: 33px;
+    padding-top: 17px;
+}
+
+.col-lg-8 {
+    width: 66.6667%;
+    float: left;
+    padding-left: 15px;
+}
+
+.row {
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+/** pagination **/
+
+.pagination {
+	border-top: 0;
+	margin: 0;
+	padding: 0.3em 0.2em;
+	text-align: center;
+	   -moz-box-shadow: 0 0 3px 1px #AAAAAA;
+	-webkit-box-shadow: 0 0 3px 1px #AAAAAA;
+	        box-shadow: 0 0 3px 1px #AAAAAA;
+	background-color: #EFEFEF;
+}
+
+.pagination a,
+.pagination .currentStep {
+	color: #666666;
+	display: inline-block;
+	margin: 0 0.1em;
+	padding: 0.25em 0.7em;
+	text-decoration: none;
+	   -moz-border-radius: 0.3em;
+	-webkit-border-radius: 0.3em;
+	        border-radius: 0.3em;
+}
+
+.pagination a:hover, .pagination a:focus,
+.pagination .currentStep {
+	background-color: #999999;
+	color: #ffffff;
+	outline: none;
+	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
+}
+
+.no-borderradius .pagination a:hover, .no-borderradius .pagination a:focus,
+.no-borderradius .pagination .currentStep {
+	background-color: transparent;
+	color: #444444;
+	text-decoration: underline;
+}
 </style>
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
@@ -57,6 +211,8 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 
 <link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'font-awesome.min.css')}">
 <link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'style.css')}">
+<link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'bootstrap.css')}">
+
 <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Titillium+Web:400,600,300,200&subset=latin,latin-ext">
 
 
@@ -108,11 +264,12 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 							<li class="active">
 								<g:link controller="home" action="index">Home</g:link>
 							</li>
+							
 						</ul>
 						<div class="navbar-search pull-left">
 							<g:form class="navbar-form navbar-left" controller="restClient" action="getProperties">
 								<div class="form-group fieldcontain text-center">
-									<input type="text" title="Search" value="" placeholder="Search " class="form-control nav-search" name="query"> 
+									<input style="height: 30px;" type="text" title="Search" value="" placeholder="Search " class="form-control nav-search" name="query"> 
 									<span class="input-group-btn">
 										<button class="btn btn-lg btn-primary" type="submit">Go!</button>
 									</span>
@@ -154,8 +311,7 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 	</header>
 	
 <!-- === MAIN Background === -->
-<div id="wrap">
-	<div class="container">
+	<div class="container-fluid">
 		<hr>
 		<% 
 		if(offset == null)
@@ -166,79 +322,69 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 		
 		if(	max > properties.size())
 			max = properties.size()
-	
+		
 		for(int i=offset;i<offset+max;i++){ %>
-		<div class="row-fluid">
-			<div class="panel panel-default">
-				<div class="right-sec">
-					<ul class="media-list">
-						<li class="media span7">
+		
+			<div class="col-lg-12"  style="padding-top: 20px;">
+				<div class="propertyItem">
+				
+					<div class="propertyContent row" style="margin-left: 40px; margin-right: 20px;">
+						<div class="col-lg-4 col-md-4 col-sm-4">
 							<a class="pull-left" href="#"> 
-								<img class="media-object" src="http://photos.foter.com/68/new-money-movement_300x300.jpg"
-								style="" alt="64x64" data-src="holder.js/64x64">
+								<img class="media-object img-responsive" style="width: 300px; height: 250px; padding-top: 20px;" 
+								src="http://images.prd.mris.com/image/V2/1/Yu59d899Ocpyr_RnF0-8qNJX1oYibjwp9TiLy-bZvU9vRJ2iC1zSQgFwW-fTCs6tVkKrj99s7FFm5Ygwl88xIA.jpg" 
+								alt="64x64" data-src="holder.js/64x64">
 							</a>
-							<div class="media-body">
-								<h4>
-									<g:link controller="restClient" action="getProperties" params="${['query':properties[i].address, 'watchlist':true]}" >
-									${properties[i].address}</g:link>
-									<span class="label label-success pull-right">${properties[i].zest_amt}</span>
-								</h4>
-								<dl class="dl-horizontal">
-									<dt>City</dt>
-									<dd>
-										${properties[i].city}
-									</dd>
-									<dt>Zip</dt>
-									<dd>
-										${properties[i].zipcode}
-									</dd>
-									<dt>Bathrooms</dt>
-									<dd>
-										${properties[i].bathroom}
-									</dd>
-									<dt>Bedrooms</dt>
-									<dd>
-										${properties[i].bedroom}
-									</dd>
-									<dt>Finished Sq.Ft Area</dt>
-									<dd>
-										${properties[i].finishedSqFt}
-									</dd>
-									<dt>Lot Sq.Ft Area</dt>
-									<dd>
-										${properties[i].lotSizeSqFt}
-									</dd>
-									<dt>Estimated Price</dt>
-									<dd>
-										${properties[i].zest_amt}
-									</dd>
-								</dl>
-								<div class="col-md-2">
-									<p>
-
-										<% if(session.username != null && watchlist != true){ %>
-										<g:form class="col-lg-12" controller="restClient"
-											action="addToUserWatchList"
-											params="${ [address: properties[i].address]}">
-											<button class="btn btn-lg btn-primary" type="submit">
-												Add to Watchlist!</button>
-										</g:form>
-										<% } %>
-									</p>
-								</div>
-							</div>
-						</li>
-					</ul>
+						</div>
+						<div class="col-lg-8 rowText">
+							<h4 style="padding-top: 10px; border-top-width: 20px; margin-top: 20px;">
+								<g:link controller="restClient" action="getProperties" params="${['query':properties[i].address, 'watchlist':true]}">
+									${properties[i].address} ${properties[i].city} ${properties[i].zipcode}
+								</g:link>
+								&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+								<span class="label label-success">$ ${properties[i].zest_amt}</span>
+							</h4>
+							<dl class="dl-horizontal">
+								<dt>Bathrooms</dt>
+								<dd>
+									${properties[i].bathroom}
+								</dd>
+								<dt>Bedrooms</dt>
+								<dd>
+									${properties[i].bedroom}
+								</dd>
+								<dt>Finished Sq.Ft Area</dt>
+								<dd>
+									${properties[i].finishedSqFt}
+								</dd>
+								<dt>Lot Sq.Ft Area</dt>
+								<dd>
+									${properties[i].lotSizeSqFt}
+								</dd>
+							</dl>
+						</div>
+						<br>
+						<div class="col-md-2">
+							<p>
+							<% if(session.username != null && watchlist != true){ %>
+								<g:form class="col-lg-12" controller="restClient" action="addToUserWatchList" params="${ [address: properties[i].address]}">
+									<button class="btn btn-lg btn-primary"style="margin-left: 20px; margin-top: 20px;" type="submit">Add to Watchlist!</button>
+								</g:form>
+							<% } %>
+							</p>
+						</div>
+					</div>
 				</div>
 			</div>
-		</div> <% } %>
+		
+		<% } %>
 		<%if(watchlist){ %>
-			<div class="pagination">
-	       		<g:paginate class="btn btn-lg btn-primary"  total="${ total}" next="Forward" prev="Back" controller="restClient" 
-	                    action="paginateWatchList" params="${['query':params.query, 'total':total]}" />
+			<div class="pagination pagination-centered">
+				<g:paginate class="btn btn-lg btn-primary"  total="${ total}" next="Forward" prev="Back" controller="restClient" 
+                   action="paginateWatchList" params="${['query':params.query, 'total':total]}"/>
 	    	</div>
 		<%} else {%>
-			<div class="pagination">
+			<div class="pagination pagination-centered">
 				<g:paginate class="btn btn-lg btn-primary"  total="${ total}" next="Forward" prev="Back" controller="restClient"
 						action="paginateAddresses" params="${['query':params.query, 'total':total]}" />
 			</div>
@@ -249,7 +395,6 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 			<p class="text-muted credit">&copy; Real Realty 2014</p>
 		</div>
 	</div>
-</div>
 	
 </body>
 </html>

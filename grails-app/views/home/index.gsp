@@ -91,6 +91,28 @@
     max-height: 200px;
 }
 
+* MARKETING CONTENT
+-------------------------------------------------- */
+
+/* Pad the edges of the mobile views a bit */
+.marketing {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* Center align the text within the three columns below the carousel */
+.marketing .col-lg-4 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.marketing h2 {
+  font-weight: normal;
+}
+.marketing .col-lg-4 p {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
 /* CUSTOMIZE THE CAROUSEL
 -------------------------------------------------- */
 
@@ -194,16 +216,6 @@ $(document).ready(function(e) {
 							</li>
 							<li><a href="#contact">Contact Us</a></li>
 						</ul>
-						<div class="navbar-search pull-left">
-							<g:form class="navbar-form navbar-left" controller="restClient" action="getProperties">
-								<div class="form-group fieldcontain text-center">
-									<input type="text" title="Search" value="" placeholder="Search " class="form-control nav-search" name="query"> 
-									<span class="input-group-btn">
-										<button class="btn btn-lg btn-primary" type="submit">Go!</button>
-									</span>
-								</div>
-							</g:form>
-						</div>
 						<ul class="nav pull-right">
 							<% if(session.username != null){ %>
 								<li style="color: white; padding-top: 10px;">
@@ -273,27 +285,108 @@ $(document).ready(function(e) {
 			</g:form>
 		</div>
 	</div>
-	<section id="about" class="section appear clearfix">
-		<div class="marketing">
+	<hr class="soften">
+	<div class="marketing">
+		<section id="about" class="section appear clearfix">
+		
 			<h2>Introducing </h2>
 			<p class="lead marketing-byline">Team Real Realty</p>
-			<div class="row-fluid">
-				<div class="span4">
-					<img src="/RealMashupFinal/static/images/Minion-1.jpg" style="width: 388px; padding-left: 4px; padding-right: 6px; border-left-width: 6px; border-right-width: 6px;"/>
-					<h4>Priyanka Agal</h4>
-				</div>
-				<div class="span4">
-					<img src="/RealMashupFinal/static/images/Minion-2.jpg"  style="height: 474px; padding-right: 6px; border-left-width: 6px; padding-left: 4px;"/>
-					<h4>Snehal Dmello</h4>
-				</div>
-				<div class="span4">
-					<img src="/RealMashupFinal/static/images/Minion-3.jpg" style="height: 474px; width: 388px; padding-left: 4px; border-left-width: 6px; padding-right: 6px; border-right-width: 6px;"/>
-					<h4>Abhijeet Upadhye</h4>
+			<hr class="soften">
+			<div class="row-fluid" style="margin-left: 100px; margin-right: 100px;">
+				<ul class="thumbnails" style="margin-left: 100px; margin-right: 100px;">
+					<li class="span3" style="margin-left: 30px; margin-right: 45px;">
+						<a class="thumbnail">
+							<img src="/RealMashupFinal/static/images/Minion-1.jpg" 
+								style="width: 388px; padding-left: 4px; padding-right: 6px; border-left-width: 6px; border-right-width: 6px;"/>
+							<h4>Priyanka Agal</h4>
+						</a>
+					</li>
+					<li class="span3" style="margin-left: 45px; margin-right: 45px;">
+						<a class="thumbnail">
+							<img src="/RealMashupFinal/static/images/Minion-2.jpg"  
+								style="width: 388px; height: 292px; padding-right: 6px; border-left-width: 6px; padding-left: 4px;"/>
+							<h4>Snehal Dmello</h4>
+						</a>
+					</li>
+					<li class="span3" style="margin-left: 30px; margin-right: 45px;">
+						<a class="thumbnail">
+							<img src="/RealMashupFinal/static/images/Minion-3.jpg"
+								style="height: 292px; width: 388px; padding-left: 4px; border-left-width: 6px; padding-right: 6px; border-right-width: 6px; margin-left: 0px; margin-right: 30px;" />
+							<h4>Abhijeet Upadhye</h4>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</section>
+	</div>
+	<hr class="soften">
+	<!-- START THE FEATURETTES -->
+	<div class="marketing">
+		<section id="whatwedo">
+			<h2 class="align-center">What We Do </h2>
+			<p class="lead marketing-byline">We give you analytics</p>
+			<hr class="soften">
+			<div class="row-fluid" style="margin-left: 50px; width: 1170px; height: 332px; margin-right: 40px;">
+            	<ul class="thumbnails" style="height: 320px;">
+              		<li class="span4">
+                		<div class="thumbnail" style="width: 310px; height: 315px;">
+							<img style="width: 300px; height: 200px;" alt="product name" src="/RealMashupFinal/static/images/feature3.jpg">
+							<h3>Search home listings</h3>
+							<p>We gather data from various websites to bring real estate listings.</p>
+						</div>
+					</li>
+              		<li class="span4">
+                		<div class="thumbnail" style="width: 310px; height: 315px;">
+							<img style="width: 300px; height: 200px;" alt="product name" src="/RealMashupFinal/static/images/feature2.jpg">
+							<h3>Predictive Analytics</h3>
+							<p>We anlayze the real estate data to predict rise and drop in prices</p>
+						</div>
+					</li>
+					<li class="span4">
+                		<div class="thumbnail" style="width: 310px; height: 315px;">
+							<img style="width: 300px; height: 200px;" alt="product name" src="/RealMashupFinal/static/images/feature1.jpg">
+							<h3>External factor Widgets</h3>
+							<p>Show external factors affecting the real estate</p>
+						</div>
+					</li>
+				</ul>
+			</div>
+	   		<!-- /.row -->
+		</section>
+	</div>
+	<hr class="soften">
+	<section id="contact">
+		<div id="contacts">
+			<div class="row" style="margin-left: 42px; width: 600px;">
+				<div class="col-sm-offset-3 col-sm-6">
+					<g:form class="well" controller="restClient" action="postMessage" style="height: 410px;">
+						<legend>Contact Us</legend>
+						<div class="control-group">
+							<div class="controls">
+								<input id="name" class="form-control" style="height: 20px; width: 550px;" type="text" data-validation-required-message="Please enter your name" required="" 
+									placeholder="Full Name">
+								<p class="help-block"></p>
+							</div>
+						</div>
+						<div class="control-group">
+							<div class="controls">
+								<input id="email" class="form-control" style="height: 20px; width: 550px;" type="email" data-validation-required-message="Please enter your email" required="" 
+									placeholder="Email">
+								<div class="help-block"></div>
+							</div>
+						</div>
+						<div class="control-group">
+							<div class="controls">
+								<textarea id="message" class="form-control" style="resize:none" maxlength="999" data-validation-minlength-message="Min 5 characters" 
+									minlength="5" data-validation-required-message="Please enter your message" required="" placeholder="Message" cols="100" rows="10"></textarea>
+								<div class="help-block"></div>
+							</div>
+						</div>
+						<button type="submit" class="btn btn-primary pull-right" style="width: 70px;">Send</button>
+					</g:form>
 				</div>
 			</div>
 		</div>
-	</section>
-	<section>
 	</section>
 	<hr class="soften">
 	<div id="footer">
@@ -301,5 +394,6 @@ $(document).ready(function(e) {
 			<p class="text-muted credit">&copy; Real Realty 2014</p>
 		</div>
 	</div>
+	<hr class="soften">
 </body>
 </html>
