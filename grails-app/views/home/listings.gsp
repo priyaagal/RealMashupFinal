@@ -252,19 +252,35 @@ col-lg-4 col-md-4 col-sm-4{
 								<dl class="dl-horizontal">
 									<dt>Bathrooms</dt>
 									<dd>
+									<%if(!flash.bathroom.equals(0)){%>
 										${flash.bathroom}
+									<%}else{%>
+										NA
+									<%}%>
 									</dd>
 									<dt>Bedrooms</dt>
 									<dd>
+									<%if(!flash.bedroom.equals(0)){%>
 										${flash.bedroom}
+									<%}else{%>
+										NA
+									<%}%>
 									</dd>
 									<dt>Finished Sq.Ft Area</dt>
 									<dd>
-										${flash.fArea} <a>sqFt</a>
+										<%if(!flash.fArea.equals(0)){%>
+											${flash.fArea} <a> sqFt</a>
+										<%}else{%>
+											NA
+										<%}%>
 									</dd>
 									<dt>Lot Sq.Ft Area</dt>
 									<dd>
-										${flash.lArea}<a>sqFt</a>
+										<%if(!flash.lArea.equals(0)){%>
+											${flash.lArea}<a> sqFt</a>
+										<%}else{%>
+											NA
+										<%}%>
 									</dd>
 								</dl>
 							</div>
