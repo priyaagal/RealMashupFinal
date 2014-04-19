@@ -377,8 +377,9 @@ $(document).ready(function(e) {
 						</div>
 						<div class="control-group">
 							<div class="controls">
-								<textarea id="message" class="form-control" style="resize:none" maxlength="999" data-validation-minlength-message="Min 5 characters" 
-									minlength="5" data-validation-required-message="Please enter your message" required="" placeholder="Message" cols="100" rows="10"></textarea>
+								<textarea id="message" class="form-control" style="width: 550px;" maxlength="999" data-validation-minlength-message="Min 5 characters" 
+									minlength="5" data-validation-required-message="Please enter your message" required="" placeholder="Message" cols="100" rows="10">
+								</textarea>
 								<div class="help-block"></div>
 							</div>
 						</div>
@@ -388,13 +389,11 @@ $(document).ready(function(e) {
 			</div>
 		</div>
 	</section>
-	<hr class="soften">
-	
-	<div id="footer">
-		<div class="container">
-			<p class="text-muted credit">&copy; Real Realty 2014</p>
+	<br>
+	<div id="footer" class="section footer" style = "height: 100px; background-color:#000000">
+		<div class="container align-center" style="margin-top: 0px; border-top-width: 50px; padding-top: 50px;">
+			<p class="text-muted credit align-center" style = "color: #777777; font-size: 16px; font-weight: 300; line-height: 1.6em;">&copy; Real Realty 2014</p>
 		</div>
 	</div>
-	<hr class="soften">
 </body>
 </html>

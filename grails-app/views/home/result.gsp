@@ -344,7 +344,7 @@ col-lg-4 col-md-4 col-sm-4{
 									${properties[i].address} ${properties[i].city} ${properties[i].zipcode}
 								</g:link>
 								&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-								<span class="label label-success">$ ${properties[i].zest_amt}</span>
+								<span class="label label-success"> ${properties[i].zest_amt}</span>
 							</h4>
 							<dl class="dl-horizontal">
 								<dt>Bathrooms</dt>
@@ -381,28 +381,23 @@ col-lg-4 col-md-4 col-sm-4{
 		
 		<% } %>
 		<%if(watchlist){ %>
-			<div class="modal-footer">
-				<div class="pagination pagination-large pagination-centered">
-		       		<div class="btn-primary  btn-large"> 
-						<g:paginate class="btn btn-lg btn-primary"  total="${ total}" next="Forward" prev="Back" controller="restClient" 
-		                    action="paginateWatchList" params="${['query':params.query, 'total':total]}" />
-					</div>
-		    	</div>
-			</div>
+			<div class="pagination pagination-centered">
+				<g:paginate class="btn btn-lg btn-primary"  total="${ total}" next="Forward" prev="Back" controller="restClient" 
+                   action="paginateWatchList" params="${['query':params.query, 'total':total]}"/>
+	    	</div>
 		<%} else {%>
-			<div class="modal-footer" >
-					<div class="pagination pagination-large pagination-centered ">
-					<div class="btn-primary btn-large"> 	
-						<g:paginate class="btn btn-lg btn-primary"  total="${ total}" next="Forward" prev="Back" controller="restClient"
-								action="paginateAddresses" params="${['query':params.query, 'total':total]}" />
+			<div class="pagination pagination-centered">
+				<g:paginate class="btn btn-lg btn-primary"  total="${ total}" next="Forward" prev="Back" controller="restClient"
+						action="paginateAddresses" params="${['query':params.query, 'total':total]}" />
 					</div>
 				</div>
 			</div>
 		<%} %>	
 	</div>
-	<div id="footer">
-		<div class="container">
-			<p class="text-muted credit">&copy; Real Realty 2014</p>
+	<br>
+	<div id="footer" class="section footer" style = "height: 100px; background-color:#000000">
+		<div class="container align-center" style="margin-top: 0px; border-top-width: 50px; padding-top: 50px;">
+			<p class="text-muted credit align-center" style = "color: #777777; font-size: 16px; font-weight: 300; line-height: 1.6em;">&copy; Real Realty 2014</p>
 		</div>
 	</div>
 	
