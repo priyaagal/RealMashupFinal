@@ -135,6 +135,14 @@ class RestClientController
 		def properties = json.properties
 		def total = params.total
 		println(properties.size())
+		for (it in properties)
+		{
+			DecimalFormat dFormat = new DecimalFormat("####,###,###.00");
+			String zestAmount = '$' + (dFormat.format(it.zest_amt));
+			println(zestAmount)
+			it.zest_amt = zestAmount
+		}
+		
 		flash.properties = properties
 		render(view: "/home/result", model:['properties':properties, 'total': total, 'watchlist': false])
 	}
@@ -152,6 +160,14 @@ class RestClientController
 		def properties = json.properties
 		def total = params.total
 		println(properties.size())
+		for (it in properties)
+		{
+			DecimalFormat dFormat = new DecimalFormat("####,###,###.00");
+			String zestAmount = '$' + (dFormat.format(it.zest_amt));
+			println(zestAmount)
+			it.zest_amt = zestAmount
+		}
+		
 		flash.properties = properties
 		render(view: "/home/result", model:['properties':properties, 'total': total, 'watchlist': true])
 	}
@@ -241,6 +257,13 @@ class RestClientController
 			def total = properties.size()
 			println(total.toString())
 			printf(properties.size().toString())
+			for (it in properties)
+			{
+				DecimalFormat dFormat = new DecimalFormat("####,###,###.00");
+				String zestAmount = '$' + (dFormat.format(it.zest_amt));
+				println(zestAmount)
+				it.zest_amt = zestAmount
+			}
 			flash.properties = properties
 			render(view: "/home/result", model:['properties':properties, 'total': total, 'watchlist': true])
 		}

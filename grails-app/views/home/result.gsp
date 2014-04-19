@@ -337,43 +337,72 @@ col-lg-4 col-md-4 col-sm-4{
 								src="http://images.prd.mris.com/image/V2/1/Yu59d899Ocpyr_RnF0-8qNJX1oYibjwp9TiLy-bZvU9vRJ2iC1zSQgFwW-fTCs6tVkKrj99s7FFm5Ygwl88xIA.jpg" 
 								alt="64x64" data-src="holder.js/64x64">
 							</a>
-						</div>
-						<div class="col-lg-8 rowText">
-							<h4 style="padding-top: 10px; border-top-width: 20px; margin-top: 20px;">
-								<g:link controller="restClient" action="getProperties" params="${['query':properties[i].address, 'watchlist':true]}">
+							<div class="col-lg-8 rowText"">
+								<h4 style="padding-top: 10px; border-top-width: 20px; margin-top: 20px;">
+									<g:link controller="restClient" action="getProperties" params="${['query':properties[i].address, 'watchlist':watchlist]}" >
 									${properties[i].address} ${properties[i].city} ${properties[i].zipcode}
-								</g:link>
-								&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-								<span class="label label-success"> ${properties[i].zest_amt}</span>
-							</h4>
-							<dl class="dl-horizontal">
-								<dt>Bathrooms</dt>
-								<dd>
-									${properties[i].bathroom}
-								</dd>
-								<dt>Bedrooms</dt>
-								<dd>
-									${properties[i].bedroom}
-								</dd>
-								<dt>Finished Sq.Ft Area</dt>
-								<dd>
-									${properties[i].finishedSqFt}
-								</dd>
-								<dt>Lot Sq.Ft Area</dt>
-								<dd>
-									${properties[i].lotSizeSqFt}
-								</dd>
-							</dl>
-						</div>
-						<br>
-						<div class="col-md-2">
-							<p>
-							<% if(session.username != null && watchlist != true){ %>
-								<g:form class="col-lg-12" controller="restClient" action="AddToUserWatchList" params="${ [address: properties[i].address]}">
-									<button class="btn btn-lg btn-primary"style="margin-left: 20px; margin-top: 20px;" type="submit">Add to Watchlist!</button>
-								</g:form>
-							<% } %>
-							</p>
+									</g:link>
+									<%if(!flash.properties[i].zest_amt.equals('$.00')){%>
+										<span class="label label-success pull-right">${flash.properties[i].zest_amt}</span>
+									<%}else{%>
+										<span class="label label-success pull-right">NA</span>
+										<%}%>
+								</h4>
+								<dl class="dl-horizontal">
+									<dt>Bathrooms</dt>
+									<dd>
+									<%if(!flash.properties[i].bathroom.equals(0)){%>
+										${properties[i].bathroom}
+									<%}else{%>
+										NA
+									<%}%>
+									</dd>
+									<dt>Bedrooms</dt>
+									<dd>
+									<%if(!flash.properties[i].bedroom.equals(0)){%>
+										${properties[i].bedroom}
+									<%}else{%>
+										NA
+									<%}%>
+									</dd>
+									<dt>Finished Sq.Ft Area</dt>
+									<dd>
+									<%if(!flash.properties[i].finishedSqFt.equals(0)){%>
+										${properties[i].finishedSqFt}
+									<%}else{%>
+										NA
+									<%}%>
+									</dd>
+									<dt>Lot Sq.Ft Area</dt>
+									<dd>
+									<%if(!flash.properties[i].lotSizeSqFt.equals(0)){%>
+										${properties[i].lotSizeSqFt}
+									<%}else{%>
+										NA
+									<%}%>
+									</dd>
+									<dt>Estimated Price</dt>
+									<dd>
+									<%if(!flash.properties[i].zest_amt.equals('$.00')){%>
+										${properties[i].zest_amt}
+									<%}else{%>
+										NA
+									<%}%>	
+									</dd>
+								</dl>
+								<div class="col-md-2">
+									<p>
+
+										<% if(session.username != null && watchlist != true){ %>
+											<g:form class="col-lg-12" controller="restClient" action="AddToUserWatchList" params="${ [address: properties[i].address]}">
+												<button class="btn btn-lg btn-primary" style="margin-left: 20px; margin-top: 20px;" type="submit"> Add to Watchlist!</button>
+											</g:form>
+										<% } %>
+									</p>
+								</div>
+							</div>
+						</li>
+					</ul>
 						</div>
 					</div>
 				</div>
