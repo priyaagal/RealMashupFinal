@@ -50,9 +50,10 @@
 						</ul>
 					</div>
 					<ul class="nav-collapse collapse pull-right">
-				        <li>
-				        	<a href="#register" data-toggle="modal">
-				        	<i class="icon-pencil icon-white"></i> Register Here</a>
+				        <li style="margin-top: 10px; height: 25px;">
+				        	<a href="#register" data-toggle="modal" style="color: white; height: 20px; margin-top: 5px;">
+								<i class="icon-pencil icon-white"></i>Register Here</a>
+							
 				        </li>
 				    </ul>
 				</div>
@@ -91,7 +92,6 @@
 			</div>
 		</div>
 	</div>
-	<p class="text-center muted ">&copy; Copyright 2014 - Real Realty</p>
 	</section>
 	<!-- Main Container Ends -->
 	
@@ -148,7 +148,14 @@
 		</div>
 	</div>
 	<br>
-	<div id="footer" class="section footer" style = "height: 100px; background-color:#000000">
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<div id="footer" class="section footer" style = "position: relative ;height: 100px; background-color:#000000">
 		<div class="container align-center" style="margin-top: 0px; border-top-width: 50px; padding-top: 50px;">
 			<p class="text-muted credit align-center" style = "color: #777777; font-size: 16px; font-weight: 300; line-height: 1.6em;">&copy; Real Realty 2014</p>
 		</div>

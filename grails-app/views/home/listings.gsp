@@ -11,31 +11,47 @@
 .my-container {
 	margin: 20px;
 }
+
+
+.wrapper{
+    margin-top:10px;
+ 
+    position :relative;
+    width: 100%;
+    margin: 0px auto;
+    height:600px;
+}
+.inner_left {
+  position : absolute;
+  left:0;
+  bottom:0;
+  width: 550px; 
+  margin-top: 50px;
+  
+   
+}
+.inner_right{
+  position :absolute;
+  right:0;
+  bottom:0;
+  left: 500px; 
+  top: 50px;  
+}
 </style>
 <style>
 #map-canvas {
-   height: 300px;
-   width: 400px; 
-   margin:50px 25px 15px 500px;
+   height: 400px;
+   width: 600px;
    padding: 50px;
    overflow: visible;
+   float: right;
    border-style: ridge;
    border-width:5px;
    border-color: white;
+   padding-left: 50px; 
  }
-  
+/**margin:50px 25px 15px 500px;**/
 #map-canvas img { max-width: none }
-
-/* Wrapper for page content to push down footer */
-#wrap {
-  min-height: 100%;
-  height: auto !important;
-  height: 100%;
-  /* Pad bottom by footer height */
-  margin: 0 auto -60px;
-  /* Negative indent footer by its height */
-  padding: 0 0 60px;
-}
 
 /* Set the fixed height of the footer here */
 #footer {
@@ -72,6 +88,9 @@ code {
     background-color: #FFFFFF;
     box-shadow: 0 1px 3px #D4D4D4;
     margin-bottom: 30px;
+    width: 500px; 
+    margin-top: 0px; 
+    height: 500px;"
 }
 
 col-lg-4 col-md-4 col-sm-4{
@@ -210,23 +229,22 @@ col-lg-4 col-md-4 col-sm-4{
 	</header>
 
 <!-- === MAIN Background === -->
-	<div class="my-container">
-		<div class="container-fluid">
-			<hr>
-			<div class="row-fluid">
-				<div class="col-lg-12"  style="padding-top: 20px;">
+	<div class="container">
+		<hr>
+		<div class="row">
+			<div class="wrapper">
+				<div class ="inner_left">
 					<div class="propertyItem">
-				
-						<div class="propertyContent row" style="margin-left: 40px; margin-right: 20px;">
+						<div class="propertyContent row" style="margin-left: 40px; margin-right: 20px; width: 500px;">
 							<div class="col-lg-4 col-md-4 col-sm-4">
 								<a class="pull-left" href="#"> 
-									<img class="media-object img-responsive" style="width: 300px; height: 250px; padding-top: 20px;" 
+									<img class="media-object img-responsive" style="width: 400px; height: 250px; padding-top: 20px;"
 									src="http://images.prd.mris.com/image/V2/1/Yu59d899Ocpyr_RnF0-8qNJX1oYibjwp9TiLy-bZvU9vRJ2iC1zSQgFwW-fTCs6tVkKrj99s7FFm5Ygwl88xIA.jpg" 
 									alt="64x64" data-src="holder.js/64x64">
 								</a>
 							</div>
-							<div class="col-lg-8 rowText">
-								<h4 style="padding-top: 10px; border-top-width: 20px; margin-top: 20px;">
+							<div class="col-lg-8 rowText" style="width: 400px;">
+								<h4 style="padding-top: 10px; border-top-width: 20px; margin-top: 20px; width: 410px;"">
 									${flash.address}<a>,</a> ${flash.city}<a>,</a> ${flash.zip}
 									&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 									<span class="label label-success"> ${flash.zestAmt}</span>
@@ -250,40 +268,38 @@ col-lg-4 col-md-4 col-sm-4{
 									</dd>
 									<dt>Finished Sq.Ft Area</dt>
 									<dd>
-									<%if(!flash.fArea.equals(0)){%>
-										${flash.fArea} <p>sqFt</p>
-									<%}else{%>
-										NA
-									<%}%>
+										<%if(!flash.fArea.equals(0)){%>
+											${flash.fArea} <a> sqFt</a>
+										<%}else{%>
+											NA
+										<%}%>
 									</dd>
 									<dt>Lot Sq.Ft Area</dt>
 									<dd>
-									<%if(!flash.lArea.equals(0)){%>
-										${flash.lArea}<p>sqFt</p>
-									<%}else{%>
-										NA
-									<%}%>
+										<%if(!flash.lArea.equals(0)){%>
+											${flash.lArea}<a> sqFt</a>
+										<%}else{%>
+											NA
+										<%}%>
 									</dd>
 								</dl>
-								<div class="col-md-2">
-									<p>
-									<% if(session.username != null && watchlist!= "true"){  %>
-										<g:form class="col-lg-12" controller="restClient" action="AddToUserWatchList" params="${ [address: flash.address]}">
-											<button class="btn btn-lg btn-primary" type="submit"> Add to Watchlist!</button>
-										</g:form>
-									<% } %>
-									</p>
-								</div>
 							</div>
+						</div>
+						<div class="col-md-2">
+							<p>
+							<% if(session.username != null && watchlist!= "true"){  %>
+								<g:form class="col-lg-12" controller="restClient" action="AddToUserWatchList" params="${ [address: flash.address]}">
+									<button class="btn btn-lg btn-primary" type="submit"> Add to Watchlist!</button>
+								</g:form>
+							<% } %>
+							</p>
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="row-fluid">
-				<div class="col-md-12">
+				<div class="inner_right">
 					<div id="map-canvas" align="right"></div>
 				</div>
-			</div>
+			</div>	
 		</div>
 	</div>
 	<div class="container">
@@ -386,7 +402,7 @@ col-lg-4 col-md-4 col-sm-4{
 	</div>
 	<br>
 	<div id="footer" class="section footer" style = "height: 100px; background-color:#000000">
-		<div class="container align-center" style="margin-top: 0px; border-top-width: 50px; padding-top: 50px;">
+		<div class="container align-center" style="margin-top: 0px; border-top-width: 50px; padding-top: 30px;">
 			<p class="text-muted credit align-center" style = "color: #777777; font-size: 16px; font-weight: 300; line-height: 1.6em;">&copy; Real Realty 2014</p>
 		</div>
 	</div>
