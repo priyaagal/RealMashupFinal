@@ -40,7 +40,7 @@
 </style>
 <style>
 #map-canvas {
-   height: 400px;
+   height: 410px;
    width: 600px;
    padding: 50px;
    overflow: visible;
@@ -90,7 +90,7 @@ code {
     margin-bottom: 30px;
     width: 500px; 
     margin-top: 0px; 
-    height: 500px;"
+    height: 517px;"
 }
 
 col-lg-4 col-md-4 col-sm-4{
@@ -285,10 +285,10 @@ col-lg-4 col-md-4 col-sm-4{
 								</dl>
 							</div>
 						</div>
-						<div class="col-md-2">
+						<div class="col-md-2" style="float:right">
 							<p>
 							<% if(session.username != null && watchlist!= "true"){  %>
-								<g:form class="col-lg-12" controller="restClient" action="AddToUserWatchList" params="${ [address: flash.address]}">
+								<g:form class="col-lg-12" controller="restClient" action="addToUserWatchList" params="${ [address: flash.address]}">
 									<button class="btn btn-lg btn-primary" type="submit"> Add to Watchlist!</button>
 								</g:form>
 							<% } %>
