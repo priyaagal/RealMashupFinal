@@ -181,7 +181,7 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 								<h4>
 									<g:link controller="restClient" action="getProperties" params="${['query':properties[i].address, 'watchlist':true]}" >
 									${properties[i].address}</g:link>
-									<span class="label label-success pull-right">${properties[i].zest_amt}</span>
+									<span class="label label-success pull-right">${flash.properties[i].zest_amt}</span>
 								</h4>
 								<dl class="dl-horizontal">
 									<dt>City</dt>
@@ -220,8 +220,8 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 										<g:form class="col-lg-12" controller="restClient"
 											action="addToUserWatchList"
 											params="${ [address: properties[i].address]}">
-											<button class="btn btn-lg btn-primary" type="submit">
-												Add to Watchlist!</button>
+											<g:submitButton  class="btn btn-lg btn-primary" name="Add to Watchlist!" type="submit">
+											</g:submitButton >
 										</g:form>
 										<% } %>
 									</p>
