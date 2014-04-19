@@ -28,7 +28,7 @@ class RestClientController
 			println(data)
 			
 			def json = new JsonSlurper().parseText(data)
-			println(json.properties)
+			println(json)
 			
 			if(json.error == "success")
 			{
@@ -85,7 +85,8 @@ class RestClientController
 					}
 					
 					//render(view: "/home/listings")
-					redirect(controller:"home", action:"listings")	
+					//redirect(controller:"home", action:"listings"  )
+					render(view: "/home/listings", model:['watchlist': params.watchlist])
 				}
 				else if(json.type == "city")
 				{	
@@ -93,6 +94,15 @@ class RestClientController
 					def total = properties.size()
 					println(total.toString())
 					printf(properties.size().toString())
+					
+					for (it in properties)
+					{
+						DecimalFormat dFormat = new DecimalFormat("####,###,###.00");
+						String zestAmount = '$' + (dFormat.format(it.zest_amt));
+						println(zestAmount)
+						it.zest_amt = zestAmount
+					}
+					
 					flash.properties = properties
 					
 					//redirect(controller: "home", action:"showResult",  model:['properties':properties, 'total': total, 'watchlist': false])
@@ -101,13 +111,13 @@ class RestClientController
 				else
 				{
 					flash.errorMessage = (json.error.split(":"))[1]
-					redirect(controller:"home", action: "index")
+					redirect(controller:"home", action: "showError")
 				}
 			}
 			else
 			{
 				flash.errorMessage = (json.error.split(":"))[1]
-				redirect(controller:"home", action: "index")
+				redirect(controller:"home", action: "showError")
 			}
 		}	
 	}
@@ -176,7 +186,7 @@ class RestClientController
 		else
 		{
 			flash.errorMessage = (error.split(":"))[1]
-			redirect(controller:"home", action: "index")
+			redirect(controller:"home", action: "showError")
 		}
 		
 	}
@@ -210,7 +220,7 @@ class RestClientController
 		else
 		{
 			flash.errorMessage = (error.split(":"))[1]
-			redirect(controller:"home", action: "index")
+			redirect(controller:"home", action: "showError")
 		}
 		
 	}
@@ -238,7 +248,7 @@ class RestClientController
 		{
 			flash.errorMessage = (json.error.split(":"))[1]
 			println(flash.errorMessage)
-			redirect(controller:"home", action: "index")
+			redirect(controller:"home", action: "showError")
 		}
 	}
 
@@ -248,6 +258,7 @@ class RestClientController
 	   def error
 	   def properties
 	   def http = new HTTPBuilder("http://localhost:8080/RealMashupFinal/rest/watchlist/addToUserWatchList?email="+session.email)
+	   println(params.toString())
 	   
 	   http.request(Method.POST, groovyx.net.http.ContentType.JSON)
 	   {

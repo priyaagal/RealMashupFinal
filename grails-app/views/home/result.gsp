@@ -7,6 +7,8 @@
 <meta content="" name="description">
 <meta content="" name="author">
 
+<g:javascript library="jquery" />
+
 <!-- Le styles -->
 <style type="text/css">
 style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc div {
@@ -269,7 +271,7 @@ col-lg-4 col-md-4 col-sm-4{
 						<div class="navbar-search pull-left">
 							<g:form class="navbar-form navbar-left" controller="restClient" action="getProperties">
 								<div class="form-group fieldcontain text-center">
-									<input style="height: 30px;" type="text" title="Search" value="" placeholder="Search " class="form-control nav-search" name="query"> 
+									<input style="height: 30px;" type="text" required = "required" title="Search" value="" placeholder="Search " class="form-control nav-search" name="query"> 
 									<span class="input-group-btn">
 										<button class="btn btn-lg btn-primary" type="submit">Go!</button>
 									</span>
@@ -367,7 +369,7 @@ col-lg-4 col-md-4 col-sm-4{
 						<div class="col-md-2">
 							<p>
 							<% if(session.username != null && watchlist != true){ %>
-								<g:form class="col-lg-12" controller="restClient" action="addToUserWatchList" params="${ [address: properties[i].address]}">
+								<g:form class="col-lg-12" controller="restClient" action="AddToUserWatchList" params="${ [address: properties[i].address]}">
 									<button class="btn btn-lg btn-primary"style="margin-left: 20px; margin-top: 20px;" type="submit">Add to Watchlist!</button>
 								</g:form>
 							<% } %>
@@ -379,14 +381,22 @@ col-lg-4 col-md-4 col-sm-4{
 		
 		<% } %>
 		<%if(watchlist){ %>
-			<div class="pagination pagination-centered">
-				<g:paginate class="btn btn-lg btn-primary"  total="${ total}" next="Forward" prev="Back" controller="restClient" 
-                   action="paginateWatchList" params="${['query':params.query, 'total':total]}"/>
-	    	</div>
+			<div class="modal-footer">
+				<div class="pagination pagination-large pagination-centered">
+		       		<div class="btn-primary  btn-large"> 
+						<g:paginate class="btn btn-lg btn-primary"  total="${ total}" next="Forward" prev="Back" controller="restClient" 
+		                    action="paginateWatchList" params="${['query':params.query, 'total':total]}" />
+					</div>
+		    	</div>
+			</div>
 		<%} else {%>
-			<div class="pagination pagination-centered">
-				<g:paginate class="btn btn-lg btn-primary"  total="${ total}" next="Forward" prev="Back" controller="restClient"
-						action="paginateAddresses" params="${['query':params.query, 'total':total]}" />
+			<div class="modal-footer" >
+					<div class="pagination pagination-large pagination-centered ">
+					<div class="btn-primary btn-large"> 	
+						<g:paginate class="btn btn-lg btn-primary"  total="${ total}" next="Forward" prev="Back" controller="restClient"
+								action="paginateAddresses" params="${['query':params.query, 'total':total]}" />
+					</div>
+				</div>
 			</div>
 		<%} %>	
 	</div>

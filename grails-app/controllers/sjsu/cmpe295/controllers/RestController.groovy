@@ -1,5 +1,6 @@
 package sjsu.cmpe295.controllers
 import grails.converters.JSON
+import java.text.DecimalFormat
 import sjsu.cmpe295.models.MasterUnSoldProperty
 import sjsu.cmpe295.models.User
 
@@ -72,7 +73,7 @@ class RestController {
 				}
 				else
 				{
-					def message = "failue:Record not found"
+					def message = "failue:Records not found"
 					render JSON.parse("{\"error\" : \"" + message + "\"}") as JSON
 				}
 			}
@@ -149,28 +150,38 @@ class RestController {
 		
 		if(request.JSON.fname && request.JSON.lname && request.JSON.email && request.JSON.password)
 		{	
-			User ruser = new User();
-			ruser.setFirstname(request.JSON.fname )
-			ruser.setLastname(request.JSON.lname)
-			ruser.setEmail(request.JSON.email)
-			ruser.setPassword(request.JSON.password)
-			
-			ruser.save(flush: true)
-			
-			def cuser =  User.findByEmail(request.JSON.email)
-			if(cuser)
-			{	
+			//check if user exists
+			User exuser = User.findByEmail(request.JSON.email)
+			if(!exuser)
+			{
+				User ruser = new User();
+				ruser.setFirstname(request.JSON.fname )
+				ruser.setLastname(request.JSON.lname)
+				ruser.setEmail(request.JSON.email)
+				ruser.setPassword(request.JSON.password)
 				
-				//render cuser as JSON
-				render(contentType: 'text/json')
-				{[
-						'error': "success",
-						'user': cuser
-				]}
+				ruser.save(flush: true)
+				
+				def cuser =  User.findByEmail(request.JSON.email)
+				if(cuser)
+				{	
+					
+					//render cuser as JSON
+					render(contentType: 'text/json')
+					{[
+							'error': "success",
+							'user': cuser
+					]}
+				}
+				else
+				{
+					def message = "failue:User not inserted"
+					render JSON.parse("{\"error\" : \"" + message + "\"}") as JSON
+				}
 			}
 			else
 			{
-				def message = "failue:User not inserted"
+				def message = "failue:User already exists"
 				render JSON.parse("{\"error\" : \"" + message + "\"}") as JSON
 			}
 		}
@@ -263,7 +274,7 @@ class RestController {
 				if((max+offset.toInteger()) >  total )
 					 properties =  properties.subList(offset.toInteger(),total.toInteger())
 				else
-					properties =  properties.subList(offset.toInteger(), max.toInteger())
+					properties =  properties.subList(offset.toInteger(), max.toInteger() + offset.toInteger())
 			}
 			else
 			{

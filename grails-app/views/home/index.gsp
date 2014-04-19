@@ -275,7 +275,7 @@ $(document).ready(function(e) {
 			<p class="lead">Find the Best Places to Live</p>
 			<g:form class="col-lg-12" controller="restClient" action="getProperties">
 				<div class="form-group fieldcontain text-center">
-					<input class="center-block form-control input-lg" type="text" title="Search" placeholder="e.g. San Jose" name="query">
+					<input class="center-block form-control input-lg" required = "required" type="text" title="Search" placeholder="e.g. San Jose" name="query">
 					<span class="input-group-btn">
 						<button class="btn btn-lg btn-primary btn-inverse" type="submit">
 							<i class="icon-search icon-white"></i>
@@ -389,6 +389,7 @@ $(document).ready(function(e) {
 		</div>
 	</section>
 	<hr class="soften">
+	
 	<div id="footer">
 		<div class="container">
 			<p class="text-muted credit">&copy; Real Realty 2014</p>
