@@ -155,12 +155,6 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 		</div>
 	</header>
 	
-	<g:javascript>
-		function isPropertyAddedtoWL()
-		{	alert("In");
-			alert(document.getElementById("WLButton").value);
-		}
-	</g:javascript>
 <!-- === MAIN Background === -->
 <div id="wrap">
 	<div class="container">
