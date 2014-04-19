@@ -73,7 +73,7 @@ class RestController {
 				}
 				else
 				{
-					def message = "failue:Record not found"
+					def message = "failue:Records not found"
 					render JSON.parse("{\"error\" : \"" + message + "\"}") as JSON
 				}
 			}

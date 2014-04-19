@@ -28,7 +28,7 @@ class RestClientController
 			println(data)
 			
 			def json = new JsonSlurper().parseText(data)
-			println(json.properties)
+			println(json)
 			
 			if(json.error == "success")
 			{
@@ -111,13 +111,13 @@ class RestClientController
 				else
 				{
 					flash.errorMessage = (json.error.split(":"))[1]
-					redirect(controller:"home", action: "index")
+					redirect(controller:"home", action: "showError")
 				}
 			}
 			else
 			{
 				flash.errorMessage = (json.error.split(":"))[1]
-				redirect(controller:"home", action: "error")
+				redirect(controller:"home", action: "showError")
 			}
 		}	
 	}
@@ -186,7 +186,7 @@ class RestClientController
 		else
 		{
 			flash.errorMessage = (error.split(":"))[1]
-			redirect(controller:"home", action: "index")
+			redirect(controller:"home", action: "showError")
 		}
 		
 	}
@@ -220,7 +220,7 @@ class RestClientController
 		else
 		{
 			flash.errorMessage = (error.split(":"))[1]
-			redirect(controller:"home", action: "index")
+			redirect(controller:"home", action: "showError")
 		}
 		
 	}
@@ -248,7 +248,7 @@ class RestClientController
 		{
 			flash.errorMessage = (json.error.split(":"))[1]
 			println(flash.errorMessage)
-			redirect(controller:"home", action: "index")
+			redirect(controller:"home", action: "showError")
 		}
 	}
 
