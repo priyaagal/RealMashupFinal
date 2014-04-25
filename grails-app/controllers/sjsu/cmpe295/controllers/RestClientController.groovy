@@ -122,7 +122,7 @@ class RestClientController
 		println("In RestClientController/getPropertiesInfoByAjax()")
 		println(params.toString())
 		// make the REST api call
-		def data = new URL("http://localhost:8080/RealMashup/rest/ajax/getPropertiesInfoByAjax?query="+params.value.replace(" ","+")+"&paginate=false").getText()
+		def data = new URL("http://realmashup.aws.af.cm/rest/ajax/getPropertiesInfoByAjax?query="+params.value.replace(" ","+")+"&paginate=false").getText()
 		
 		def json = new JsonSlurper().parseText(data)
 		//println(json)

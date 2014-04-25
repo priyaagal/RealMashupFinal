@@ -182,24 +182,11 @@ $(document).ready(function(e) {
 </script>
 
 
-<<g:javascript library="jquery" />
+<g:javascript library="jquery" />
 <g:javascript library="jquery-ui" />
 
 <r:layoutResources/>
 <script>
-//alert(); 
-
-			/*
-            $(document).ajaxComplete(function() {
-            	//alert("In");	
-            	alert("list "+list);
-            	$( "#searchbar" ).autocomplete({
-            	      source: list
-            	    });
-
-                
-            });*/
-
             function populate()
             {	
 				var list = $("#updateMe").html().replace(/'/g, "")

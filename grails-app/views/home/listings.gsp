@@ -160,6 +160,35 @@ col-lg-4 col-md-4 col-sm-4{
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <link rel="stylesheet" href="${resource(dir: 'fancybox', file: 'jquery.fancybox-v=2.1.5.css')}" type="text/css" media="screen">
 
+<g:javascript library="jquery" />
+<g:javascript library="jquery-ui" />
+<r:layoutResources/>
+
+<script>
+            function populate()
+            {	
+				var list = $("#updateMeL").html().replace(/'/g, "")
+				
+				var res = list.split(",");
+				
+				var rlist = [] ;
+				res[0] = res[0].substring(1); //removing [
+				var len = res.length 
+				res[len-1] = res[len-1].substring(0, res[len-1].length -1); // removing ]
+				//alert(rlist)
+				for(var i in res)
+					{	
+						rlist.push(res[i]);
+					}				
+			
+				$( "#searchbarL" ).autocomplete({
+          	      source:  rlist
+          	    });
+            }
+            
+             
+             
+</script>
 </head>
 
 <body>
@@ -187,7 +216,9 @@ col-lg-4 col-md-4 col-sm-4{
 						<div class="navbar-search pull-left">
 							<g:form class="navbar-form navbar-left" controller="restClient" action="getProperties">
 								<div class="form-group fieldcontain text-center">
-									<input type="text" title="Search" required = "required" value="" placeholder="Search " class="form-control nav-search" name="query"> 
+									 <g:remoteField id="searchbarL"  controller ="restClient" action="getPropertiesInfoByAjax" class="form-control nav-search" 
+									required = "required" update="updateMeL" onComplete="populate()" type="text" title="Search" placeholder="e.g. San Jose" name="query" /> 
+									 <div id="updateMeL" style="display: none"  > ${properties}   </div>
 									<span class="input-group-btn">
 										<button class="btn btn-lg btn-primary" type="submit">Go!</button>
 									</span>

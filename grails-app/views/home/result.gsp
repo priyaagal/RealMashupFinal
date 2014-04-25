@@ -244,6 +244,36 @@ col-lg-4 col-md-4 col-sm-4{
 	});
 </script>
 
+<g:javascript library="jquery-ui" />
+
+<r:layoutResources/>
+<script>
+            function populate()
+            {	
+				var list = $("#updateMe").html().replace(/'/g, "")
+				
+				var res = list.split(",");
+				
+				var rlist = [] ;
+				res[0] = res[0].substring(1); //removing [
+				var len = res.length 
+				res[len-1] = res[len-1].substring(0, res[len-1].length -1); // removing ]
+				
+				for(var i in res)
+					{	
+						rlist.push(res[i]);
+					}				
+			
+				$( "#searchbar" ).autocomplete({
+          	      source:  rlist
+          	    });
+            }
+            
+             
+             
+</script>
+
+
 </head>
 <body>
 	<header>
@@ -270,8 +300,10 @@ col-lg-4 col-md-4 col-sm-4{
 						</ul>
 						<div class="navbar-search pull-left">
 							<g:form class="navbar-form navbar-left" controller="restClient" action="getProperties">
-								<div class="form-group fieldcontain text-center">
-									<input style="height: 30px;" type="text" required = "required" title="Search" value="" placeholder="Search " class="form-control nav-search" name="query"> 
+								<div class="form-group fieldcontain text-center"> 
+									 <g:remoteField id="searchbar"  controller ="restClient" action="getPropertiesInfoByAjax" class="form-control nav-search"  
+										required = "required" update="updateMe" onComplete="populate()" type="text" title="Search" placeholder="e.g. San Jose" name="query" /> 
+			 						<div id="updateMe" style="display: none" > ${properties}   </div>
 									<span class="input-group-btn">
 										<button class="btn btn-lg btn-primary" type="submit">Go!</button>
 									</span>
