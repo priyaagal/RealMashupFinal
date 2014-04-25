@@ -80,46 +80,6 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 *, *:before, *:after {
     -moz-box-sizing: border-box;
 }
-.propertyContent {
-    padding: 9px;
-}
-.row {
-    margin-left: -15px;
-    margin-right: -15px;
-}
-* {
-    margin: 0;
-    padding: 0;
-}
-
-.row:before, .row:after {
-    content: " ";
-    display: table;
-}
-
-body {
-    color: #464646;
-    font-family: Proxima Nova Light,Helvetica,Arial;
-    font-size: 15px;
-}
-body {
-    color: #333333;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-size: 14px;
-    line-height: 1.42857;
-}
-html {
-    font-size: 62.5%;
-}
-html {
-    font-family: sans-serif;
-}
-
-.col-lg-12 {
-    min-height: 1px;
-    padding-left: 15px;
-    padding-right: 15px;
-}
 
 .propertyContent {
     padding: 9px;
@@ -150,10 +110,6 @@ col-lg-4 col-md-4 col-sm-4{
     padding-left: 15px;
 }
 
-.row {
-    margin-left: -15px;
-    margin-right: -15px;
-}
 
 /** pagination **/
 
@@ -195,10 +151,9 @@ col-lg-4 col-md-4 col-sm-4{
 	text-decoration: underline;
 }
 </style>
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<link rel="stylesheet" href="css/bootstrap-responsive.min.css">
-<link rel="stylesheet" href="css/font-awesome.css">
-<script src="js/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
+<link rel="stylesheet" href="/RealMashupFinal/static/css/bootstrap.min.css">
+<link rel="stylesheet" href="/RealMashupFinal/static/css/bootstrap-responsive.min.css">
+<link rel="stylesheet" href="/RealMashupFinal/static/fancybox/jquery.fancybox-v=2.1.5.css">
 <!-- body { padding-top: 60px; padding-bottom: 40px; } -->
 <!-- Bootstrap -->
 <link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'bootstrap.min.css')}">
@@ -218,13 +173,13 @@ col-lg-4 col-md-4 col-sm-4{
 <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Titillium+Web:400,600,300,200&subset=latin,latin-ext">
 
 
-<script type="text/javascript" src="js/html5shiv.js"></script>
-<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
-<script type="text/javascript" src="js/jquery-migrate-1.2.1.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
-<script type="text/javascript" src="fancybox/jquery.fancybox.pack-v=2.1.5.js"></script>
-<script type="text/javascript" src="js/script.js"></script>
+<script type="text/javascript" src="/RealMashupFinal/static/js/html5shiv.js"></script>
+<script type="text/javascript" src="/RealMashupFinal/static/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="/RealMashupFinal/static/js/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="/RealMashupFinal/static/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/RealMashupFinal/static/js/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="/RealMashupFinal/static/fancybox/jquery.fancybox.pack-v=2.1.5.js"></script>
+<script type="text/javascript" src="/RealMashupFinal/static/js/script.js"></script>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 <!-- fancybox init -->
 <script>

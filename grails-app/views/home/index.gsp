@@ -41,11 +41,9 @@
 	text-decoration: none
 }
 </style>
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<link rel="stylesheet" href="css/bootstrap-responsive.min.css">
-<link rel="stylesheet" href="css/font-awesome.css">
-<script src="//www.google-analytics.com/ga.js" style=""></script>
-<script src="js/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
+<link rel="stylesheet" href="/RealMashupFinal/static/css/bootstrap.min.css">
+<link rel="stylesheet" href="/RealMashupFinal/static/css/bootstrap-responsive.min.css">
+<link rel="stylesheet" href="/RealMashupFinal/static/fancybox/jquery.fancybox-v=2.1.5.css">
 <!-- body { padding-top: 60px; padding-bottom: 40px; } -->
 <!-- Bootstrap -->
 <link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'bootstrap.min.css')}">
@@ -67,6 +65,8 @@
 .marketing {
     color: #5A5A5A;
     text-align: center;
+    padding-left: 15px;
+  	padding-right: 15px;
 }
 
 .marketing h1 {
@@ -94,11 +94,6 @@
 * MARKETING CONTENT
 -------------------------------------------------- */
 
-/* Pad the edges of the mobile views a bit */
-.marketing {
-  padding-left: 15px;
-  padding-right: 15px;
-}
 
 /* Center align the text within the three columns below the carousel */
 .marketing .col-lg-4 {
@@ -152,9 +147,8 @@
 <g:javascript src="bootstrap.min.js"></g:javascript>
 <g:javascript src="jquery.easing.1.3.js"></g:javascript>
 <g:javascript src="jquery.raty.js"></g:javascript>
-<script type="text/javascript" src="fancybox/jquery.fancybox.pack-v=2.1.5.js"></script>
+<script type="text/javascript" src="/RealMashupFinal/static/fancybox/jquery.fancybox.pack-v=2.1.5.js"></script>
 <g:javascript src="operations.js"></g:javascript>
-<script type="text/javascript" src="www.google-analytics.com/ga.js"></script>
 
 <script>
 $(document).ready(function(e) {
@@ -359,7 +353,7 @@ $(document).ready(function(e) {
 		<div id="contacts">
 			<div class="row" style="margin-left: 42px; width: 600px;">
 				<div class="col-sm-offset-3 col-sm-6">
-					<g:form class="well" controller="restClient" action="postMessage" style="height: 410px;">
+					<g:form class="well" controller="restClient" action="postMessage" style="height: 410px;padding-bottom: 34px;">
 						<legend>Contact Us</legend>
 						<div class="control-group">
 							<div class="controls">

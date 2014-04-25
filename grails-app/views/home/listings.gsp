@@ -8,10 +8,6 @@
 <meta content="" name="author">
 
 <style type="text/css">
-.my-container {
-	margin: 20px;
-}
-
 
 .wrapper{
     margin-top:10px;
@@ -122,9 +118,9 @@ col-lg-4 col-md-4 col-sm-4{
 
 
 
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<link rel="stylesheet" href="css/bootstrap-responsive.min.css">
-<link rel="stylesheet" href="css/font-awesome.css">
+<link rel="stylesheet" href="/RealMashupFinal/static/css/bootstrap.min.css">
+<link rel="stylesheet" href="/RealMashupFinal/static/css/bootstrap-responsive.min.css">
+<link rel="stylesheet" href="/RealMashupFinal/static/fancybox/jquery.fancybox-v=2.1.5.css">
 <!-- body { padding-top: 60px; padding-bottom: 40px; } -->
 <!-- Bootstrap -->
 <link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'bootstrap.min.css')}">
@@ -152,13 +148,10 @@ col-lg-4 col-md-4 col-sm-4{
 <g:javascript src="jquery-migrate-1.2.1.min.js"></g:javascript>
 <g:javascript src="bootstrap.min.js"></g:javascript>
 <g:javascript src="jquery.easing.1.3.js"></g:javascript>
-<script type="text/javascript" src="fancybox/jquery.fancybox.pack-v=2.1.5.js"></script>
+<script type="text/javascript" src="/RealMashupFinal/static/fancybox/jquery.fancybox.pack-v=2.1.5.js"></script>
 <g:javascript src="jquery.raty.js"></g:javascript>
 
-<link rel="stylesheet" href="${resource(dir: 'css', file: 'font-awesome.min.css')}" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'style.css')}">
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<link rel="stylesheet" href="${resource(dir: 'fancybox', file: 'jquery.fancybox-v=2.1.5.css')}" type="text/css" media="screen">
 
 </head>
 
@@ -243,10 +236,10 @@ col-lg-4 col-md-4 col-sm-4{
 									alt="64x64" data-src="holder.js/64x64">
 								</a>
 							</div>
-							<div class="col-lg-8 rowText" style="width: 400px;">
-								<h4 style="padding-top: 10px; border-top-width: 20px; margin-top: 20px; width: 410px;"">
+							<div class="col-lg-8 rowText" style="width: 422px;padding-right: 15px;">
+								<h4 align="center" style=" padding-top: 10px; border-top-width: 20px; margin-top: 20px; width: 420px;"">
 									${flash.address}<a>,</a> ${flash.city}<a>,</a> ${flash.zip}
-									&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+									&nbsp&nbsp
 									<span class="label label-success"> ${flash.zestAmt}</span>
 								</h4>
 								<dl class="dl-horizontal">
