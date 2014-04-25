@@ -36,13 +36,7 @@ class RestClientController
 				if(json.type == "address")
 				{
 					flash.address = json.properties.address
-					//		char[] a = city.toLowerCase().toCharArray();
-					//		for (int i = 0; i < a.length; i++ ) {
-					//			a[i] = i == 0 || a[i-1] == ' ' ? a[i].toString().toUpperCase().toCharacter() : a[i];
-					//		}
-					//		String convertedCity = new String(a);
 					flash.city = json.properties.city;
-					
 					
 					DecimalFormat dFormat = new DecimalFormat("####,###,###.00");
 					String zestAmount = '$' + (dFormat.format(json.properties.zest_amt));
@@ -122,6 +116,22 @@ class RestClientController
 			}
 		}	
 	}
+	
+	def getPropertiesInfoByAjax()
+	{
+		println("In RestClientController/getPropertiesInfoByAjax()")
+		println(params.toString())
+		// make the REST api call
+		def data = new URL("http://localhost:8080/RealMashup/rest/ajax/getPropertiesInfoByAjax?query="+params.value.replace(" ","+")+"&paginate=false").getText()
+		
+		def json = new JsonSlurper().parseText(data)
+		//println(json)
+		def properties = json.properties
+		println(properties.toString())
+		flash.properties = properties 
+		render ( properties )
+	}
+	
 	
 	def paginateAddresses()
 	{

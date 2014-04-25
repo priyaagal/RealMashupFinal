@@ -180,7 +180,54 @@ $(document).ready(function(e) {
 	})
 }(window.jQuery)
 </script>
-</head>
+
+
+<<g:javascript library="jquery" />
+<g:javascript library="jquery-ui" />
+
+<r:layoutResources/>
+<script>
+//alert(); 
+
+			/*
+            $(document).ajaxComplete(function() {
+            	//alert("In");	
+            	alert("list "+list);
+            	$( "#searchbar" ).autocomplete({
+            	      source: list
+            	    });
+
+                
+            });*/
+
+            function populate()
+            {	
+				var list = $("#updateMe").html().replace(/'/g, "")
+				
+				var res = list.split(",");
+				
+				var rlist = [] ;
+				res[0] = res[0].substring(1); //removing [
+				var len = res.length 
+				res[len-1] = res[len-1].substring(0, res[len-1].length -1); // removing ]
+				
+				for(var i in res)
+					{	
+						rlist.push(res[i]);
+					}				
+			
+				$( "#searchbar" ).autocomplete({
+          	      source:  rlist
+          	    });
+            }
+            
+             
+             
+</script>
+
+
+ </head>
+
 
 <body>
 	<header>
@@ -273,9 +320,12 @@ $(document).ready(function(e) {
 		<div class="col-lg-12 text-center v-center">
 			<h1>Welcome to Real Realty!</h1>
 			<p class="lead">Find the Best Places to Live</p>
-			<g:form class="col-lg-12" controller="restClient" action="getProperties">
+		
+			<g:form name="Search" class="col-lg-12" controller ="restClient" action="getProperties" >
+			 <g:remoteField id="searchbar"  controller ="restClient" action="getPropertiesInfoByAjax" class="center-block form-control input-lg" value="${properties}" 
+				required = "required" update="updateMe" onComplete="populate()" type="text" title="Search" placeholder="e.g. San Jose" name="query" /> 
+			 <div id="updateMe" style="display: none" > ${properties}   </div>
 				<div class="form-group fieldcontain text-center">
-					<input class="center-block form-control input-lg" required = "required" type="text" title="Search" placeholder="e.g. San Jose" name="query">
 					<span class="input-group-btn">
 						<button class="btn btn-lg btn-primary btn-inverse" type="submit">
 							<i class="icon-search icon-white"></i>
@@ -285,6 +335,7 @@ $(document).ready(function(e) {
 			</g:form>
 		</div>
 	</div>
+	
 	<hr class="soften">
 	<div class="marketing">
 		<section id="about" class="section appear clearfix">
@@ -320,7 +371,6 @@ $(document).ready(function(e) {
 		</section>
 	</div>
 	<hr class="soften">
-	<!-- START THE FEATURETTES -->
 	<div class="marketing">
 		<section id="whatwedo">
 			<h2 class="align-center">What We Do </h2>
@@ -351,7 +401,6 @@ $(document).ready(function(e) {
 					</li>
 				</ul>
 			</div>
-	   		<!-- /.row -->
 		</section>
 	</div>
 	<hr class="soften">

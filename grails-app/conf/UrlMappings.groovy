@@ -14,6 +14,10 @@ class UrlMappings {
 			action = [GET: "getProperties"]
 		}
 		
+		"/rest/ajax/$sku?"(controller: "rest", parseRequest: true) {
+			action = [GET: "getPropertiesInfoByAjax"]
+		}
+		
 		"/rest/user/$sku?"(controller: "rest", parseRequest: true) {
 			action = [POST: "authenticateUser", PUT: "registerUser"]
 		}

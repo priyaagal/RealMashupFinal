@@ -55,12 +55,12 @@ class RestController {
 				println(params.paginate)
 				if(params.paginate == "true")
 					{	println("paginated")
-						filters = [ max : max, offset : offset, sort : "zest_amt", order: 'desc']
+						filters = [ max : max, offset : offset, sort : "zest_amt", order: 'desc', cache:true]
 						properties = MasterUnSoldProperty.findAllByCity(params.city, filters)
 						println(properties.size().toString())
 					}
 				else
-				{	filters = [sort : "zest_amt", order: 'desc']
+				{	filters = [sort : "zest_amt", order: 'desc',  cache:true]
 					properties = MasterUnSoldProperty.findAllByCity(params.city, filters)
 				}
 				
@@ -82,7 +82,7 @@ class RestController {
 			}
 			else if(params.address) 
 			{
-				properties = MasterUnSoldProperty.findByAddress(params.address, filters)
+				properties = MasterUnSoldProperty.findByAddress(params.address,  [cache:true])
 				if(properties)
 				{	
 					//render properties as JSON
@@ -98,6 +98,118 @@ class RestController {
 					def message = "failue:Property not found"
 					render JSON.parse("{\"error\" : \"" + message + "\"}") as JSON
 				}
+			}
+		}
+	
+	}
+	
+	def getPropertiesInfoByAjax() {
+		println("In RestController/getPropertiesInfoByAjax()")
+		println(params.toString())
+		
+		def properties
+
+		def offset = 0
+		def max = 10
+		println(params.toString())
+		
+		if(params.offset)
+			offset = params.offset
+		if(params.max)
+			max = params.max
+		
+		def query = params.query.replace("+", " ")
+		def valid = true
+			
+		if(query.contains(",") )
+		{
+			def address = query.split(",")
+			params.address = address[0]
+		}
+		else if (query.count(" ") > 1 && query.count(" ") < 4 )
+		{
+			params.address = query
+		}
+		else if( query.count(" ") <= 1)
+		{
+			params.city = query.replace(" ", "")
+		}
+		else
+		{
+			valid = false
+			def message = "failue:Invalid input"
+			render JSON.parse("{\"error\" : \"" + message + "\"}") as JSON
+		}
+			
+		if(valid)
+		{
+			def filters
+			
+			if(params.city)
+			{
+				//properties = MasterUnSoldProperty.findAllByCity(params.city)
+				def c = MasterUnSoldProperty.createCriteria()
+				properties = c.list	
+									{
+										like("city", ""+params.city+"%")
+										order("city", "asc")
+										projections{	
+														distinct("city")
+														//property("city")
+										  			}
+									}
+									
+				println(properties.toString())
+				println(properties.size().toString())
+					
+				
+				if(properties)
+				{
+					//render properties as JSON
+					render(contentType: 'text/json')
+					{[
+							'error': "success",
+							'type' : "city",
+							'properties': properties
+					]}
+				}
+				else
+				{
+					def message = "failue:Records not found"
+					render JSON.parse("{\"error\" : \"" + message + "\"}") as JSON
+				}
+			}
+			else if(params.address)
+			{	
+				def c = MasterUnSoldProperty.createCriteria()
+				properties = c.list
+									{
+										like("address", "%"+params.address+"%")
+										order("address", "asc")
+										projections{
+														distinct("address")
+														//property("city")
+													  }
+									}
+				println(properties.toString())
+				println(properties.size().toString())
+									
+				if(properties)
+				{
+					//render properties as JSON
+					render(contentType: 'text/json')
+						{[
+								'error': "success",
+								'type' : "address",
+								'properties': properties
+						]}
+				}
+				else
+				{
+					def message = "failue:Property not found"
+					render JSON.parse("{\"error\" : \"" + message + "\"}") as JSON
+				}
+				
 			}
 		}
 	
