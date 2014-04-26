@@ -67,6 +67,8 @@
 .marketing {
     color: #5A5A5A;
     text-align: center;
+    padding-left: 15px;
+  	padding-right: 15px;
 }
 
 .marketing h1 {
@@ -94,11 +96,7 @@
 * MARKETING CONTENT
 -------------------------------------------------- */
 
-/* Pad the edges of the mobile views a bit */
-.marketing {
-  padding-left: 15px;
-  padding-right: 15px;
-}
+
 
 /* Center align the text within the three columns below the carousel */
 .marketing .col-lg-4 {
@@ -290,13 +288,13 @@ $(document).ready(function(e) {
 		<div id="myCarousel" class="carousel slide" style="height: 340px;">
 			<div class="carousel-inner" style="height: 380px;">
 				<div class="item active">
-					<img src="/RealMashupFinal/static/images/property-main-1.jpg" class="img-responsive">
+					<g:img dir="images" file="property-main-1.jpg" class="img-responsive"/>
 				</div>
 				<div class="item">
-					<img src="/RealMashupFinal/static/images/property-main-2.jpg" class="img-responsive">
+					<g:img dir="images" file="property-main-2.jpg" class="img-responsive"/>
 				</div>
 				<div class="item">
-					<img src="/RealMashupFinal/static/images/property-main-3.jpg" class="img-responsive">
+					<g:img dir="images" file="property-main-3.jpg" class="img-responsive"/>
 				</div>
 			</div>
 			<a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
@@ -334,21 +332,21 @@ $(document).ready(function(e) {
 				<ul class="thumbnails" style="margin-left: 100px; margin-right: 100px;">
 					<li class="span3" style="margin-left: 30px; margin-right: 45px;">
 						<a class="thumbnail">
-							<img src="/RealMashupFinal/static/images/Minion-1.jpg" 
-								style="width: 388px; padding-left: 4px; padding-right: 6px; border-left-width: 6px; border-right-width: 6px;"/>
+							<g:img dir="images" file="Minion-1.jpg"  
+								style="height: 292px; width: 388px; padding-left: 4px; padding-right: 6px; border-left-width: 6px; border-right-width: 6px;"/>
 							<h4>Priyanka Agal</h4>
 						</a>
 					</li>
 					<li class="span3" style="margin-left: 45px; margin-right: 45px;">
 						<a class="thumbnail">
-							<img src="/RealMashupFinal/static/images/Minion-2.jpg"  
+							<g:img dir="images" file="Minion-2.jpg"  
 								style="width: 388px; height: 292px; padding-right: 6px; border-left-width: 6px; padding-left: 4px;"/>
 							<h4>Snehal Dmello</h4>
 						</a>
 					</li>
 					<li class="span3" style="margin-left: 30px; margin-right: 45px;">
 						<a class="thumbnail">
-							<img src="/RealMashupFinal/static/images/Minion-3.jpg"
+							<g:img dir="images" file="Minion-3.jpg"
 								style="height: 292px; width: 388px; padding-left: 4px; border-left-width: 6px; padding-right: 6px; border-right-width: 6px; margin-left: 0px; margin-right: 30px;" />
 							<h4>Abhijeet Upadhye</h4>
 						</a>
@@ -363,25 +361,25 @@ $(document).ready(function(e) {
 			<h2 class="align-center">What We Do </h2>
 			<p class="lead marketing-byline">We give you analytics</p>
 			<hr class="soften">
-			<div class="row-fluid" style="margin-left: 50px; width: 1170px; height: 332px; margin-right: 40px;">
+			<div class="row-fluid" style="margin-left: 200px; width: 1170px; height: 332px; margin-right: 100px;">
             	<ul class="thumbnails" style="height: 320px;">
               		<li class="span4">
                 		<div class="thumbnail" style="width: 310px; height: 315px;">
-							<img style="width: 300px; height: 200px;" alt="product name" src="/RealMashupFinal/static/images/feature3.jpg">
+							<g:img dir="images" style="width: 300px; height: 200px;" alt="product name" file="feature3.jpg"/>
 							<h3>Search home listings</h3>
 							<p>We gather data from various websites to bring real estate listings.</p>
 						</div>
 					</li>
               		<li class="span4">
                 		<div class="thumbnail" style="width: 310px; height: 315px;">
-							<img style="width: 300px; height: 200px;" alt="product name" src="/RealMashupFinal/static/images/feature2.jpg">
+							<g:img dir="images" style="width: 300px; height: 200px;" alt="product name" file="feature2.jpg"/>
 							<h3>Predictive Analytics</h3>
 							<p>We anlayze the real estate data to predict rise and drop in prices</p>
 						</div>
 					</li>
 					<li class="span4">
                 		<div class="thumbnail" style="width: 310px; height: 315px;">
-							<img style="width: 300px; height: 200px;" alt="product name" src="/RealMashupFinal/static/images/feature1.jpg">
+							<g:img dir="images" style="width: 300px; height: 200px;" alt="product name" file="feature1.jpg" />
 							<h3>External factor Widgets</h3>
 							<p>Show external factors affecting the real estate</p>
 						</div>
@@ -393,9 +391,9 @@ $(document).ready(function(e) {
 	<hr class="soften">
 	<section id="contact">
 		<div id="contacts">
-			<div class="row" style="margin-left: 42px; width: 600px;">
+			<div class="row" style="margin-left: 420px; width: 600px;">
 				<div class="col-sm-offset-3 col-sm-6">
-					<g:form class="well" controller="restClient" action="postMessage" style="height: 410px;">
+					<g:form class="well" controller="restClient" action="postMessage" style="height: 410px;padding-bottom: 34px;">
 						<legend>Contact Us</legend>
 						<div class="control-group">
 							<div class="controls">

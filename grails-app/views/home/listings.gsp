@@ -147,6 +147,7 @@ col-lg-4 col-md-4 col-sm-4{
 <script type="text/javascript" src="js/jquery.raty.js"></script>
 
 --%>
+
 <g:javascript src="html5shiv.js"></g:javascript>
 <g:javascript src="jquery-1.10.2.min.js"></g:javascript>
 <g:javascript src="jquery-migrate-1.2.1.min.js"></g:javascript>
@@ -160,14 +161,13 @@ col-lg-4 col-md-4 col-sm-4{
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <link rel="stylesheet" href="${resource(dir: 'fancybox', file: 'jquery.fancybox-v=2.1.5.css')}" type="text/css" media="screen">
 
-<g:javascript library="jquery" />
 <g:javascript library="jquery-ui" />
 <r:layoutResources/>
 
 <script>
             function populate()
             {	
-				var list = $("#updateMeL").html().replace(/'/g, "")
+				var list = $("#updateMe").html().replace(/'/g, "")
 				
 				var res = list.split(",");
 				
@@ -175,13 +175,14 @@ col-lg-4 col-md-4 col-sm-4{
 				res[0] = res[0].substring(1); //removing [
 				var len = res.length 
 				res[len-1] = res[len-1].substring(0, res[len-1].length -1); // removing ]
-				//alert(rlist)
+				
 				for(var i in res)
 					{	
 						rlist.push(res[i]);
 					}				
-			
-				$( "#searchbarL" ).autocomplete({
+
+				//alert(rlist)
+				$( "#searchbar" ).autocomplete({
           	      source:  rlist
           	    });
             }
@@ -189,6 +190,7 @@ col-lg-4 col-md-4 col-sm-4{
              
              
 </script>
+
 </head>
 
 <body>
@@ -216,9 +218,9 @@ col-lg-4 col-md-4 col-sm-4{
 						<div class="navbar-search pull-left">
 							<g:form class="navbar-form navbar-left" controller="restClient" action="getProperties">
 								<div class="form-group fieldcontain text-center">
-									 <g:remoteField id="searchbarL"  controller ="restClient" action="getPropertiesInfoByAjax" class="form-control nav-search" 
-									required = "required" update="updateMeL" onComplete="populate()" type="text" title="Search" placeholder="e.g. San Jose" name="query" /> 
-									 <div id="updateMeL" style="display: none"  > ${properties}   </div>
+									 <g:remoteField id="searchbar"  controller ="restClient" action="getPropertiesInfoByAjax" class="form-control nav-search" 
+									required = "required" update="updateMe" onComplete="populate()" type="text" title="Search" placeholder="e.g. San Jose" name="query" /> 
+									 <div id="updateMe" style="display: none" > ${properties}   </div>
 									<span class="input-group-btn">
 										<button class="btn btn-lg btn-primary" type="submit">Go!</button>
 									</span>
@@ -351,11 +353,11 @@ col-lg-4 col-md-4 col-sm-4{
 						<h3>Price Trend</h3>
 					</div>
 					<g:if test="${flash.priceAppreciated}">
-						<img src="/RealMashupFinal/static/images/prices-up.jpg" alt="">
+						<g:img dir="images"  file="prices-up.jpg" alt=""/>
 						<span class="label label-warning">Prices are Up</span>
 					</g:if>
 					<g:else> 
-						<img src="/RealMashupFinal/static/images/prices-down.jpg" alt="">
+						<g:img dir="images" file="prices-down.jpg" alt=""/>
 						<span class="label label-success">Prices are Down</span>
 					</g:else>
 				</div>
@@ -366,18 +368,18 @@ col-lg-4 col-md-4 col-sm-4{
 						<h3>Buy/Not Buy</h3>
 					</div>
 					<g:if test="${flash.ifBuy}">
-						<img src="/RealMashupFinal/static/images/thumbs-up.jpg" alt="">
+						<g:img dir="images"  file="thumbs-up.jpg" alt=""/>
 						<span class="label label-warning">Time to buy</span>
 					</g:if>
 					<g:else> 
-						<img src="/RealMashupFinal/static/images/thumbs-down.jpg" alt="">
+						<g:img dir="images" file="thumbs-down.jpg" alt=""/>
 						<span class="label label-success">Not a time to buy</span>
 					</g:else>
 				</div>
 			</div>
 			<div class="tab-pane fade" id="amenities">
 				<div class="thumbnail pull-left">
-					<img src="/RealMashupFinal/static/images/amenities.jpg" alt="">
+					<g:img dir="images" file="amenities.jpg" alt=""/>
 					<div class="caption">
 						<h3>Amenities</h3>
 						<div id="amenitiesStar"></div>
@@ -386,7 +388,7 @@ col-lg-4 col-md-4 col-sm-4{
 			</div>
 			<div class="tab-pane fade" id="crimerate">
 				<div class="thumbnail pull-left">
-					<img src="/RealMashupFinal/static/images/crimerate.jpg" alt="">
+					<g:img file="crimerate.jpg" alt=""/>
 					<div class="caption">
 						<h3>Crime Rate</h3>
 						<div id="crimeRateStar"></div>
@@ -395,7 +397,7 @@ col-lg-4 col-md-4 col-sm-4{
 			</div>
 			<div class="tab-pane fade" id="education">
 				<div class="thumbnail pull-left">
-					<img src="/RealMashupFinal/static/images/education1.jpg" alt="">
+					<g:img dir="images" file="education1.jpg" alt=""/>
 					<div class="caption">
 						<h3>Education</h3>
 						<div id="educationStar"></div>
@@ -404,7 +406,7 @@ col-lg-4 col-md-4 col-sm-4{
 			</div>
 			<div class="tab-pane fade" id="employment">
 				<div class="thumbnail pull-left">
-					<img src="/RealMashupFinal/static/images/employment.jpg" alt="">
+					<g:img dir="images" file="employment.jpg" alt=""/>
 					<div class="caption">
 						<h3>Employment</h3>
 						<div id="employmentStar"></div>
@@ -413,7 +415,7 @@ col-lg-4 col-md-4 col-sm-4{
 			</div>
 			<div class="tab-pane fade" id="weather">
 				<div class="thumbnail pull-left">
-					<img src="/RealMashupFinal/static/images/weather.jpg" alt="">
+					<g:img dir="images" file="weather.jpg" alt=""/>
 					<div class="caption">
 						<h3>Weather</h3>
 						<div id="weatherStar"></div>
@@ -422,7 +424,7 @@ col-lg-4 col-md-4 col-sm-4{
 			</div>
 			<div class="tab-pane fade" id="costOfLiving">
 				<div class="thumbnail pull-left">
-					<img src="/RealMashupFinal/static/images/costofliving.jpg" alt="">
+					<g:img dir="images" file="costofliving.jpg" alt=""/>
 					<div class="caption">
 						<h3>Cost Of Living</h3>
 						<div id="costOfLivingStar"></div>
@@ -438,11 +440,11 @@ col-lg-4 col-md-4 col-sm-4{
 		</div>
 	</div>
 
-<script>
+<g:javascript>
 	$(function() {
 		$('#widgets li:eq(1) a').tab('show');
 	});
-</script>
+</g:javascript>
 
 <script>
 	var amenitiesScore =${flash.amenities}+3

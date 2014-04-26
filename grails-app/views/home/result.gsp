@@ -251,7 +251,6 @@ col-lg-4 col-md-4 col-sm-4{
             function populate()
             {	
 				var list = $("#updateMe").html().replace(/'/g, "")
-				
 				var res = list.split(",");
 				
 				var rlist = [] ;
