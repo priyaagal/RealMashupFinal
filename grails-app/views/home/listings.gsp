@@ -154,7 +154,6 @@ col-lg-4 col-md-4 col-sm-4{
 <g:javascript src="bootstrap.min.js"></g:javascript>
 <g:javascript src="jquery.easing.1.3.js"></g:javascript>
 <script type="text/javascript" src="fancybox/jquery.fancybox.pack-v=2.1.5.js"></script>
-<g:javascript src="jquery.raty.js"></g:javascript>
 
 <link rel="stylesheet" href="${resource(dir: 'css', file: 'font-awesome.min.css')}" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'style.css')}">
@@ -190,6 +189,7 @@ col-lg-4 col-md-4 col-sm-4{
              
              
 </script>
+<g:javascript src="jquery.raty.js"></g:javascript>
 
 </head>
 
