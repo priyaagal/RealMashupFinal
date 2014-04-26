@@ -7,7 +7,7 @@ class UrlMappings {
 			}
 		}
 
-		"/"(view:"/index")
+		"/"(view:"/home/index")
 		"500"(view:'/error')
 		
 		"/rest/$sku?"(controller: "rest", parseRequest: true) {
