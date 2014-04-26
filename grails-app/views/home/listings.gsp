@@ -185,7 +185,12 @@ col-lg-4 col-md-4 col-sm-4{
           	      source:  rlist
           	    });
             }
-            
+
+            function updateStatus()
+            {	
+            	$( "#WatchListButton" ).html("Added to UserWatchList");
+           	    $( "#WatchListButton" ).prop("disabled",true);
+            }
              
              
 </script>
@@ -321,9 +326,10 @@ col-lg-4 col-md-4 col-sm-4{
 						<div class="col-md-2" style="float:right">
 							<p>
 							<% if(session.username != null && watchlist!= "true"){  %>
-								<g:form class="col-lg-12" controller="restClient" action="addToUserWatchList" params="${ [address: flash.address]}">
-									<button class="btn btn-lg btn-primary" type="submit"> Add to Watchlist!</button>
-								</g:form>
+								<g:formRemote name="WatchListForm" class="col-lg-12" url="[controller:"restClient", action:"AddToUserWatchList" ,params: [address: "${flash.address}"]]"
+								onComplete="updateStatus()" >
+									<button id="WatchListButton" class="btn btn-lg btn-primary" type="submit"> Add to Watchlist!</button>
+								</g:formRemote>
 							<% } %>
 							</p>
 						</div>
