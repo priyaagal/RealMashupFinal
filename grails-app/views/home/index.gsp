@@ -235,6 +235,14 @@ $(document).ready(function(e) {
 							<li class="active">
 								<g:link controller="home" action="index">Home</g:link>
 							</li>
+							<% if(session.username == "admin"){ %>
+							<li style="color: white; padding-top: 10px;">
+								<i class="icon-user icon-white"></i>  
+							</li>
+							<li class="active">
+								<g:link controller="home" action="admin">Admin</g:link>
+							</li>
+							<%}%>
 							<li style="color: white; padding-top: 10px;">
 								<i class="icon-user icon-white"></i>  
 							</li>

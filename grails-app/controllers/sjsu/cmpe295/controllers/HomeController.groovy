@@ -12,6 +12,11 @@ class HomeController {
 		println("In class HomeController/index()")
 		render(view: "index")
 	}
+	
+	def admin() {
+		println("In class HomeController/admin()")
+		render(view: "admin")
+	}
 
 	def listings()
 	{

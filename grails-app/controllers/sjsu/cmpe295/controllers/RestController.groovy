@@ -223,6 +223,7 @@ class RestController {
 			
 			def email = request.JSON.email
 			def password = request.JSON.password
+			
 			User user = User.findByEmailAndPassword(email, password)
 			println(user.toString())
 			
