@@ -373,14 +373,21 @@ col-lg-4 col-md-4 col-sm-4{
 					<div class="caption">
 						<h3>Buy/Not Buy</h3>
 					</div>
-					<g:if test="${flash.ifBuy}">
+					<g:if test="${flash.ifBuy  == "buy"}">
 						<g:img dir="images"  file="thumbs-up.jpg" alt=""/>
-						<span class="label label-warning">Time to buy</span>
+						<span class="label label-warning">Time to buy</span><br>
+						<span class="label label-warning">Confidence Score: ${flash.cscore}</span>
 					</g:if>
-					<g:else> 
+					<g:if test="${flash.ifBuy  == "wait"}">
+						<g:img dir="images"  file="thumbs-down.jpg" alt=""/>
+						<span class="label label-warning">Time to Wait</span><br>
+						<span class="label label-warning">Confidence Score: ${flash.cscore}</span>
+					</g:if>
+					<g:if test="${flash.ifBuy  == "Dont buy"}">
 						<g:img dir="images" file="thumbs-down.jpg" alt=""/>
-						<span class="label label-success">Not a time to buy</span>
-					</g:else>
+						<span class="label label-success">Not a time to buy</span><br>
+						<span class="label label-warning">Confidence Score: ${flash.cscore}</span>
+					</g:if>
 				</div>
 			</div>
 			<div class="tab-pane fade" id="amenities">

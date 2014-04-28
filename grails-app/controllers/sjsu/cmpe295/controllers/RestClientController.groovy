@@ -59,6 +59,7 @@ class RestClientController
 					flash.priceAppreciated = json.properties.priceAppreciated
 					println(json.properties.priceAppreciated)
 					
+					/*
 					if(flash.costOfLiving > 1.5 && flash.priceAppreciated && flash.crimeRate <= 0.5)
 					{
 						flash.ifBuy = false;
@@ -77,8 +78,33 @@ class RestClientController
 					else 
 					{
 						flash.ifBuy = true;
+					}*/
+					
+					// new algorithm with confidence score
+					
+					// Cost of living is High and prices going down => wait
+					if(flash.costOfLiving <= 1.5 && flash.priceAppreciated == false )
+					{
+						flash.ifBuy = "wait";
+					}
+					// Cost of living is High and prices going up => Buy if budget is high
+					else if(flash.costOfLiving <= 1.5 && flash.priceAppreciated == true )
+					{
+						flash.ifBuy = "buy";
+					}
+					// Cost of living is Low and prices going down => Dont Buy
+					else if(flash.costOfLiving > 1.5 && flash.priceAppreciated == false )
+					{
+						flash.ifBuy = "Dont buy";
+					}
+					// Cost of living is Low and prices going up => Buy (Good investment)
+					else if(flash.costOfLiving > 1.5 && flash.priceAppreciated == true )
+					{
+						flash.ifBuy = "buy";
 					}
 					
+					flash.cscore = 50 + ((flash.education+3) * 2) + ((flash.crimeRate+3) *2) + ((flash.employment+3) * 2) + ((flash.amenities+3)*3) + (flash.weather+3)
+					print("Confidence Score: "+ flash.cscore )
 					//render(view: "/home/listings")
 					//redirect(controller:"home", action:"listings"  )
 					render(view: "/home/listings", model:['watchlist': params.watchlist])
