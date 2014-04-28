@@ -139,10 +139,11 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 						</ul>
 						<div class="navbar-search pull-left">
 							<g:form name="Search" class="navbar-form navbar-left" controller="restClient" action="getProperties">
+								<div class="form-group fieldcontain text-center"> 
 								<g:remoteField id="searchbar"  controller ="restClient" action="getPropertiesInfoByAjax" class="center-block form-control input-lg" value="${properties}" 
 								required = "required" update="updateMe" onComplete="populate()" type="text" title="Search" placeholder="e.g. San Jose" name="query" /> 
 								 <div id="updateMe" style="display: none" > ${properties}   </div>
-								<div class="form-group fieldcontain text-center"> 
+								
 									<span class="input-group-btn">
 										<button class="btn btn-lg btn-primary" type="submit">Go!</button>
 									</span>
