@@ -276,9 +276,9 @@ col-lg-4 col-md-4 col-sm-4{
 						<div class="propertyContent row" style="margin-left: 40px; margin-right: 20px; width: 500px;">
 							<div class="col-lg-4 col-md-4 col-sm-4">
 								<a class="pull-left" href="#"> 
-									<%if (flash.thumbnail != null){  %>
+									<%if (flash.thumbnail != ""){  %>
 										<img class="media-object img-responsive" style="width: 400px; height: 250px; padding-top: 20px;"
-										src= ${flash.thumbnail}
+										src= "${flash.thumbnail}"
 										alt="64x64" data-src="holder.js/64x64">
 									<%}else {%>
 										<img class="media-object img-responsive" style="width: 400px; height: 250px; padding-top: 20px;"

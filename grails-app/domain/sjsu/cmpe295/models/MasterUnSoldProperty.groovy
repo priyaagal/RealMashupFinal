@@ -48,7 +48,7 @@ class MasterUnSoldProperty {
 		static mapping = {
 			predictedpriceAppreciation defaultValue: false
 			recentlySold defaultValue: false
-			//cache usage:'read-only', include:'non-lazy'
+			cache usage:'read-only', include:'non-lazy'
 		}
 		
 		
