@@ -240,14 +240,14 @@ class RestController {
 			}
 			else
 			{
-					def message = "failue:User not found"
+					def message = "failue:Invalid username or password"
 					render JSON.parse("{\"error\" : \"" + message + "\"}") as JSON
 			}
 				
 		}
 		else
 		{
-			def message = "failue:invalid username or password"
+			def message = "failue:Invalid username or password"
 			render JSON.parse("{\"error\" : \"" + message + "\"}") as JSON
 		}
 		

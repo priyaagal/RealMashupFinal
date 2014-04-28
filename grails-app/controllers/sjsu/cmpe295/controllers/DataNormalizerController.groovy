@@ -1,26 +1,27 @@
 package sjsu.cmpe295.controllers
 
 import sjsu.cmpe295.models.Property;
+import sjsu.cmpe295.services.DataCollectorService
 
 
 class DataNormalizerController {
-	def dataCollectorService
+	DataCollectorService dataCollectorService = new DataCollectorService();
 
 
 
 	def index() {
-		println("In class DataPopulaterController.groovy/index()")
+		println("In class DataNormalizerController/index()")
 		redirect(action : 'home')
 	}
 
 	def home() {
 		//construct home page
 		def errorMessage
-		println("In class DataPopulaterController.groovy/home()")
+		println("In class DataNormalizerController/home()")
 		
 		try{
-			dataCollectorService.generateNormalizedDataFromResultCsv();
-			render(view:'/index')
+			dataCollectorService.updatePropertyInfo();
+			//render(view:'/index')
 			
 		} catch(Exception e) {
 			errorMessage = e.getMessage()

@@ -84,6 +84,35 @@ class DataCollectorService {
 		}
 	}
 	
+	def updatePropertyInfo()
+	{	println("In DataCollectorService/updatePropertyInfo")
+		
+		def errorMessage
+		def noOfRecordsScanned = 0
+		def noOfRowsUpdated = 0
+		def csvIterator
+
+		try{
+
+			def csvFileObject = new File( "E:\\CMPE295B\\results\\Archive 4\\Unsold_dump.csv" ).withReader {
+				csvIterator = CsvParser.parseCsv( it )
+				csvIterator.each {
+					String res = dataNormalizerService.updateData(it[2].toString(),it[32].toString(),it[33].toString());
+					noOfRecordsScanned++;
+					if(res.equalsIgnoreCase("success")) {
+						noOfRowsUpdated++;
+						println("Record no:"+noOfRowsUpdated+" updated")
+					}
+				}
+			}
+
+			println("Total number of records scanned: "+ noOfRecordsScanned)
+			println("Total number of records updated: "+ noOfRowsUpdated)
+		} catch(Exception e) {
+			errorMessage = e.getMessage()
+		}
+	}
+	
 	def getAccuracyFromRData() {
 		def noOfRecordsScanned = 0
 		def noOfRecordsAccurate = 0
