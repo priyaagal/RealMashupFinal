@@ -41,9 +41,14 @@ class MasterUnSoldProperty {
 		Double zest_high
 		Double zpID
 		
+		Boolean recentlySold
+		String thumbs1
+		String thumbs2
+		
 		static mapping = {
 			predictedpriceAppreciation defaultValue: false
-			cache usage:'read-only', include:'non-lazy'
+			recentlySold defaultValue: false
+			//cache usage:'read-only', include:'non-lazy'
 		}
 		
 		

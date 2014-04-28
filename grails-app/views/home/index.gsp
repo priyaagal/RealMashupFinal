@@ -205,14 +205,9 @@ $(document).ready(function(e) {
           	      source:  rlist
           	    });
             }
-            
-             
-             
+                    
 </script>
-
-
- </head>
-
+</head>
 
 <body>
 	<header>

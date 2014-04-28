@@ -276,9 +276,15 @@ col-lg-4 col-md-4 col-sm-4{
 						<div class="propertyContent row" style="margin-left: 40px; margin-right: 20px; width: 500px;">
 							<div class="col-lg-4 col-md-4 col-sm-4">
 								<a class="pull-left" href="#"> 
-									<img class="media-object img-responsive" style="width: 400px; height: 250px; padding-top: 20px;"
-									src="http://images.prd.mris.com/image/V2/1/Yu59d899Ocpyr_RnF0-8qNJX1oYibjwp9TiLy-bZvU9vRJ2iC1zSQgFwW-fTCs6tVkKrj99s7FFm5Ygwl88xIA.jpg" 
-									alt="64x64" data-src="holder.js/64x64">
+									<%if (flash.thumbnail != null){  %>
+										<img class="media-object img-responsive" style="width: 400px; height: 250px; padding-top: 20px;"
+										src= ${flash.thumbnail}
+										alt="64x64" data-src="holder.js/64x64">
+									<%}else {%>
+										<img class="media-object img-responsive" style="width: 400px; height: 250px; padding-top: 20px;"
+										src="http://images.prd.mris.com/image/V2/1/Yu59d899Ocpyr_RnF0-8qNJX1oYibjwp9TiLy-bZvU9vRJ2iC1zSQgFwW-fTCs6tVkKrj99s7FFm5Ygwl88xIA.jpg"
+										alt="64x64" data-src="holder.js/64x64">
+									<%}%>
 								</a>
 							</div>
 							<div class="col-lg-8 rowText" style="width: 400px;">
@@ -323,15 +329,15 @@ col-lg-4 col-md-4 col-sm-4{
 								</dl>
 							</div>
 						</div>
-						<div class="col-md-2" style="float:right">
-							<p>
+						<div class="col-md-2" style="float:right;" >
+							
 							<% if(session.username != null && watchlist!= "true"){  %>
 								<g:formRemote name="WatchListForm" class="col-lg-12" url="[controller:"restClient", action:"AddToUserWatchList" ,params: [address: "${flash.address}"]]"
 								onComplete="updateStatus()" >
 									<button id="WatchListButton" class="btn btn-lg btn-primary" type="submit"> Add to Watchlist!</button>
 								</g:formRemote>
 							<% } %>
-							</p>
+							
 						</div>
 					</div>
 				</div>

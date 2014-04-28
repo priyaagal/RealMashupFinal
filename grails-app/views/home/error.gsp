@@ -88,6 +88,32 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 	});
 </script>
 
+<g:javascript library="jquery-ui" />
+<r:layoutResources/>
+<script>
+            function populate()
+            {	
+				var list = $("#updateMe").html().replace(/'/g, "")
+				
+				var res = list.split(",");
+				
+				var rlist = [] ;
+				res[0] = res[0].substring(1); //removing [
+				var len = res.length 
+				res[len-1] = res[len-1].substring(0, res[len-1].length -1); // removing ]
+				
+				for(var i in res)
+					{	
+						rlist.push(res[i]);
+					}				
+			
+				$( "#searchbar" ).autocomplete({
+          	      source:  rlist
+          	    });
+            }
+             
+</script>
+
 </head>
 <body>
 	<header>
@@ -112,9 +138,11 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 							</li>
 						</ul>
 						<div class="navbar-search pull-left">
-							<g:form class="navbar-form navbar-left" controller="restClient" action="getProperties">
-								<div class="form-group fieldcontain text-center">
-									<input type="text" required = "required" title="Search" value="" placeholder="Search " class="form-control nav-search" name="query"> 
+							<g:form name="Search" class="navbar-form navbar-left" controller="restClient" action="getProperties">
+								<g:remoteField id="searchbar"  controller ="restClient" action="getPropertiesInfoByAjax" class="center-block form-control input-lg" value="${properties}" 
+								required = "required" update="updateMe" onComplete="populate()" type="text" title="Search" placeholder="e.g. San Jose" name="query" /> 
+								 <div id="updateMe" style="display: none" > ${properties}   </div>
+								<div class="form-group fieldcontain text-center"> 
 									<span class="input-group-btn">
 										<button class="btn btn-lg btn-primary" type="submit">Go!</button>
 									</span>

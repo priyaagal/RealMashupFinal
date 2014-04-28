@@ -43,11 +43,13 @@ class MasterSoldProperty {
 		Double zpID
 		
 		Boolean recentlySold
+		String thumbs1
+		String thumbs2
 	
 	static mapping = {
 		predictedpriceAppreciation defaultValue: false
 		recentlySold defaultValue: true
-		cache usage:'read-only', include:'non-lazy'
+		//cache usage:'read-only', include:'non-lazy'
 	}
 	
 	

@@ -11,6 +11,7 @@ import org.codehaus.groovy.grails.web.json.JSONObject
 import org.codehaus.groovy.runtime.DateGroovyMethods
 import org.codehaus.groovy.runtime.DefaultGroovyMethodsSupport
 import sjsu.cmpe295.models.MasterSoldProperty
+import sjsu.cmpe295.models.MasterUnSoldProperty
 import sjsu.cmpe295.models.NormalizedUnSoldProperty
 import sjsu.cmpe295.models.MasterSoldProperty
 import sjsu.cmpe295.models.Property;
@@ -145,6 +146,54 @@ class DataNormalizerService extends DateGroovyMethods {
 		
 		return result
 	}
+	
+	def public updateData(String address, String thumbs1, String thumbs2 )
+	{	
+		println("In DataNormalizerService/updateData")
+		
+		MasterUnSoldProperty property
+		String result= "failure"
+		try
+		{
+			// if ZPID exists then we are just updating the record
+			// else we are adding a new record
+
+			if(MasterUnSoldProperty.findByAddress(address) != null)
+			{
+				property = MasterUnSoldProperty.findByAddress(address) //update
+			
+				property.setThumbs1(thumbs1)
+				property.setThumbs2(thumbs2)
+			
+				property.save(flush:true) // save to Database
+			
+				println(property.getErrors()) //check errors
+			
+				if(property.getErrors().toString().contains(" 0 "))
+					result = "success"
+				else
+				{
+					println("Record not updated")
+					result = "failure"
+				}
+			}
+			else
+			{
+				println("Record not found")
+				result = "failure"
+			}
+		}
+		catch(Exception e)
+		{	println(e.getMessage())
+			e.printStackTrace()
+			println("Record not inserted")
+			result = "failure"
+			return result
+		}
+		
+		return result
+	}
+	
 	
 	def populateExternalFactors(MasterSoldProperty property,String city)
 	{	

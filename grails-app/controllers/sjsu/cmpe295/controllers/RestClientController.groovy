@@ -57,6 +57,7 @@ class RestClientController
 					flash.weather = json.properties.weather
 					flash.costOfLiving = json.properties.costofliving
 					flash.priceAppreciated = json.properties.priceAppreciated
+					flash.thumbnail = json.properties.thumbs1
 					println(json.properties.priceAppreciated)
 					
 					/*
@@ -104,7 +105,7 @@ class RestClientController
 					}
 					
 					flash.cscore = 50 + ((flash.education+3) * 2) + ((flash.crimeRate+3) *2) + ((flash.employment+3) * 2) + ((flash.amenities+3)*3) + (flash.weather+3)
-					print("Confidence Score: "+ flash.cscore )
+					
 					//render(view: "/home/listings")
 					//redirect(controller:"home", action:"listings"  )
 					render(view: "/home/listings", model:['watchlist': params.watchlist])
