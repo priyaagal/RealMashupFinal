@@ -25,7 +25,7 @@ class RestClientController
 		{
 			// make the REST api call
 			def data = new URL("http://realmashup.aws.af.cm/rest/getProperties?query="+params.query.replace(" ","+")+"&paginate=false").getText()
-			
+			//def data = new URL("http://localhost:8080/RealMashup/rest/getProperties?query="+params.query.replace(" ","+")+"&paginate=false").getText()
 			println(data)
 			
 			def json = new JsonSlurper().parseText(data)
@@ -105,6 +105,7 @@ class RestClientController
 					}
 					
 					flash.cscore = 50 + ((flash.education+3) * 2) + ((flash.crimeRate+3) *2) + ((flash.employment+3) * 2) + ((flash.amenities+3)*3) + (flash.weather+3)
+					print("Thumbnail: "+flash.thumbnail)
 					
 					//render(view: "/home/listings")
 					//redirect(controller:"home", action:"listings"  )
