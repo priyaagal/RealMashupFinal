@@ -25,7 +25,7 @@ class RestClientController
 		{
 			// make the REST api call
 			def data = new URL("http://realmashup.aws.af.cm/rest/getProperties?query="+params.query.replace(" ","+")+"&paginate=false").getText()
-			//def data = new URL("http://localhost:8080/RealMashup/rest/getProperties?query="+params.query.replace(" ","+")+"&paginate=false").getText()
+			//def data = new URL("http://realmashup.aws.af.cm/rest/getProperties?query="+params.query.replace(" ","+")+"&paginate=false").getText()
 			println(data)
 			
 			def json = new JsonSlurper().parseText(data)
@@ -60,26 +60,6 @@ class RestClientController
 					flash.thumbnail = json.properties.thumbs1
 					println(json.properties.priceAppreciated)
 					
-					/*
-					if(flash.costOfLiving > 1.5 && flash.priceAppreciated && flash.crimeRate <= 0.5)
-					{
-						flash.ifBuy = false;
-					}
-					else if (flash.costOfLiving < 1.5 && flash.priceAppreciated) 
-					{
-						if(flash.weather > 0.5 && flash.education > 0.5 && flash.education > 0.5 && flash.crimeRate > 0.5)
-						{
-							flash.ifBuy = true;
-						}
-						else
-						 {
-							flash.ifBuy = false;
-						 }
-					}
-					else 
-					{
-						flash.ifBuy = true;
-					}*/
 					
 					// new algorithm with confidence score
 					
@@ -215,7 +195,7 @@ class RestClientController
 	{
 		println("In RestClientController/authenticateUser()")
 		// make the REST api call
-		//def data = new URL("http://localhost:8080/RealMashupFinal/rest/user/authenticateUser").getText()
+		//def data = new URL("http://realmashup.aws.af.cmFinal/rest/user/authenticateUser").getText()
 		println(params.toString())
 		def error
 		User user
@@ -250,10 +230,10 @@ class RestClientController
 	{
 		println("In RestClientController/registerUser()")
 		// make the REST api call
-		//def data = new URL("http://localhost:8080/RealMashupFinal/rest/user/registerUser").getText()
+		//def data = new URL("http://realmashup.aws.af.cmFinal/rest/user/registerUser").getText()
 		def error
 		User user
-		//def http = new HTTPBuilder("http://localhost:8080/RealMashupFinal/rest/user/registerUser")
+		//def http = new HTTPBuilder("http://realmashup.aws.af.cmFinal/rest/user/registerUser")
 		def http = new HTTPBuilder("http://realmashup.aws.af.cm/rest/user/registerUser")
 		http.request(Method.PUT, groovyx.net.http.ContentType.JSON)
 		{
@@ -352,5 +332,40 @@ class RestClientController
 	   
    }
 
-	
+   def removeFromWatchList() {
+	   println("In class RestClientController/removeFromWatchList()")
+	   
+	   def error
+	   def properties
+	   def http = new HTTPBuilder("http://realmashup.aws.af.cm/rest/watchlist/removeFromWatchList")
+	   //println(params.toString())
+	   
+	   http.request(Method.PUT, groovyx.net.http.ContentType.JSON)
+	   {
+		    body = [address:params.address, email:session.email];
+		   response.success = { resp, json ->
+							  // println(json)
+							   properties = json.properties
+							   error =json.error
+						   }
+	   }
+	  
+	   
+	   if(error == "success")
+	   {
+		   def total = properties.size()
+		   println(total.toString())
+		   printf(properties.size().toString())
+		   flash.properties = properties
+		   render(view: "/home/result", model:['properties':properties, 'total': total, 'watchlist': true])
+		   //redirect(controller: "home", action:"index")
+	   }
+	   else
+	   {
+		   flash.errorMessage = (error.split(":"))[1]
+		   println(flash.errorMessage)
+		   redirect(controller:"home", action: "showError")
+	   }
+	   
+   }
 }

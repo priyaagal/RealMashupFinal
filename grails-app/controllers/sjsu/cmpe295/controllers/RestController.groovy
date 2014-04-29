@@ -312,6 +312,10 @@ class RestController {
 	{
 		
 		println("In RestController/addToUserWatchlist()")
+		// dump out params
+		params?.each { key, value ->
+			println( "params: $key = $value" )
+		}
 		
 		def user
 		def property
@@ -354,7 +358,70 @@ class RestController {
 		}
 		else
 		{
-			def message = "failue:Property not added to Watchlist"
+			def message = "failue:Input address not provided to add property to Watchlist"
+			render JSON.parse("{\"error\" : \"" + message + "\"}") as JSON
+		}
+	}
+	
+	def removeFromWatchList()
+	{
+		
+		println("In RestController/removeFromUserWatchlist()")
+		// dump out params
+		params?.each { key, value ->
+			println( "params: $key = $value" )
+		}
+		
+		def user
+		def property
+		def address = request.JSON.address
+		
+		if(address)
+		{
+		
+		   property = MasterUnSoldProperty.findByAddress(address)
+		   user = User.findByEmail(request.JSON.email) // find user by email from session
+		   HashSet<MasterUnSoldProperty> properties
+	 
+		   // set association
+		   if(user.props != null)
+		   {
+			   properties =  user.props
+			   println("Original Set:"+properties.toString())
+			   
+			   println("Removed Element:"+property.toString())
+			   
+			   properties = properties.minus(property)
+			   println("Diminished Set:"+properties.toString())
+			   user.props =  properties
+		
+			   // save objects
+			   user.save(flush:true)
+			   printf(user.getErrors().toString())
+			   println(user.errors)
+			   
+			   for (props in user.props)
+			   { 	println (props.address.toString())
+					   println (props.city.toString())
+					println (props.state.toString())
+			   }
+				
+			   //render user as JSON
+			   render(contentType: 'text/json')
+			   {[
+					   'error': "success",
+					   'properties': properties
+			   ]}
+		   }
+		   else
+		   {
+			   def message = "failue:Property not added in Watchlist"
+			   render JSON.parse("{\"error\" : \"" + message + "\"}") as JSON
+		   }
+		}
+		else
+		{
+			def message = "failue:Input address not provided to search property in Watchlist"
 			render JSON.parse("{\"error\" : \"" + message + "\"}") as JSON
 		}
 	}
