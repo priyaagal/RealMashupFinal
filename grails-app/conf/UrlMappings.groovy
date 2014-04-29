@@ -23,9 +23,9 @@ class UrlMappings {
 		}
 		
 		"/rest/watchlist/$sku?"(controller: "rest", parseRequest: true) {
-			action = [POST: "addToUserWatchlist", GET: "getUserWatchlist"]
+			action = [POST: "addToUserWatchlist", PUT: "removeFromWatchList", GET: "getUserWatchlist" ]
 		}
-		
+	
 		name register: "/register"(view:"/home/register")
 		name logout: "/logout"(view:"/home/logout")
 	}

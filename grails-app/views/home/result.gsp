@@ -270,8 +270,16 @@ col-lg-4 col-md-4 col-sm-4{
 
             function updateStatus(i)
             {	
-            	$( "#WatchListButton"+i ).html("Added to UserWatchList");
-           	    $( "#WatchListButton"+i ).prop("disabled",true);
+            	if(${watchlist} != true )
+                {
+	                $( "#WatchListButton"+i ).html("Added to Watchlist!");
+	           	   	$( "#WatchListButton"+i ).prop("disabled",true);
+                }
+            	else
+                {
+            		$( "#WatchListButton"+i ).html("Removed From Watchlist!");
+ 	           	   	$( "#WatchListButton"+i ).prop("disabled",true);
+                }
             }
             
 </script>
@@ -431,9 +439,14 @@ col-lg-4 col-md-4 col-sm-4{
 										<% if(session.username != null && watchlist != true){ %>
 											<g:formRemote name="WatchListForm" class="col-lg-12" url="[controller:"restClient", action:"AddToUserWatchList" ,params: [address: "${properties[i].address}"]]"
 											onComplete="updateStatus(${i})" >
-												<button id="WatchListButton<%=i%>" class="btn btn-lg btn-primary" style="margin-left: 20px; margin-top: 20px;" type="submit"> Add to Watchlist!</button>
+												<button id="WatchListButton<%=i%>" class="btn btn-lg btn-primary" style="margin-left: 20px; margin-top: 20px;" type="submit">Add to Watchlist!</button>
 											</g:formRemote>
-										<% } %>
+										<% }else{ %>
+											<g:formRemote name="WatchListForm" class="col-lg-12" url="[controller:"restClient", action:"removeFromWatchList" ,params: [address: "${properties[i].address}"]]"
+											onComplete="updateStatus(${i})" >
+												<button id="WatchListButton<%=i%>" class="btn btn-lg btn-primary" style="margin-left: 20px; margin-top: 20px;" type="submit">Remove From Watchlist!</button>
+											</g:formRemote>
+										<%}%>
 									</p>
 								</div>
 							</div>
