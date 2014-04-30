@@ -344,7 +344,7 @@ col-lg-4 col-md-4 col-sm-4{
 								onComplete="updateStatus()" >
 									<button id="WatchListButton" class="btn btn-lg btn-primary" type="submit"> Add to Watchlist!</button>
 								</g:formRemote>
-							<% }else{ %>
+							<% }else if((session.username != null && watchlist== "true")){ %>
 								<g:formRemote name="WatchListForm" class="col-lg-12" url="[controller:"restClient", action:"removeFromWatchList" ,params: [address: "${flash.address}"]]"
 								onComplete="updateStatus()" >
 									<button id="WatchListButton" class="btn btn-lg btn-primary" type="submit"> Remove From Watchlist!</button>
@@ -465,7 +465,7 @@ col-lg-4 col-md-4 col-sm-4{
 		</div>
 	</div>
 	<br>
-	<div id="footer" class="section footer" style = "height: 100px; background-color:#000000">
+	<div id="footer" class="section footer " style = "height: 100px; background-color:#000000">
 		<div class="container align-center" style="margin-top: 0px; border-top-width: 50px; padding-top: 30px;">
 			<p class="text-muted credit align-center" style = "color: #777777; font-size: 16px; font-weight: 300; line-height: 1.6em;">&copy; Real Realty 2014</p>
 		</div>
