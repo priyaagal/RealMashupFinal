@@ -98,8 +98,8 @@ class RestClientController
 				else if(json.type == "city")
 				{	
 						def properties = json.properties
-						def total = properties.size()
-						println(total.toString())
+						def total = json.total
+						println("Total:"+total.toString())
 						printf(properties.size().toString())
 						
 						for (it in properties)

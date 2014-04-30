@@ -12,10 +12,8 @@ import org.codehaus.groovy.runtime.DateGroovyMethods
 import org.codehaus.groovy.runtime.DefaultGroovyMethodsSupport
 import sjsu.cmpe295.models.MasterSoldProperty
 import sjsu.cmpe295.models.MasterUnSoldProperty
-import sjsu.cmpe295.models.NormalizedUnSoldProperty
 import sjsu.cmpe295.models.MasterSoldProperty
-import sjsu.cmpe295.models.Property;
-import sjsu.cmpe295.models.SoldProperty
+
 import groovy.time.TimeCategory
 import java.text.SimpleDateFormat
 import java.util.Date

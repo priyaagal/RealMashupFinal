@@ -2,7 +2,6 @@ package sjsu.cmpe295.controllers
 
 import java.text.DecimalFormat
 import sjsu.cmpe295.models.MasterUnSoldProperty
-import sjsu.cmpe295.models.Property
 import sjsu.cmpe295.models.User
 
 class HomeController {

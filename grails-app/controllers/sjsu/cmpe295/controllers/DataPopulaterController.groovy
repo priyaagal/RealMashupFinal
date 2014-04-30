@@ -1,6 +1,5 @@
 package sjsu.cmpe295.controllers
 
-import sjsu.cmpe295.models.Property;
 
 
 class DataPopulaterController {

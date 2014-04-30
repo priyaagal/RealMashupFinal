@@ -8,9 +8,8 @@ import grails.rest.*
 
 import groovy.json.JsonBuilder
 import org.codehaus.groovy.grails.web.json.JSONObject
-import sjsu.cmpe295.models.Property;
-import sjsu.cmpe295.models.SoldProperty
 
+// This code was initially used to generate records from zillow. can be customized later as required
 
 class ZillowService {
 
@@ -95,6 +94,7 @@ class ZillowService {
 			BufferedReader br = new BufferedReader(new InputStreamReader(System.in))
 			def input = br.readLine()
 			
+			/*
 			if(input == "1" || input == "1")
 				Object property = new SoldProperty()
 			else if(input == "2" || input == "2")
@@ -105,7 +105,7 @@ class ZillowService {
 					println("Record not inserted" )
 					return
 			}
-				
+				*/
 			
 			populateProperty(result,property)
 		}

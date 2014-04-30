@@ -1,7 +1,7 @@
 package sjsu.cmpe295.controllers
 import grails.converters.JSON
 import java.text.DecimalFormat
-import sjsu.cmpe295.models.MasterUnSoldProperty
+import sjsu.cmpe295.models.MasterProperty
 import sjsu.cmpe295.models.User
 
 // This class acts as a backend for all the urls mapped from urlMappings.groovy
@@ -16,6 +16,7 @@ class RestController {
 
 		def offset = 0
 		def max = 10
+		def total
 		println(params.toString())
 		
 		if(params.offset)
@@ -31,7 +32,7 @@ class RestController {
 			def address = query.split(",")
 			params.address = address[0]
 		}
-		else if (query.count(" ") > 1 && query.count(" ") < 6 )
+		else if (query.count(" ") > 1 && query.count(" ") < 7)
 		{
 			params.address = query
 		}
@@ -57,12 +58,16 @@ class RestController {
 					if(params.paginate == "true")
 						{	println("paginated")
 							filters = [ max : max, offset : offset, sort : "zest_amt", order: 'desc', cache:true]
-							properties = MasterUnSoldProperty.findAllByCity(params.city, filters)
+							properties = MasterProperty.findAllByCity(params.city, filters)
 							println(properties.size().toString())
+							total = properties.size()
+							println("total:"+total)
 						}
 					else
-					{	filters = [sort : "zest_amt", order: 'desc',  cache:true]
-						properties = MasterUnSoldProperty.findAllByCity(params.city, filters)
+					{	filters = [ max : max, offset : offset, sort : "zest_amt", order: 'desc',  cache:true]
+						properties = MasterProperty.findAllByCity(params.city, filters)
+						total = MasterProperty.countByCity(params.city)
+						println("total:"+total)
 					}
 					
 					if(properties)
@@ -72,7 +77,8 @@ class RestController {
 						{[
 								'error': "success",
 								'type' : "city",
-								'properties': properties
+								'properties': properties,
+								'total': total
 						]}
 					}
 					else
@@ -90,7 +96,7 @@ class RestController {
 			{
 				try
 				{
-					properties = MasterUnSoldProperty.findByAddress(params.address,  [cache:true])
+					properties = MasterProperty.findByAddress(params.address,  [cache:true])
 					if(properties)
 					{	
 						//render properties as JSON
@@ -163,7 +169,7 @@ class RestController {
 			{	
 				try
 				{
-					def c = MasterUnSoldProperty.createCriteria()
+					def c = MasterProperty.createCriteria()
 					properties = c.list	
 										{
 											like("city", ""+params.city+"%")
@@ -202,7 +208,7 @@ class RestController {
 			else if(params.address)
 			{	try
 				{
-					def c = MasterUnSoldProperty.createCriteria()
+					def c = MasterProperty.createCriteria()
 					properties = c.list
 										{
 											like("address", "%"+params.address+"%")
@@ -364,15 +370,15 @@ class RestController {
 		{
 		   try
 		   {
-			   property = MasterUnSoldProperty.findByAddress(address)
+			   property = MasterProperty.findByAddress(address)
 			   user = User.findByEmail(params.email) // find user by email from session
-			   HashSet<MasterUnSoldProperty> properties
+			   HashSet<MasterProperty> properties
 		 
 			   // set association
 			   if(user.props != null)
 				   properties =  user.props
 			   else
-				   properties = new HashSet<MasterUnSoldProperty>()
+				   properties = new HashSet<MasterProperty>()
 				   
 			   properties.add(property)
 			   printf(properties.toString())
@@ -425,9 +431,9 @@ class RestController {
 		{
 		   try
 		   {
-			   property = MasterUnSoldProperty.findByAddress(address)
+			   property = MasterProperty.findByAddress(address)
 			   user = User.findByEmail(request.JSON.email) // find user by email from session
-			   HashSet<MasterUnSoldProperty> properties
+			   HashSet<MasterProperty> properties
 		 
 			   // set association
 			   if(user.props != null)
@@ -497,7 +503,7 @@ class RestController {
 		{	
 			try
 			{
-				List properties = new ArrayList<MasterUnSoldProperty>()
+				List properties = new ArrayList<MasterProperty>()
 	
 				if(params.paginate == "true")
 				{	println("paginated")
