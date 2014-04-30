@@ -15,14 +15,16 @@ class BackendController {
 		
 		for(int i=1;i<MasterUnSoldProperty.count();i++)
 		{
-			def property = MasterUnSoldProperty.get(i)
-			MasterSoldProperty mproperty = new MasterSoldProperty();
+			MasterUnSoldProperty property = MasterUnSoldProperty.get(i)
+			MasterProperty mproperty = new MasterProperty();
 			mproperty.setAddress(property.getAddress())
 			mproperty.setAmenities(property.getAmenities())
+			mproperty.setAge(property.getAge())
 			mproperty.setBathroom(property.getBathroom())
 			mproperty.setBedroom(property.getBedroom())
 			mproperty.setCostofliving(property.getCostofliving())
 			mproperty.setCrimerate(property.getCrimerate())
+			mproperty.setCity(property.getCity())
 			mproperty.setDaysPending(property.getDaysPending())
 			mproperty.setEducation(property.getEducation())
 			mproperty.setEmployment(property.getEmployment())
@@ -34,8 +36,12 @@ class BackendController {
 			mproperty.setLongitude(property.getLongitude())
 			mproperty.setLotSizeSqFt(property.getLotSizeSqFt())
 			mproperty.setPriceAppreciated(property.getPriceAppreciated())
-			mproperty.setState(property.getState)
-			mproperty.setTaxAssesment(property.getTaxAssesment()())
+			mproperty.setPredictedpriceAppreciation(property.getPredictedpriceAppreciation())
+			mproperty.setRecentlySold(property.getRecentlySold())
+			mproperty.setState(property.getState())
+			mproperty.setTaxAssesment(property.getTaxAssesment())
+			mproperty.setThumbs1(property.getThumbs1())
+			mproperty.setThumbs2(property.getThumbs2())
 			mproperty.setUseCode(property.getUseCode())
 			mproperty.setWeather(property.getWeather())
 			mproperty.setYearBuilt(property.getYearBuilt())
@@ -45,10 +51,11 @@ class BackendController {
 			mproperty.setZest_valueChange(property.getZest_valueChange())
 			mproperty.setZipcode(property.getZipcode())
 			mproperty.setZpID(property.getZpID())
-			mproperty.setPredictedpriceAppreciation(property.getPredictedpriceAppreciation())
-			mproperty.setRecentlySold(false)
+	
+			println(property.getAddress())
+			mproperty.save(flush:true)
 			
-			mproperty.save()
+			println(property.getErrors()) //check errors
 			
 			if(property.getErrors().toString().contains(" 0 "))
 				println("Record "+i+" updated")
@@ -56,6 +63,7 @@ class BackendController {
 			{
 				println("Record not updated")
 			}
+			
 		}
 	}
 	

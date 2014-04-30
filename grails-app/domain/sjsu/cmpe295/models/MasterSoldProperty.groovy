@@ -49,7 +49,7 @@ class MasterSoldProperty {
 	static mapping = {
 		predictedpriceAppreciation defaultValue: false
 		recentlySold defaultValue: true
-		cache usage:'read-only', include:'non-lazy'
+		//cache usage:'read-only', include:'non-lazy'
 	}
 	
 	

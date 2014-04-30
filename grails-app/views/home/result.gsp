@@ -376,9 +376,15 @@ col-lg-4 col-md-4 col-sm-4{
 					<div class="propertyContent row" style="margin-left: 40px; margin-right: 20px;">
 						<div class="col-lg-4 col-md-4 col-sm-4">
 							<a class="pull-left" href="#"> 
-								<img class="media-object img-responsive" style="width: 300px; height: 250px; padding-top: 20px;" 
-								src="http://images.prd.mris.com/image/V2/1/Yu59d899Ocpyr_RnF0-8qNJX1oYibjwp9TiLy-bZvU9vRJ2iC1zSQgFwW-fTCs6tVkKrj99s7FFm5Ygwl88xIA.jpg" 
-								alt="64x64" data-src="holder.js/64x64">
+								<%if (properties[i].thumbs1 != ""){  %>
+										<img class="media-object img-responsive" style="width: 400px; height: 250px; padding-top: 20px;"
+										src= "${properties[i].thumbs1}"
+										alt="64x64" data-src="holder.js/64x64">
+									<%}else {%>
+										<img class="media-object img-responsive" style="width: 400px; height: 250px; padding-top: 20px;"
+										src="http://images.prd.mris.com/image/V2/1/Yu59d899Ocpyr_RnF0-8qNJX1oYibjwp9TiLy-bZvU9vRJ2iC1zSQgFwW-fTCs6tVkKrj99s7FFm5Ygwl88xIA.jpg"
+										alt="64x64" data-src="holder.js/64x64">
+									<%}%>
 							</a>
 							<div class="col-lg-8 rowText"">
 								<h4 style="padding-top: 10px; border-top-width: 20px; margin-top: 20px;">

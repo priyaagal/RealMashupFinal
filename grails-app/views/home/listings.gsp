@@ -188,8 +188,16 @@ col-lg-4 col-md-4 col-sm-4{
 
             function updateStatus()
             {	
-            	$( "#WatchListButton" ).html("Added to UserWatchList");
-           	    $( "#WatchListButton" ).prop("disabled",true);
+            	if(${watchlist} != true )
+                {
+	                $( "#WatchListButton" ).html("Added to Watchlist!");
+	           	   	$( "#WatchListButton" ).prop("disabled",true);
+                }
+            	else
+                {
+            		$( "#WatchListButton").html("Removed From Watchlist!");
+ 	           	   	$( "#WatchListButton").prop("disabled",true);
+                }
             }
              
              
@@ -336,8 +344,12 @@ col-lg-4 col-md-4 col-sm-4{
 								onComplete="updateStatus()" >
 									<button id="WatchListButton" class="btn btn-lg btn-primary" type="submit"> Add to Watchlist!</button>
 								</g:formRemote>
-							<% } %>
-							
+							<% }else{ %>
+								<g:formRemote name="WatchListForm" class="col-lg-12" url="[controller:"restClient", action:"removeFromWatchList" ,params: [address: "${flash.address}"]]"
+								onComplete="updateStatus()" >
+									<button id="WatchListButton" class="btn btn-lg btn-primary" type="submit"> Remove From Watchlist!</button>
+								</g:formRemote>
+							<% }%>
 						</div>
 					</div>
 				</div>
