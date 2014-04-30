@@ -35,6 +35,12 @@ class HomeController {
 	   println("In class HomeController/showError()")
 	   render(view:"error")
     }
+	
+	def show404()
+	{
+	   println("In class HomeController/showError()")
+	   render(view:"404")
+	}
 
 }
 

@@ -24,7 +24,11 @@ class RestClientController
 		if(params.query)
 		{
 			// make the REST api call
-			def data = new URL("http://realmashup.aws.af.cm/rest/getProperties?query="+params.query.replace(" ","+")+"&paginate=false").getText()
+			def data
+		try
+		{
+			data = new URL("http://realmashup.aws.af.cm/rest/getProperties?query="+params.query.replace(" ","+")+"&paginate=false").getText()
+			
 			//def data = new URL("http://realmashup.aws.af.cm/rest/getProperties?query="+params.query.replace(" ","+")+"&paginate=false").getText()
 			println(data)
 			
@@ -93,36 +97,41 @@ class RestClientController
 				}
 				else if(json.type == "city")
 				{	
-					def properties = json.properties
-					def total = properties.size()
-					println(total.toString())
-					printf(properties.size().toString())
-					
-					for (it in properties)
-					{
-						DecimalFormat dFormat = new DecimalFormat("####,###,###.00");
-						String zestAmount = '$' + (dFormat.format(it.zest_amt));
-						println(zestAmount)
-						it.zest_amt = zestAmount
-					}
-					
-					flash.properties = properties
-					
-					//redirect(controller: "home", action:"showResult",  model:['properties':properties, 'total': total, 'watchlist': false])
-					render(view: "/home/result", model:['properties':properties, 'total': total, 'watchlist': false])
+						def properties = json.properties
+						def total = properties.size()
+						println(total.toString())
+						printf(properties.size().toString())
+						
+						for (it in properties)
+						{
+							DecimalFormat dFormat = new DecimalFormat("####,###,###.00");
+							String zestAmount = '$' + (dFormat.format(it.zest_amt));
+							println(zestAmount)
+							it.zest_amt = zestAmount
+						}
+						
+						flash.properties = properties
+						
+						//redirect(controller: "home", action:"showResult",  model:['properties':properties, 'total': total, 'watchlist': false])
+						render(view: "/home/result", model:['properties':properties, 'total': total, 'watchlist': false])
 				}
 				else
 				{
-					flash.errorMessage = (json.error.split(":"))[1]
-					redirect(controller:"home", action: "showError")
+						flash.errorMessage = (json.error.split(":"))[1]
+						redirect(controller:"home", action: "showError")
 				}
 			}
 			else
 			{
-				flash.errorMessage = (json.error.split(":"))[1]
-				redirect(controller:"home", action: "showError")
+					flash.errorMessage = (json.error.split(":"))[1]
+					redirect(controller:"home", action: "showError")
 			}
 		}	
+		catch(Exception e)
+		{
+				redirect(controller:"home", action: "show404")
+		} //try
+		} // guery if
 	}
 	
 	def getPropertiesInfoByAjax()
@@ -130,14 +139,20 @@ class RestClientController
 		println("In RestClientController/getPropertiesInfoByAjax()")
 		println(params.toString())
 		// make the REST api call
-		def data = new URL("http://realmashup.aws.af.cm/rest/ajax/getPropertiesInfoByAjax?query="+params.value.replace(" ","+")+"&paginate=false").getText()
+		try{
+			def data = new URL("http://realmashup.aws.af.cm/rest/ajax/getPropertiesInfoByAjax?query="+params.value.replace(" ","+")+"&paginate=false").getText()
 		
-		def json = new JsonSlurper().parseText(data)
-		//println(json)
-		def properties = json.properties
-		println(properties.toString())
-		flash.properties = properties 
-		render ( properties )
+		
+			def json = new JsonSlurper().parseText(data)
+			//println(json)
+			def properties = json.properties
+			println(properties.toString())
+			flash.properties = properties 
+			render ( properties )
+		}catch(Exception e)
+		{
+			redirect(controller:"home", action: "show404")
+		}
 	}
 	
 	
@@ -145,50 +160,64 @@ class RestClientController
 	{
 		println("In RestClientController/paginateAddresses()")
 		
-		// make the REST api call
-		def data = new URL("http://realmashup.aws.af.cm/rest/getProperties?query="+params.query.replace(" ","+")
-			+"&paginate=true"+"&max="+params.max+"&offset="+params.offset).getText()
-		println(data)
+		try{
+			// make the REST api call
+			def data = new URL("http://realmashup.aws.af.cm/rest/getProperties?query="+params.query.replace(" ","+")
+				+"&paginate=true"+"&max="+params.max+"&offset="+params.offset).getText()
 		
-		def json = new JsonSlurper().parseText(data)
-		def properties = json.properties
-		def total = params.total
-		println(properties.size())
-		for (it in properties)
+			println(data)
+			
+			def json = new JsonSlurper().parseText(data)
+			def properties = json.properties
+			def total = params.total
+			println(properties.size())
+			for (it in properties)
+			{
+				DecimalFormat dFormat = new DecimalFormat("####,###,###.00");
+				String zestAmount = '$' + (dFormat.format(it.zest_amt));
+				println(zestAmount)
+				it.zest_amt = zestAmount
+			}
+			
+			flash.properties = properties
+			render(view: "/home/result", model:['properties':properties, 'total': total, 'watchlist': false])
+			
+		}catch(Exception e)
 		{
-			DecimalFormat dFormat = new DecimalFormat("####,###,###.00");
-			String zestAmount = '$' + (dFormat.format(it.zest_amt));
-			println(zestAmount)
-			it.zest_amt = zestAmount
+			redirect(controller:"home", action: "show404")
 		}
-		
-		flash.properties = properties
-		render(view: "/home/result", model:['properties':properties, 'total': total, 'watchlist': false])
 	}
 	
 	def paginateWatchList()
 	{
 		println("In RestClientController/paginateWatchList()")
 		
+		try{
 		// make the REST api call
-		def data = new URL("http://realmashup.aws.af.cm/rest/watchlist/getUserWatchlist?email="+session.email
-			+"&paginate=true"+"&max="+params.max+"&offset="+params.offset).getText()
-		println(data)
+			def data = new URL("http://realmashup.aws.af.cm/rest/watchlist/getUserWatchlist?email="+session.email
+				+"&paginate=true"+"&max="+params.max+"&offset="+params.offset).getText()
+	
+			println(data)
+			
+			def json = new JsonSlurper().parseText(data)
+			def properties = json.properties
+			def total = params.total
+			println(properties.size())
+			for (it in properties)
+			{
+				DecimalFormat dFormat = new DecimalFormat("####,###,###.00");
+				String zestAmount = '$' + (dFormat.format(it.zest_amt));
+				println(zestAmount)
+				it.zest_amt = zestAmount
+			}
+			
+			flash.properties = properties
+			render(view: "/home/result", model:['properties':properties, 'total': total, 'watchlist': true])
 		
-		def json = new JsonSlurper().parseText(data)
-		def properties = json.properties
-		def total = params.total
-		println(properties.size())
-		for (it in properties)
+		}catch(Exception e)
 		{
-			DecimalFormat dFormat = new DecimalFormat("####,###,###.00");
-			String zestAmount = '$' + (dFormat.format(it.zest_amt));
-			println(zestAmount)
-			it.zest_amt = zestAmount
+			redirect(controller:"home", action: "show404")
 		}
-		
-		flash.properties = properties
-		render(view: "/home/result", model:['properties':properties, 'total': total, 'watchlist': true])
 	}
 	
 	def authenticateUser() 
@@ -199,31 +228,39 @@ class RestClientController
 		println(params.toString())
 		def error
 		User user
-		def http = new HTTPBuilder("http://realmashup.aws.af.cm/rest/user/authenticateUser")
-		http.request(Method.POST, groovyx.net.http.ContentType.JSON)
-		{
-			body = [email:params.email, password:params.password];
-			response.success = { resp, json ->
-								println(json)
-								user = json.user
-								error =json.error
-							}
-		}
 		
-		if(error == "success")
-		{	
-			//render(view: '/home/index')
-			session.username = user.firstname
-			session.lastname = user.lastname
-			session.email = user.email
-			redirect(controller: "home", action:"index")
-		}
-		else
-		{
-			flash.errorMessage = (error.split(":"))[1]
-			redirect(controller:"home", action: "showError")
-		}
+		try{
+			def http = new HTTPBuilder("http://realmashup.aws.af.cm/rest/user/authenticateUser")
 		
+		
+			http.request(Method.POST, groovyx.net.http.ContentType.JSON)
+			{
+				body = [email:params.email, password:params.password];
+				response.success = { resp, json ->
+									println(json)
+									user = json.user
+									error =json.error
+								}
+			}
+			
+			if(error == "success")
+			{	
+				//render(view: '/home/index')
+				session.username = user.firstname
+				session.lastname = user.lastname
+				session.email = user.email
+				redirect(controller: "home", action:"index")
+			}
+			else
+			{
+				flash.errorMessage = (error.split(":"))[1]
+				redirect(controller:"home", action: "showError")
+			}
+		
+		}catch(Exception e)
+		{
+			redirect(controller:"home", action: "show404")
+		}
 	}
 	
 	def registerUser()
@@ -233,30 +270,38 @@ class RestClientController
 		//def data = new URL("http://realmashup.aws.af.cmFinal/rest/user/registerUser").getText()
 		def error
 		User user
-		//def http = new HTTPBuilder("http://realmashup.aws.af.cmFinal/rest/user/registerUser")
-		def http = new HTTPBuilder("http://realmashup.aws.af.cm/rest/user/registerUser")
-		http.request(Method.PUT, groovyx.net.http.ContentType.JSON)
-		{
-			body = [fname:params.fname, lname:params.lname, email:params.email, password:params.password];
-			response.success = { resp, json ->
-								println(json)
-								user = json.user
-								error =json.error
-							}
-		}
 		
-		if(error == "success")
+		try{
+			//def http = new HTTPBuilder("http://realmashup.aws.af.cmFinal/rest/user/registerUser")
+			def http = new HTTPBuilder("http://realmashup.aws.af.cm/rest/user/registerUser")
+		
+			http.request(Method.PUT, groovyx.net.http.ContentType.JSON)
+			{
+				body = [fname:params.fname, lname:params.lname, email:params.email, password:params.password];
+				response.success = { resp, json ->
+									println(json)
+									user = json.user
+									error =json.error
+								}
+			}
+			
+			if(error == "success")
+			{
+				//render(view: '/home/index')
+				session.username = user.firstname
+				session.lastname = user.lastname
+				session.email = user.email
+				redirect(controller: "home", action:"index")
+			}
+			else
+			{
+				flash.errorMessage = (error.split(":"))[1]
+				redirect(controller:"home", action: "showError")
+			}
+			
+		}catch(Exception e)
 		{
-			//render(view: '/home/index')
-			session.username = user.firstname
-			session.lastname = user.lastname
-			session.email = user.email
-			redirect(controller: "home", action:"index")
-		}
-		else
-		{
-			flash.errorMessage = (error.split(":"))[1]
-			redirect(controller:"home", action: "showError")
+			redirect(controller:"home", action: "show404")
 		}
 		
 	}
@@ -264,34 +309,40 @@ class RestClientController
 	def getUserWatchlist() {
 		println("In class RestClientController/getUserWatchlist()")
 		
-		def data = new URL("http://realmashup.aws.af.cm/rest/watchlist/getUserWatchlist?email="+session.email).getText()
-		println(data)
+		try{
+			def data = new URL("http://realmashup.aws.af.cm/rest/watchlist/getUserWatchlist?email="+session.email).getText()
 		
-		def json = new JsonSlurper().parseText(data)
-		
-		
-		//redirect(controller: "home", action:"showResult",  model:['properties':properties, 'total': total, 'watchlist': false])
-		if(json.error == "success")
-		{	
-			def properties = json.properties
-			def total = properties.size()
-			println(total.toString())
-			printf(properties.size().toString())
-			for (it in properties)
-			{
-				DecimalFormat dFormat = new DecimalFormat("####,###,###.00");
-				String zestAmount = '$' + (dFormat.format(it.zest_amt));
-				println(zestAmount)
-				it.zest_amt = zestAmount
+			println(data)
+			
+			def json = new JsonSlurper().parseText(data)
+			
+			//redirect(controller: "home", action:"showResult",  model:['properties':properties, 'total': total, 'watchlist': false])
+			if(json.error == "success")
+			{	
+				def properties = json.properties
+				def total = properties.size()
+				println(total.toString())
+				printf(properties.size().toString())
+				for (it in properties)
+				{
+					DecimalFormat dFormat = new DecimalFormat("####,###,###.00");
+					String zestAmount = '$' + (dFormat.format(it.zest_amt));
+					println(zestAmount)
+					it.zest_amt = zestAmount
+				}
+				flash.properties = properties
+				render(view: "/home/result", model:['properties':properties, 'total': total, 'watchlist': true])
 			}
-			flash.properties = properties
-			render(view: "/home/result", model:['properties':properties, 'total': total, 'watchlist': true])
-		}
-		else
+			else
+			{
+				flash.errorMessage = (json.error.split(":"))[1]
+				println(flash.errorMessage)
+				redirect(controller:"home", action: "showError")
+			}
+		
+		}catch(Exception e)
 		{
-			flash.errorMessage = (json.error.split(":"))[1]
-			println(flash.errorMessage)
-			redirect(controller:"home", action: "showError")
+			redirect(controller:"home", action: "show404")
 		}
 	}
 
@@ -300,36 +351,42 @@ class RestClientController
 	   
 	   def error
 	   def properties
-	   def http = new HTTPBuilder("http://realmashup.aws.af.cm/rest/watchlist/addToUserWatchList?email="+session.email)
-	   println(params.toString())
 	   
-	   http.request(Method.POST, groovyx.net.http.ContentType.JSON)
+	   try{
+		   def http = new HTTPBuilder("http://realmashup.aws.af.cm/rest/watchlist/addToUserWatchList?email="+session.email)
+	   
+		   println(params.toString())
+		   
+		   http.request(Method.POST, groovyx.net.http.ContentType.JSON)
+		   {
+			   body = [address:params.address];
+			   response.success = { resp, json ->
+								   println(json)
+								   error =json.error
+								   properties = json.properties
+							   }
+		   }
+		  
+		   
+		   if(error == "success")
+		   {	
+			   def total = properties.size()
+			   println(total.toString())
+			   printf(properties.size().toString())
+			   flash.properties = properties
+			   render(view: "/home/result", model:['properties':properties, 'total': total, 'watchlist': true])
+			   //redirect(controller: "home", action:"index")
+		   }
+		   else
+		   {
+			   flash.errorMessage = (error.split(":"))[1]
+			   println(flash.errorMessage)
+			   redirect(controller:"home", action: "showError")
+		   }
+	   }catch(Exception e)
 	   {
-		   body = [address:params.address];
-		   response.success = { resp, json ->
-							   println(json)
-							   error =json.error
-							   properties = json.properties
-						   }
+		   redirect(controller:"home", action: "show404")
 	   }
-	  
-	   
-	   if(error == "success")
-	   {	
-		   def total = properties.size()
-		   println(total.toString())
-		   printf(properties.size().toString())
-		   flash.properties = properties
-		   render(view: "/home/result", model:['properties':properties, 'total': total, 'watchlist': true])
-		   //redirect(controller: "home", action:"index")
-	   }
-	   else
-	   {
-		   flash.errorMessage = (error.split(":"))[1]
-		   println(flash.errorMessage)
-		   redirect(controller:"home", action: "showError")
-	   }
-	   
    }
 
    def removeFromWatchList() {
@@ -337,35 +394,41 @@ class RestClientController
 	   
 	   def error
 	   def properties
-	   def http = new HTTPBuilder("http://realmashup.aws.af.cm/rest/watchlist/removeFromWatchList")
-	   //println(params.toString())
 	   
-	   http.request(Method.PUT, groovyx.net.http.ContentType.JSON)
-	   {
-		    body = [address:params.address, email:session.email];
-		   response.success = { resp, json ->
-							  // println(json)
-							   properties = json.properties
-							   error =json.error
-						   }
-	   }
-	  
+	   try{
+		   def http = new HTTPBuilder("http://realmashup.aws.af.cm/rest/watchlist/removeFromWatchList")
 	   
-	   if(error == "success")
+		   //println(params.toString())
+		   
+		   http.request(Method.PUT, groovyx.net.http.ContentType.JSON)
+		   {
+			    body = [address:params.address, email:session.email];
+			   response.success = { resp, json ->
+								  // println(json)
+								   properties = json.properties
+								   error =json.error
+							   }
+		   }
+		  
+		   
+		   if(error == "success")
+		   {
+			   def total = properties.size()
+			   println(total.toString())
+			   printf(properties.size().toString())
+			   flash.properties = properties
+			   render(view: "/home/result", model:['properties':properties, 'total': total, 'watchlist': true])
+			   //redirect(controller: "home", action:"index")
+		   }
+		   else
+		   {
+			   flash.errorMessage = (error.split(":"))[1]
+			   println(flash.errorMessage)
+			   redirect(controller:"home", action: "showError")
+		   }
+	   }catch(Exception e)
 	   {
-		   def total = properties.size()
-		   println(total.toString())
-		   printf(properties.size().toString())
-		   flash.properties = properties
-		   render(view: "/home/result", model:['properties':properties, 'total': total, 'watchlist': true])
-		   //redirect(controller: "home", action:"index")
+		   redirect(controller:"home", action: "show404")
 	   }
-	   else
-	   {
-		   flash.errorMessage = (error.split(":"))[1]
-		   println(flash.errorMessage)
-		   redirect(controller:"home", action: "showError")
-	   }
-	   
    }
 }
