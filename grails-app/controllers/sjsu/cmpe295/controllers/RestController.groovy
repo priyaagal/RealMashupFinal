@@ -31,7 +31,7 @@ class RestController {
 			def address = query.split(",")
 			params.address = address[0]
 		}
-		else if (query.count(" ") > 1 && query.count(" ") < 4 )
+		else if (query.count(" ") > 1 && query.count(" ") < 6 )
 		{
 			params.address = query
 		}
@@ -51,51 +51,65 @@ class RestController {
 			def filters 
 			
 			if(params.city)
-			{	
-				println(params.paginate)
-				if(params.paginate == "true")
-					{	println("paginated")
-						filters = [ max : max, offset : offset, sort : "zest_amt", order: 'desc', cache:true]
+			{	try
+				{
+					println(params.paginate)
+					if(params.paginate == "true")
+						{	println("paginated")
+							filters = [ max : max, offset : offset, sort : "zest_amt", order: 'desc', cache:true]
+							properties = MasterUnSoldProperty.findAllByCity(params.city, filters)
+							println(properties.size().toString())
+						}
+					else
+					{	filters = [sort : "zest_amt", order: 'desc',  cache:true]
 						properties = MasterUnSoldProperty.findAllByCity(params.city, filters)
-						println(properties.size().toString())
 					}
-				else
-				{	filters = [sort : "zest_amt", order: 'desc',  cache:true]
-					properties = MasterUnSoldProperty.findAllByCity(params.city, filters)
-				}
-				
-				if(properties)
+					
+					if(properties)
+					{
+						//render properties as JSON
+						render(contentType: 'text/json')
+						{[
+								'error': "success",
+								'type' : "city",
+								'properties': properties
+						]}
+					}
+					else
+					{
+						def message = "failue:Records not found"
+						render JSON.parse("{\"error\" : \"" + message + "\"}") as JSON
+					}
+				}catch(Exception e)
 				{
-					//render properties as JSON
-					render(contentType: 'text/json')
-					{[
-							'error': "success",
-							'type' : "city",
-							'properties': properties
-					]}
-				}
-				else
-				{
-					def message = "failue:Records not found"
+					def message = "failue:We are experiencing some issues with the system"
 					render JSON.parse("{\"error\" : \"" + message + "\"}") as JSON
 				}
 			}
 			else if(params.address) 
 			{
-				properties = MasterUnSoldProperty.findByAddress(params.address,  [cache:true])
-				if(properties)
-				{	
-					//render properties as JSON
-					render(contentType: 'text/json') 
-						{[
-								'error': "success",
-								'type' : "address",
-								'properties': properties
-						]}
-				}
-				else
+				try
 				{
-					def message = "failue:Property not found"
+					properties = MasterUnSoldProperty.findByAddress(params.address,  [cache:true])
+					if(properties)
+					{	
+						//render properties as JSON
+						render(contentType: 'text/json') 
+							{[
+									'error': "success",
+									'type' : "address",
+									'properties': properties
+							]}
+					}
+					else
+					{
+						def message = "failue:Property not found"
+						render JSON.parse("{\"error\" : \"" + message + "\"}") as JSON
+					}
+				
+				}catch(Exception e)
+				{
+					def message = "failue:We are experiencing some issues with the system"
 					render JSON.parse("{\"error\" : \"" + message + "\"}") as JSON
 				}
 			}
@@ -146,70 +160,81 @@ class RestController {
 			def filters
 			
 			if(params.city)
-			{
-				//properties = MasterUnSoldProperty.findAllByCity(params.city)
-				def c = MasterUnSoldProperty.createCriteria()
-				properties = c.list	
-									{
-										like("city", ""+params.city+"%")
-										order("city", "asc")
-										projections{	
-														distinct("city")
-														//property("city")
-										  			}
-									}
-									
-				println(properties.toString())
-				println(properties.size().toString())
+			{	
+				try
+				{
+					def c = MasterUnSoldProperty.createCriteria()
+					properties = c.list	
+										{
+											like("city", ""+params.city+"%")
+											order("city", "asc")
+											projections{	
+															distinct("city")
+															//property("city")
+											  			}
+										}
+										
+					println(properties.toString())
+					println(properties.size().toString())
+						
 					
-				
-				if(properties)
+					if(properties)
+					{
+						//render properties as JSON
+						render(contentType: 'text/json')
+						{[
+								'error': "success",
+								'type' : "city",
+								'properties': properties
+						]}
+					}
+					else
+					{
+						def message = "failue:Records not found"
+						render JSON.parse("{\"error\" : \"" + message + "\"}") as JSON
+					}
+				}catch(Exception e)
 				{
-					//render properties as JSON
-					render(contentType: 'text/json')
-					{[
-							'error': "success",
-							'type' : "city",
-							'properties': properties
-					]}
-				}
-				else
-				{
-					def message = "failue:Records not found"
+					def message = "failue:We are experiencing some issues with the system"
 					render JSON.parse("{\"error\" : \"" + message + "\"}") as JSON
 				}
 			}
 			else if(params.address)
-			{	
-				def c = MasterUnSoldProperty.createCriteria()
-				properties = c.list
-									{
-										like("address", "%"+params.address+"%")
-										order("address", "asc")
-										projections{
-														distinct("address")
-														//property("city")
-													  }
-									}
-				println(properties.toString())
-				println(properties.size().toString())
-									
-				if(properties)
+			{	try
 				{
-					//render properties as JSON
-					render(contentType: 'text/json')
-						{[
-								'error': "success",
-								'type' : "address",
-								'properties': properties
-						]}
-				}
-				else
+					def c = MasterUnSoldProperty.createCriteria()
+					properties = c.list
+										{
+											like("address", "%"+params.address+"%")
+											order("address", "asc")
+											projections{
+															distinct("address")
+															//property("city")
+														  }
+										}
+					println(properties.toString())
+					println(properties.size().toString())
+										
+					if(properties)
+					{
+						//render properties as JSON
+						render(contentType: 'text/json')
+							{[
+									'error': "success",
+									'type' : "address",
+									'properties': properties
+							]}
+					}
+					else
+					{
+						def message = "failue:Property not found"
+						render JSON.parse("{\"error\" : \"" + message + "\"}") as JSON
+					}
+				}catch(Exception e)
 				{
-					def message = "failue:Property not found"
+					def message = "failue:We are experiencing some issues with the system"
 					render JSON.parse("{\"error\" : \"" + message + "\"}") as JSON
 				}
-				
 			}
 		}
 	
@@ -224,24 +249,31 @@ class RestController {
 			def email = request.JSON.email
 			def password = request.JSON.password
 			
-			User user = User.findByEmailAndPassword(email, password)
-			println(user.toString())
-			
-			
-			if(user)
-			{	
-			
-				//render user as JSON
-				render(contentType: 'text/json')
-				{[
-						'error': "success",
-						'user': user
-				]}
-			}
-			else
+			try
 			{
-					def message = "failue:Invalid username or password"
-					render JSON.parse("{\"error\" : \"" + message + "\"}") as JSON
+				User user = User.findByEmailAndPassword(email, password)
+				println(user.toString())
+				
+				
+				if(user)
+				{	
+				
+					//render user as JSON
+					render(contentType: 'text/json')
+					{[
+							'error': "success",
+							'user': user
+					]}
+				}
+				else
+				{
+						def message = "failue:Invalid username or password"
+						render JSON.parse("{\"error\" : \"" + message + "\"}") as JSON
+				}
+			}catch(Exception e)
+			{
+				def message = "failue:We are experiencing some issues with the system"
+				render JSON.parse("{\"error\" : \"" + message + "\"}") as JSON
 			}
 				
 		}
@@ -266,38 +298,45 @@ class RestController {
 		
 		if(request.JSON.fname && request.JSON.lname && request.JSON.email && request.JSON.password)
 		{	
-			//check if user exists
-			User exuser = User.findByEmail(request.JSON.email)
-			if(!exuser)
+			try
 			{
-				User ruser = new User();
-				ruser.setFirstname(request.JSON.fname )
-				ruser.setLastname(request.JSON.lname)
-				ruser.setEmail(request.JSON.email)
-				ruser.setPassword(request.JSON.password)
-				
-				ruser.save(flush: true)
-				
-				def cuser =  User.findByEmail(request.JSON.email)
-				if(cuser)
-				{	
+				//check if user exists
+				User exuser = User.findByEmail(request.JSON.email)
+				if(!exuser)
+				{
+					User ruser = new User();
+					ruser.setFirstname(request.JSON.fname )
+					ruser.setLastname(request.JSON.lname)
+					ruser.setEmail(request.JSON.email)
+					ruser.setPassword(request.JSON.password)
 					
-					//render cuser as JSON
-					render(contentType: 'text/json')
-					{[
-							'error': "success",
-							'user': cuser
-					]}
+					ruser.save(flush: true)
+					
+					def cuser =  User.findByEmail(request.JSON.email)
+					if(cuser)
+					{	
+						
+						//render cuser as JSON
+						render(contentType: 'text/json')
+						{[
+								'error': "success",
+								'user': cuser
+						]}
+					}
+					else
+					{
+						def message = "failue:User not inserted"
+						render JSON.parse("{\"error\" : \"" + message + "\"}") as JSON
+					}
 				}
 				else
 				{
-					def message = "failue:User not inserted"
+					def message = "failue:User already exists"
 					render JSON.parse("{\"error\" : \"" + message + "\"}") as JSON
 				}
-			}
-			else
+			}catch(Exception e)
 			{
-				def message = "failue:User already exists"
+				def message = "failue:We are experiencing some issues with the system"
 				render JSON.parse("{\"error\" : \"" + message + "\"}") as JSON
 			}
 		}
@@ -323,38 +362,44 @@ class RestController {
 		
 		if(address)
 		{
+		   try
+		   {
+			   property = MasterUnSoldProperty.findByAddress(address)
+			   user = User.findByEmail(params.email) // find user by email from session
+			   HashSet<MasterUnSoldProperty> properties
+		 
+			   // set association
+			   if(user.props != null)
+				   properties =  user.props
+			   else
+				   properties = new HashSet<MasterUnSoldProperty>()
+				   
+			   properties.add(property)
+			   printf(properties.toString())
+			   user.props =  properties
 		
-		   property = MasterUnSoldProperty.findByAddress(address)
-		   user = User.findByEmail(params.email) // find user by email from session
-		   HashSet<MasterUnSoldProperty> properties
-	 
-		   // set association
-		   if(user.props != null)
-			   properties =  user.props
-		   else
-			   properties = new HashSet<MasterUnSoldProperty>()
+			   // save objects
+			   user.save(flush:true)
+			   printf(user.getErrors().toString())
+			   println(user.errors)
 			   
-		   properties.add(property)
-		   printf(properties.toString())
-		   user.props =  properties
-	
-		   // save objects
-		   user.save(flush:true)
-		   printf(user.getErrors().toString())
-		   println(user.errors)
-		   
-		   for (props in user.props)
-		   { 	println (props.address.toString())
-			   	println (props.city.toString())
-				println (props.state.toString())
+			   for (props in user.props)
+			   { 	println (props.address.toString())
+				   	println (props.city.toString())
+					println (props.state.toString())
+			   }
+				
+			   //render user as JSON
+			   render(contentType: 'text/json')
+			   {[
+					   'error': "success",
+					   'properties': properties
+			   ]}
+		   }catch(Exception e)
+		   {
+			   def message = "failue:We are experiencing some issues with the system"
+			   render JSON.parse("{\"error\" : \"" + message + "\"}") as JSON
 		   }
-			
-		   //render user as JSON
-		   render(contentType: 'text/json')
-		   {[
-				   'error': "success",
-				   'properties': properties
-		   ]}
 		}
 		else
 		{
@@ -378,44 +423,50 @@ class RestController {
 		
 		if(address)
 		{
-		
-		   property = MasterUnSoldProperty.findByAddress(address)
-		   user = User.findByEmail(request.JSON.email) // find user by email from session
-		   HashSet<MasterUnSoldProperty> properties
-	 
-		   // set association
-		   if(user.props != null)
+		   try
 		   {
-			   properties =  user.props
-			   println("Original Set:"+properties.toString())
-			   
-			   println("Removed Element:"+property.toString())
-			   
-			   properties = properties.minus(property)
-			   println("Diminished Set:"+properties.toString())
-			   user.props =  properties
-		
-			   // save objects
-			   user.save(flush:true)
-			   printf(user.getErrors().toString())
-			   println(user.errors)
-			   
-			   for (props in user.props)
-			   { 	println (props.address.toString())
-					   println (props.city.toString())
-					println (props.state.toString())
+			   property = MasterUnSoldProperty.findByAddress(address)
+			   user = User.findByEmail(request.JSON.email) // find user by email from session
+			   HashSet<MasterUnSoldProperty> properties
+		 
+			   // set association
+			   if(user.props != null)
+			   {
+				   properties =  user.props
+				   println("Original Set:"+properties.toString())
+				   
+				   println("Removed Element:"+property.toString())
+				   
+				   properties = properties.minus(property)
+				   println("Diminished Set:"+properties.toString())
+				   user.props =  properties
+			
+				   // save objects
+				   user.save(flush:true)
+				   printf(user.getErrors().toString())
+				   println(user.errors)
+				   
+				   for (props in user.props)
+				   { 	println (props.address.toString())
+						   println (props.city.toString())
+						println (props.state.toString())
+				   }
+					
+				   //render user as JSON
+				   render(contentType: 'text/json')
+				   {[
+						   'error': "success",
+						   'properties': properties
+				   ]}
 			   }
-				
-			   //render user as JSON
-			   render(contentType: 'text/json')
-			   {[
-					   'error': "success",
-					   'properties': properties
-			   ]}
-		   }
-		   else
+			   else
+			   {
+				   def message = "failue:Property not added in Watchlist"
+				   render JSON.parse("{\"error\" : \"" + message + "\"}") as JSON
+			   }
+		   }catch(Exception e)
 		   {
-			   def message = "failue:Property not added in Watchlist"
+			   def message = "failue:We are experiencing some issues with the system"
 			   render JSON.parse("{\"error\" : \"" + message + "\"}") as JSON
 		   }
 		}
@@ -443,34 +494,40 @@ class RestController {
 		def user = User.findByEmail(params.email)
 		
 		if(user.props !=null && user.props.size() > 0 )
-		{
-			List properties = new ArrayList<MasterUnSoldProperty>()
-
-			if(params.paginate == "true")
-			{	println("paginated")
-				properties.addAll(user.props)
-				println(properties.size().toString())
-				def total = properties.size()
-					
-					println("total "+total)
-					println("max "+max)
-				if((max+offset.toInteger()) >  total )
-					 properties =  properties.subList(offset.toInteger(),total.toInteger())
-				else
-					properties =  properties.subList(offset.toInteger(), max.toInteger() + offset.toInteger())
-			}
-			else
+		{	
+			try
 			{
-				properties.addAll(user.props)
+				List properties = new ArrayList<MasterUnSoldProperty>()
+	
+				if(params.paginate == "true")
+				{	println("paginated")
+					properties.addAll(user.props)
+					println(properties.size().toString())
+					def total = properties.size()
+						
+						println("total "+total)
+						println("max "+max)
+					if((max+offset.toInteger()) >  total )
+						 properties =  properties.subList(offset.toInteger(),total.toInteger())
+					else
+						properties =  properties.subList(offset.toInteger(), max.toInteger() + offset.toInteger())
+				}
+				else
+				{
+					properties.addAll(user.props)
+				}
+				
+				render(contentType: 'text/json')
+				{[
+						'error': "success",
+						'type' : "address",
+						'properties': properties
+				]}
+			}catch(Exception e)
+			{
+				def message = "failue:We are experiencing some issues with the system"
+				render JSON.parse("{\"error\" : \"" + message + "\"}") as JSON
 			}
-			
-			render(contentType: 'text/json')
-			{[
-					'error': "success",
-					'type' : "address",
-					'properties': properties
-			]}
-			 
 		}
 		else
 		{
